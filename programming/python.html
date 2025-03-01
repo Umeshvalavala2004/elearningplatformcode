@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/63c50dd3d1.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Learning Path</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            background: #eef;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .resource-buttons {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #ddd;
+            border-radius: 5px;
+        }
+        .resource-buttons button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .resource-buttons button:hover {
+            background: #0056b3;
+        }
+        .fa-solid.fa-file-pdf{
+          color: rgb(255, 255, 255);
+          font-size: 15px;
+      }
+      .fa-brands.fa-youtube{
+          color: red;
+          font-size: 15px;
+  
+      }
+      .fa-solid.fa-link{
+          color: black;
+          font-size: 15px;
+      }
+    </style>
+    <script>
+        function showResources(id) {
+            var resources = document.getElementById(id);
+            if (resources.style.display === "none" || resources.style.display === "") {
+                resources.style.display = "block";
+            } else {
+                resources.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Python Learning Path</h1>
+        
+        <h2>Basic Topics</h2>
+        <ul>
+            <li><a onclick="showResources('basic1')">Introduction to Python</a>
+                <div id="basic1" class="resource-buttons">
+                    <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+                    <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+                    <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+                </div>
+            </li>
+            <li><a onclick="showResources('basic2')">Variables and Data Types</a>
+                <div id="basic2" class="resource-buttons">
+                    <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+                    <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+                    <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+                </div>
+            </li>
+            <li><a onclick="showResources('basic3')">Operators</a>
+              <div id="basic3" class="resource-buttons">
+                <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+                <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+                <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+              </div>
+          </li>
+          <li><a onclick="showResources('basic4')">Control Flow (if-else statements)</a>
+            <div id="basic4" class="resource-buttons">
+                <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+                <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+                <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+            </div>
+        </li>
+        <li><a onclick="showResources('basic5')">Loops (for and while loops)</a>
+          <div id="basic5" class="resource-buttons">
+                                 <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+                    <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+                    <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+          </div>
+      </li>
+      <li><a onclick="showResources('basic6')">Functions and Scope</a>
+        <div id="basic6" class="resource-buttons">
+            <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+            <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+            <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+        </div>
+    </li>
+    <li><a onclick="showResources('basic7')">Lists</a>
+      <div id="basic7" class="resource-buttons">
+        <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+        <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+        <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+      </div>
+  </li>
+  <li><a onclick="showResources('basic8')">Tuples</a>
+    <div id="basic8" class="resource-buttons">
+        <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+        <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+        <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+    </div>
+</li>
+<li><a onclick="showResources('basic9')">Dictionaries</a>
+  <div id="basic9" class="resource-buttons">
+    <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+    <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+    <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+  </div>
+</li>
+<li><a onclick="showResources('basic10')">Sets</a>
+  <div id="basic10" class="resource-buttons">
+    <button onclick="window.open('#')"><i class="fa-solid fa-file-pdf"></i>PDF</button>
+    <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+    <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+  </div>
+</li>
+        </ul>
+        
+        <h2>Intermediate Topics</h2>
+        <ul>
+            <li>Functions and Modules - <a onclick="showResources('inter1')">Resource Link</a>
+                <div id="inter1" class="resource-buttons">
+                                      <button onclick="window.open('https://youtu.be/ZkndfcIyxMM?si=5uU-arKBXwuZf68u')"><i class="fa-brands fa-youtube"></i>YouTube video</button>
+                </div>
+            </li>
+            <li>Functions and Modules - <a onclick="showResources('inter1')">Resource Link</a>
+              <div id="inter1" class="resource-buttons">
+                  <button onclick="window.open('#')">PDF</button>
+                  <button onclick="window.open('#')">YouTube Channel</button>
+                  <button onclick="window.open('#')">GFG Link</button>
+              </div>
+          </li>
+          <li>Functions and Modules - <a onclick="showResources('inter1')">Resource Link</a>
+            <div id="inter1" class="resource-buttons">
+                <button onclick="window.open('#')">PDF</button>
+                <button onclick="window.open('#')">YouTube Channel</button>
+                <button onclick="window.open('#')">GFG Link</button>
+            </div>
+        </li>
+        </ul>
+        
+        <h2>Advanced Topics</h2>
+        <ul>
+            <li>Decorators and Generators - <a onclick="showResources('adv1')">Resource Link</a>
+                <div id="adv1" class="resource-buttons">
+                                      <button onclick="window.open('https://www.geeksforgeeks.org/introduction-to-python/')"><i class="fa-solid fa-link"></i>GFG Link</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

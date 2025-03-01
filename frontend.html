@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Development Resources</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .resource-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 64rem;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .resource-section {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      color: white;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .resource-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      transition: background-color 0.2s;
+    }
+
+    .resource-item:hover {
+      background-color: var(--gray-50);
+    }
+
+    .resource-icon {
+      color: var(--primary);
+    }
+
+    .resource-content h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .resource-content p {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .resource-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .resource-link:hover {
+      color: var(--primary-hover);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gray-600);
+      text-decoration: none;
+      font-weight: 500;
+      margin: 2rem 0;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--gray-900);
+    }
+
+    .youtube-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: white;
+      border-radius: 0.5rem;
+    }
+
+    .youtube-logo img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="main.html" class="back-link">
+      <i data-lucide="arrow-left"></i>
+      <span>Back to Roadmaps</span>
+    </a>
+
+    <div class="hero">
+      <h1 class="hero-title">Frontend Development Resources</h1>
+      <p class="hero-description">Curated list of the best resources to master frontend development</p>
+    </div>
+
+    <div class="resource-grid">
+      <!-- Documentation Section -->
+      <div class="resource-section">
+        <div class="section-header">
+          <div class="section-icon" style="background-color: rgb(59, 130, 246)">
+            <i data-lucide="book-open"></i>
+          </div>
+          <h2>Official Documentation</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <i data-lucide="file-text" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>MDN Web Docs</h4>
+              <p>Comprehensive documentation for HTML, CSS, and JavaScript</p>
+              <a href="https://developer.mozilla.org" class="resource-link" target="_blank">
+                Learn More <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="file-text" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>W3Schools</h4>
+              <p>Interactive tutorials and references for web technologies</p>
+              <a href="https://www.w3schools.com" class="resource-link" target="_blank">
+                Learn More <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="file-text" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>React Documentation</h4>
+              <p>Official documentation for React.js framework</p>
+              <a href="https://react.dev" class="resource-link" target="_blank">
+                Learn More <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- YouTube Channels -->
+      <div class="resource-section">
+        <div class="section-header">
+          <div class="youtube-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube Logo">
+          </div>
+          <h2>YouTube Channels</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <i data-lucide="play" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>Traversy Media</h4>
+              <p>Web development tutorials with practical projects</p>
+              <a href="https://www.youtube.com/@TraversyMedia" class="resource-link" target="_blank">
+                Watch Now <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="play" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>freeCodeCamp</h4>
+              <p>In-depth tutorials on various web technologies</p>
+              <a href="https://www.youtube.com/@freecodecamp" class="resource-link" target="_blank">
+                Watch Now <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="play" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>Web Dev Simplified</h4>
+              <p>Clear explanations of web development concepts</p>
+              <a href="https://www.youtube.com/@WebDevSimplified" class="resource-link" target="_blank">
+                Watch Now <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Online Courses -->
+      <div class="resource-section">
+        <div class="section-header">
+          <div class="section-icon" style="background-color: rgb(34, 197, 94)">
+            <i data-lucide="graduation-cap"></i>
+          </div>
+          <h2>Online Courses</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <i data-lucide="book" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>The Complete Web Developer in 2024</h4>
+              <p>Zero to Mastery Academy's comprehensive course</p>
+              <a href="https://zerotomastery.io/courses/coding-bootcamp" class="resource-link" target="_blank">
+                View Course <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="book" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>JavaScript: Understanding the Weird Parts</h4>
+              <p>Deep dive into JavaScript fundamentals</p>
+              <a href="https://www.udemy.com/course/understand-javascript" class="resource-link" target="_blank">
+                View Course <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="book" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>CSS for JavaScript Developers</h4>
+              <p>Josh Comeau's comprehensive CSS course</p>
+              <a href="https://css-for-js.dev" class="resource-link" target="_blank">
+                View Course <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tools & Resources -->
+      <div class="resource-section">
+        <div class="section-header">
+          <div class="section-icon" style="background-color: rgb(168, 85, 247)">
+            <i data-lucide="tool"></i>
+          </div>
+          <h2>Tools & Resources</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <i data-lucide="code" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>VS Code</h4>
+              <p>Popular code editor with great frontend development features</p>
+              <a href="https://code.visualstudio.com" class="resource-link" target="_blank">
+                Download <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="code" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>Chrome DevTools</h4>
+              <p>Essential browser tools for web development</p>
+              <a href="https://developer.chrome.com/docs/devtools" class="resource-link" target="_blank">
+                Learn More <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+          <li class="resource-item">
+            <i data-lucide="code" class="resource-icon"></i>
+            <div class="resource-content">
+              <h4>GitHub</h4>
+              <p>Version control and collaboration platform</p>
+              <a href="https://github.com" class="resource-link" target="_blank">
+                Join Now <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

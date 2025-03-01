@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeLearn - E-Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #646cff;
+    --secondary-color: #535bf2;
+    --dark-bg: #1a1a1a;
+    --light-bg: #ffffff;
+    --text-dark: #213547;
+    --text-light: rgba(255, 255, 255, 0.87);
+}
+
+body {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background-color: var(--light-bg);
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-links a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.auth-buttons button {
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color) !important;
+}
+
+.signup-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+    color: white;
+    padding: 2rem;
+    margin-top: 60px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background: white;
+    color: var(--primary-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Featured Courses */
+.featured-courses {
+    padding: 4rem 2rem;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Programming Languages Section */
+.programming-section {
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+}
+
+.language-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.language-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.language-card:hover {
+    transform: translateY(-5px);
+}
+
+.language-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.modal-content h3 {
+    margin: 2rem 0 1rem;
+    color: var(--text-dark);
+}
+
+.modal-content h4 {
+    margin: 1.5rem 0 0.5rem;
+    color: var(--text-dark);
+}
+
+.modal-content ul {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.modal-content ul li {
+    margin-bottom: 0.5rem;
+}
+
+.modal-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.modal-content a:hover {
+    text-decoration: underline;
+}
+
+.video-tutorials li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.tutorial-info {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: var(--dark-bg);
+    color: var(--text-light);
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+}
+
+.footer-section a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.social-links a {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links, .auth-buttons {
+        display: none;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .video-tutorials li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tutorial-info {
+        margin-top: 0.25rem;
+    }
+
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text-dark);
+    margin: 5px 0;
+    transition: all 0.3s;
+}
+/**/
+/* Carousel container */
+.language-carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin: 20px 0;
+}
+
+/* Track for swiping */
+.language-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 10px;
+}
+
+/* Individual card */
+.language-card {
+    flex: 0 0 80%; /* Adjust card size to fit swiping */
+    max-width: 300px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid rgb(170, 149, 223);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.language-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+/* Swipe navigation buttons */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-nav.left {
+    left: 10px;
+}
+
+.carousel-nav.right {
+    right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .language-card {
+        flex: 0 0 80%; /* Adjust card size to fit swiping */
+        max-width: 150px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border: 1px solid rgb(170, 149, 223);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 20px;
+        transition: transform 0.3s;
+    }
+   
+    
+}
+@media screen and (max-width: 568px){
+    .carousel-nav.left {
+        display: none;
+     }
+     
+     .carousel-nav.right {
+       display: none;
+     }
+}
+
+
+</style>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">CodeLearn</div>
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#courses">Courses</a>
+            <a href="#programming">Programming</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="login-btn">Login</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Master Programming with Expert Guidance</h1>
+            <p>Learn from industry experts and build real-world projects</p>
+            <button class="cta-btn">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+
+
+    <!-- Programming Languages -->
+    <!-- <section class="programming-section" id="programming">
+        <h2>Programming Languages</h2>
+        <div class="language-grid">
+            <div class="language-card" data-language="python">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                <h3>Python</h3>
+            </div>
+            
+            <div class="language-card" data-language="javascript">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="language-card" data-language="java">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                <h3>Java</h3>
+            </div>
+            <div class="language-card" data-language="cpp">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+                <h3>C++</h3>
+            </div>
+        </div>
+    </section> -->
+    <!--  -->
+    <section class="programming-section" id="programming">
+        <h2>Programming Languages</h2>
+        <div class="language-carousel">
+            <div class="language-track">
+                <div class="language-card" data-language="python">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                    <h3>Python</h3>
+                </div>
+                <div class="language-card" data-language="javascript">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                    <h3>Java Script</h3>
+                </div>
+                <div class="language-card" data-language="java">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                    <h3>Java</h3>
+                </div>
+                <div class="language-card" data-language="cpp">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+                    <h3>C++</h3>
+                </div>
+                <div class="language-card" data-language="cpp">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="C++">
+                    <h3>Kotlin</h3>
+                </div>
+                <div class="language-card" data-language="cpp">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="C++">
+                    <h3>Go Lang</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  -->
+    <section class="programming-section" id="programming">
+        <h2>Programming Languages</h2>
+        <div class="language-carousel">
+            <div class="language-track">
+                <div class="language-card" data-language="python">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                    <h3>Rust</h3>
+                </div>
+                <div class="language-card" data-language="javascript">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                    <h3>Go (Golang)</h3>
+                </div>
+                <div class="language-card" data-language="java">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                    <h3>Kotlin</h3>
+                </div>
+                <div class="language-card" data-language="cpp">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+                    <h3>C++</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Language Details Modal -->
+    <div class="modal" id="languageModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+<!--aptitude and reasoning  -->
+<section class="programming-section" id="programming">
+    <h2>Programming Languages</h2>
+    <div class="language-carousel">
+        <div class="language-track">
+            <div class="language-card" data-language="python">
+                <img src="https://media.istockphoto.com/id/1399506394/vector/concept-of-up-skill-and-learning.jpg?s=612x612&w=0&k=20&c=_sN5jIE3OGQX-eFVcEk-Gwgne-Fy7CnfpCfHpfDvYug=" alt="Python">
+                <h3>Aptitude</h3>
+            </div>
+            <div class="language-card" data-language="javascript">
+                <img src="https://t3.ftcdn.net/jpg/12/37/07/96/240_F_1237079660_ZzuebeDaLJO5DNfChpLaa9ea5qlEGyIH.jpg" alt="JavaScript">
+                <h3>Reasoning</h3>
+            </div>
+            <div class="language-card" data-language="java">
+                <img src="https://media.istockphoto.com/id/490212822/vector/webinar-in-action.jpg?s=612x612&w=0&k=20&c=Xf83PNeqsG9nAMPgKEqYBxwj-cD26kEFh8INo3CQ3Xg=" alt="Java">
+                <h3>Verbal</h3>
+            </div>
+            <div class="language-card" data-language="cpp">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+                <h3>C++</h3>
+            </div>
+            <div class="language-card" data-language="cpp">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="C++">
+                <h3>Kotlin</h3>
+            </div>
+            <div class="language-card" data-language="cpp">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="C++">
+                <h3>Go Lang</h3>
+            </div>
+        </div>
+    </div>
+</section>
+    <!--  -->
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeLearn</h3>
+                <p>Empowering developers worldwide</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#courses">Courses</a>
+                <a href="#programming">Programming</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 CodeLearn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Programming Languages Data
+const languagesData = {
+    python: {
+        name: 'Python',
+        description: 'A versatile programming language known for its simplicity and readability.',
+        roadmap: [
+            {
+                phase: 'Basics (2-3 weeks)',
+                topics: [
+                    'Variables and Data Types',
+                    'Control Flow (if/else)',
+                    'Loops (for/while)',
+                    'Functions',
+                    'Basic Data Structures'
+                ]
+            },
+            {
+                phase: 'Intermediate (4-6 weeks)',
+                topics: [
+                    'Object-Oriented Programming',
+                    'File Handling',
+                    'Error Handling',
+                    'Modules and Packages',
+                    'Virtual Environments'
+                ]
+            },
+            {
+                phase: 'Advanced (8-10 weeks)',
+                topics: [
+                    'Web Development with Django/Flask',
+                    'Data Science with NumPy/Pandas',
+                    'API Development',
+                    'Database Integration',
+                    'Testing and Deployment'
+                ]
+            }
+        ],
+        resources: {
+            documentation: 'https://docs.python.org/3/',
+            pdfs: [
+                {
+                    name: 'Python for Everybody (Free Book)',
+                    url: 'https://www.py4e.com/book.php'
+                },
+                {
+                    name: 'Think Python 2e (Free PDF)',
+                    url: 'https://greenteapress.com/wp/think-python-2e/'
+                },
+                {
+                    name: 'Python Data Science Handbook',
+                    url: 'https://github.com/jakevdp/PythonDataScienceHandbook'
+                }
+            ],
+            tutorials: [
+                {
+                    name: 'Python Full Course for Beginners [4 Hours]',
+                    url: 'https://www.youtube.com/watch?v=rfscVS0vtbw',
+                    duration: '4 hours',
+                    channel: 'freeCodeCamp'
+                },
+                {
+                    name: 'Python Tutorial for Beginners - Full Course',
+                    url: 'https://www.youtube.com/watch?v=_uQrJ0TkZlc',
+                    duration: '6 hours',
+                    channel: 'Programming with Mosh'
+                },
+                {
+                    name: 'Python OOP Tutorial',
+                    url: 'https://www.youtube.com/watch?v=ZDa-Z5JzLYM',
+                    duration: '1 hour',
+                    channel: 'Corey Schafer'
+                },
+                {
+                    name: 'Python Django Web Framework - Full Course',
+                    url: 'https://www.youtube.com/watch?v=F5mRW0jo-U4',
+                    duration: '4 hours',
+                    channel: 'freeCodeCamp'
+                }
+            ],
+            books: [
+                'Python Crash Course by Eric Matthes',
+                'Automate the Boring Stuff with Python',
+                'Python Cookbook by David Beazley'
+            ]
+        }
+    },
+    javascript: {
+        name: 'JavaScript',
+        description: 'The programming language of the web, essential for front-end development.',
+        roadmap: [
+            {
+                phase: 'Fundamentals (2-3 weeks)',
+                topics: [
+                    'Variables and Data Types',
+                    'Functions and Scope',
+                    'DOM Manipulation',
+                    'Events',
+                    'Arrays and Objects'
+                ]
+            },
+            {
+                phase: 'Advanced Concepts (4-6 weeks)',
+                topics: [
+                    'Async Programming',
+                    'ES6+ Features',
+                    'Error Handling',
+                    'Local Storage',
+                    'API Integration'
+                ]
+            },
+            {
+                phase: 'Frameworks (8-10 weeks)',
+                topics: [
+                    'React/Vue/Angular',
+                    'State Management',
+                    'Testing',
+                    'Build Tools',
+                    'Deployment'
+                ]
+            }
+        ],
+        resources: {
+            documentation: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+            pdfs: [
+                {
+                    name: 'Eloquent JavaScript (Free Book)',
+                    url: 'https://eloquentjavascript.net/'
+                },
+                {
+                    name: 'JavaScript Design Patterns',
+                    url: 'https://www.patterns.dev/posts/classic-design-patterns/'
+                },
+                {
+                    name: 'You Don\'t Know JS (Book Series)',
+                    url: 'https://github.com/getify/You-Dont-Know-JS'
+                }
+            ],
+            tutorials: [
+                {
+                    name: 'JavaScript Full Course for Beginners',
+                    url: 'https://www.youtube.com/watch?v=PkZNo7MFNFg',
+                    duration: '3 hours',
+                    channel: 'freeCodeCamp'
+                },
+                {
+                    name: 'JavaScript DOM Manipulation Course',
+                    url: 'https://www.youtube.com/watch?v=5fb2aPlgoys',
+                    duration: '2 hours',
+                    channel: 'freeCodeCamp'
+                },
+                {
+                    name: 'Async JavaScript Crash Course',
+                    url: 'https://www.youtube.com/watch?v=PoRJizFvM7s',
+                    duration: '1 hour',
+                    channel: 'Traversy Media'
+                },
+                {
+                    name: 'React JS Full Course',
+                    url: 'https://www.youtube.com/watch?v=w7ejDZ8SWv8',
+                    duration: '4 hours',
+                    channel: 'Traversy Media'
+                }
+            ],
+            books: [
+                'Eloquent JavaScript',
+                'You Don\'t Know JS Series',
+                'JavaScript: The Good Parts'
+            ]
+        }
+    },
+    python: {
+        name: 'Python',
+        description: 'A versatile programming language known for its simplicity and readability.',
+        roadmap: [
+            {
+                phase: 'Basics (2-3 weeks)',
+                topics: [
+                    'Variables and Data Types',
+                    'Control Flow (if/else)',
+                    'Loops (for/while)',
+                    'Functions',
+                    'Basic Data Structures'
+                ]
+            },
+            {
+                phase: 'Intermediate (4-6 weeks)',
+                topics: [
+                    'Object-Oriented Programming',
+                    'File Handling',
+                    'Error Handling',
+                    'Modules and Packages',
+                    'Virtual Environments'
+                ]
+            },
+            {
+                phase: 'Advanced (8-10 weeks)',
+                topics: [
+                    'Web Development with Django/Flask',
+                    'Data Science with NumPy/Pandas',
+                    'API Development',
+                    'Database Integration',
+                    'Testing and Deployment'
+                ]
+            }
+        ],
+        resources: {
+            documentation: 'https://docs.python.org/3/',
+            pdfs: [
+                {
+                    name: 'Python for Everybody (Free Book)',
+                    url: 'https://www.py4e.com/book.php'
+                },
+                {
+                    name: 'Think Python 2e (Free PDF)',
+                    url: 'https://greenteapress.com/wp/think-python-2e/'
+                },
+                {
+                    name: 'Python Data Science Handbook',
+                    url: 'https://github.com/jakevdp/PythonDataScienceHandbook'
+                }
+            ],
+            tutorials: [
+                {
+                    name: 'Python Full Course for Beginners [4 Hours]',
+                    url: 'https://www.youtube.com/watch?v=rfscVS0vtbw',
+                    duration: '4 hours',
+                    channel: 'freeCodeCamp'
+                },
+                {
+                    name: 'Python Tutorial for Beginners - Full Course',
+                    url: 'https://www.youtube.com/watch?v=_uQrJ0TkZlc',
+                    duration: '6 hours',
+                    channel: 'Programming with Mosh'
+                },
+                {
+                    name: 'Python OOP Tutorial',
+                    url: 'https://www.youtube.com/watch?v=ZDa-Z5JzLYM',
+                    duration: '1 hour',
+                    channel: 'Corey Schafer'
+                },
+                {
+                    name: 'Python Django Web Framework - Full Course',
+                    url: 'https://www.youtube.com/watch?v=F5mRW0jo-U4',
+                    duration: '4 hours',
+                    channel: 'freeCodeCamp'
+                }
+            ],
+            books: [
+                'Python Crash Course by Eric Matthes',
+                'Automate the Boring Stuff with Python',
+                'Python Cookbook by David Beazley'
+            ]
+        }
+    },
+    java: {
+        name: 'Python',
+        description: 'A versatile programming language known for its simplicity and readability.',
+        roadmap: [
+            {
+                phase: 'Basics (2-3 weeks)',
+                topics: [
+                    'Variables and Data Types',
+                    'Control Flow (if/else)',
+                    'Loops (for/while)',
+                    'Functions',
+                    'Basic Data Structures'
+                ]
+            },
+            {
+                phase: 'Intermediate (4-6 weeks)',
+                topics: [
+                    'Object-Oriented Programming',
+                    'File Handling',
+                    'Error Handling',
+                    'Modules and Packages',
+                    'Virtual Environments'
+                ]
+            },
+            {
+                phase: 'Advanced (8-10 weeks)',
+                topics: [
+                    'Web Development with Django/Flask',
+                    'Data Science with NumPy/Pandas',
+                    'API Development',
+                    'Database Integration',
+                    'Testing and Deployment'
+                ]
+            }
+        ],
+        resources: {
+            documentation: 'https://docs.python.org/3/',
+            pdfs: [
+                {
+                    name: 'Python for Everybody (Free Book)',
+                    url: 'https://www.py4e.com/book.php'
+                },
+                {
+                    name: 'Think Python 2e (Free PDF)',
+                    url: 'https://greenteapress.com/wp/think-python-2e/'
+                },
+                {
+                    name: 'Python Data Science Handbook',
+                    url: 'https://github.com/jakevdp/PythonDataScienceHandbook'
+                }
+            ],
+            tutorials: [
+                {
+                    name: 'Python Full Course for Beginners [4 Hours]',
+                    url: 'https://www.youtube.com/watch?v=rfscVS0vtbw',
+                    duration: '4 hours',
+                    channel: 'freeCodeCamp'
+                },
+                {
+                    name: 'Python Tutorial for Beginners - Full Course',
+                    url: 'https://www.youtube.com/watch?v=_uQrJ0TkZlc',
+                    duration: '6 hours',
+                    channel: 'Programming with Mosh'
+                },
+                {
+                    name: 'Python OOP Tutorial',
+                    url: 'https://www.youtube.com/watch?v=ZDa-Z5JzLYM',
+                    duration: '1 hour',
+                    channel: 'Corey Schafer'
+                },
+                {
+                    name: 'Python Django Web Framework - Full Course',
+                    url: 'https://www.youtube.com/watch?v=F5mRW0jo-U4',
+                    duration: '4 hours',
+                    channel: 'freeCodeCamp'
+                }
+            ],
+            books: [
+                'Python Crash Course by Eric Matthes',
+                'Automate the Boring Stuff with Python',
+                'Python Cookbook by David Beazley'
+            ]
+        }
+    }
+};
+
+
+
+// Modal Functionality
+const modal = document.getElementById('languageModal');
+const closeBtn = document.querySelector('.close-btn');
+const languageCards = document.querySelectorAll('.language-card');
+
+function openModal(language) {
+    const data = languagesData[language];
+    if (!data) return;
+
+    const modalContent = `
+        <h2>${data.name}</h2>
+        <p>${data.description}</p>
+        
+        <h3>Learning Roadmap</h3>
+        ${data.roadmap.map(phase => `
+            <div class="roadmap-phase">
+                <h4>${phase.phase}</h4>
+                <ul>
+                    ${phase.topics.map(topic => `<li>${topic}</li>`).join('')}
+                </ul>
+            </div>
+        `).join('')}
+        
+        <h3>Resources</h3>
+        
+        <h4>Free PDF Resources</h4>
+        <ul>
+            ${data.resources.pdfs.map(pdf => `
+                <li><a href="${pdf.url}" target="_blank">${pdf.name}</a></li>
+            `).join('')}
+        </ul>
+
+        <h4>Video Tutorials</h4>
+        <ul class="video-tutorials">
+            ${data.resources.tutorials.map(tutorial => `
+                <li>
+                    <a href="${tutorial.url}" target="_blank">
+                        ${tutorial.name}
+                    </a>
+                    <span class="tutorial-info">
+                        [${tutorial.duration} | ${tutorial.channel}]
+                    </span>
+                </li>
+            `).join('')}
+        </ul>
+        
+        <h4>Official Documentation</h4>
+        <a href="${data.resources.documentation}" target="_blank">${data.resources.documentation}</a>
+        
+        <h4>Recommended Books</h4>
+        <ul>
+            ${data.resources.books.map(book => `<li>${book}</li>`).join('')}
+        </ul>
+    `;
+
+    document.querySelector('.modal-body').innerHTML = modalContent;
+    modal.style.display = 'block';
+}
+
+languageCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const language = card.dataset.language;
+        openModal(language);
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// Mobile Navigation
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const authButtons = document.querySelector('.auth-buttons');
+
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    authButtons.classList.toggle('active');
+});
+
+
+
+// Populate Featured Courses
+const courseGrid = document.getElementById('courseGrid');
+featuredCourses.forEach(course => {
+    const courseCard = document.createElement('div');
+    courseCard.className = 'course-card';
+    courseCard.innerHTML = `
+        <img src="${course.image}" alt="${course.title}">
+        <h3>${course.title}</h3>
+        <p>Instructor: ${course.instructor}</p>
+        <div class="course-rating">
+            <span>★ ${course.rating}</span>
+        </div>
+        <div class="course-price">$${course.price}</div>
+        <button class="enroll-btn">Enroll Now</button>
+    `;
+    courseGrid.appendChild(courseCard);
+});
+    </script>
+    <script>
+        const track = document.querySelector('.language-track');
+const cards = document.querySelectorAll('.language-card');
+const prevBtn = document.createElement('button');
+const nextBtn = document.createElement('button');
+let currentIndex = 0;
+
+// Add navigation buttons
+prevBtn.className = 'carousel-nav left';
+prevBtn.innerHTML = '<';
+nextBtn.className = 'carousel-nav right';
+nextBtn.innerHTML = '>';
+document.querySelector('.language-carousel').appendChild(prevBtn);
+document.querySelector('.language-carousel').appendChild(nextBtn);
+
+// Swipe functionality
+const updateCarousel = () => {
+    const cardWidth = cards[0].offsetWidth + 10; // Include gap
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+};
+
+// Next button event
+nextBtn.addEventListener('click', () => {
+    if (currentIndex < cards.length - 1) {
+        currentIndex++;
+        updateCarousel();
+    }
+});
+
+// Previous button event
+prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+    }
+});
+
+// Optional: Touch swipe support
+let startX = 0;
+track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
+
+track.addEventListener('touchmove', (e) => {
+    const touchDelta = e.touches[0].clientX - startX;
+    if (touchDelta > 50 && currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+        startX = e.touches[0].clientX;
+    } else if (touchDelta < -50 && currentIndex < cards.length - 1) {
+        currentIndex++;
+        updateCarousel();
+        startX = e.touches[0].clientX;
+    }
+});
+
+    </script>
+</body>
+</html>

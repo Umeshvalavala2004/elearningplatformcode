@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub - Learn Programming</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<style>
+    @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    background-color: var(--gray-50);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Navbar */
+.navbar {
+    background: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--gray-700);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    width: 250px;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.search-box i {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-600);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    padding: 8rem 1rem 6rem;
+    color: var(--white);
+    position: relative;
+}
+
+.hero-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.stat p {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-outline {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: var(--gray-50);
+}
+
+.btn-outline-white {
+    border: 2px solid var(--white);
+    color: var(--white);
+    background: transparent;
+}
+
+.btn-outline-white:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Courses Section */
+.courses {
+    padding: 5rem 0;
+}
+
+.courses h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.section-desc {
+    text-align: center;
+    color: var(--gray-600);
+    margin-bottom: 3rem;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.course-card {
+    background: var(--white);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s;
+}
+
+.course-card:hover {
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+.course-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-price {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.course-content {
+    padding: 1.5rem;
+}
+
+.course-title {
+    font-size: 1.25rem;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.course-description {
+    color: var(--gray-600);
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.course-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.course-meta > div {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.instructor {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.instructor img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.instructor span {
+    color: var(--gray-700);
+    font-size: 0.875rem;
+}
+
+/* Course Detail */
+.course-detail {
+    padding: 5rem 0;
+    min-height: 100vh;
+    background: var(--gray-50);
+}
+
+.course-detail.hidden {
+    display: none;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.course-detail-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.course-main {
+    background: var(--white);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.course-header img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.course-header h1 {
+    padding: 1.5rem;
+    font-size: 2rem;
+    color: var(--gray-900);
+}
+
+.course-stats {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 1.5rem 1.5rem;
+    color: var(--gray-700);
+}
+
+.course-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.resources {
+    padding: 1.5rem;
+}
+
+.resources h2 {
+    margin-bottom: 1rem;
+    color: var(--gray-900);
+}
+
+.resource-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.resource-content h3 {
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+}
+
+.resource-content p {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.resource-content a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.course-sidebar {
+    position: sticky;
+    top: 5rem;
+}
+
+.youtube-channels {
+    background: var(--white);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.youtube-channels h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.channel-item {
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.channel-item h3 {
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+}
+
+.channel-item p {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.channel-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-meta span {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+.channel-meta a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+    .course-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">EduHub</div>
+            <div class="nav-links" id="navLinks">
+                <a href="rawwaste.html" class="active">Home</a>
+                <a href="/homepage.html">Courses</a>
+                <a href="#paths">Learning Paths</a>
+                <a href="#about">About</a>
+                <div class="search-box">
+                    <input type="text" placeholder="Search courses...">
+                    <i data-lucide="search"></i>
+                </div>
+                <button class="btn btn-outline">Login</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+            <button class="mobile-menu" id="mobileMenu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Unlock Your Potential with Expert-Led Online Courses</h1>
+            <p>Join millions of learners worldwide and transform your career with our comprehensive learning platform.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Explore Courses</button>
+                <button class="btn btn-outline-white">Become an Instructor</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <i data-lucide="users"></i>
+                    <div>
+                        <h3>50K+</h3>
+                        <p>Active Students</p>
+                    </div>
+                </div>
+                <div class="stat">
+                    <i data-lucide="play"></i>
+                    <div>
+                        <h3>1000+</h3>
+                        <p>Video Courses</p>
+                    </div>
+                </div>
+                <div class="stat">
+                    <i data-lucide="star"></i>
+                    <div>
+                        <h3>4.8/5</h3>
+                        <p>Avg. Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2>Featured Courses</h2>
+            <p class="section-desc">Start your journey with our most popular courses</p>
+            <div class="course-grid" id="courseGrid"></div>
+            <div class="text-center">
+                <button class="btn btn-primary">View All Courses</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="courseDetail" class="course-detail hidden">
+        <div class="container">
+            <button class="back-button" onclick="hideCourseDetail()">
+                <i data-lucide="arrow-left"></i> Back to Courses
+            </button>
+            <div class="course-detail-grid">
+                <div class="course-main">
+                    <div class="course-header">
+                        <img src="" alt="" id="courseImage">
+                        <h1 id="courseTitle"></h1>
+                        <div class="course-stats">
+                            <span><i data-lucide="star"></i> <span id="courseRating"></span></span>
+                            <span><i data-lucide="users"></i> <span id="courseStudents"></span></span>
+                            <span><i data-lucide="clock"></i> <span id="courseDuration"></span></span>
+                        </div>
+                    </div>
+                    <div class="resources">
+                        <h2>Course Resources</h2>
+                        <div id="resourcesList" class="resources-list"></div>
+                    </div>
+                </div>
+                <div class="course-sidebar">
+                    <div class="youtube-channels">
+                        <h2><i data-lucide="youtube"></i> Recommended Channels</h2>
+                        <div id="channelsList" class="channels-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Course data
+        const courses = [
+        {
+        id: '1',
+        title: 'Complete Web Development Bootcamp',
+        description: 'Master HTML, CSS, JavaScript, React, and Node.js with hands-on projects.',
+        instructor: 'Sarah Johnson',
+        rating: 4.8,
+        students: 15420,
+        duration: '48 hours',
+        price: 89.99,
+        thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+        },
+        {
+        id: '2',
+        title: 'Data Science Fundamentals',
+        description: 'Learn Python, pandas, NumPy, and machine learning basics.',
+        instructor: 'Michael Chen',
+        rating: 4.9,
+        students: 12350,
+        duration: '36 hours',
+        price: 79.99,
+        thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+        },
+        {
+        id: '3',
+        title: 'Mobile App Development',
+        description: 'Build cross-platform mobile apps for iOS and Android.',
+        instructor: 'Alex Rodriguez',
+        rating: 4.7,
+        students: 8920,
+        duration: '32 hours',
+        price: 94.99,
+        thumbnail: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+        }
+        ];
+        
+        const resources = [
+        {
+        id: '1',
+        title: 'Complete JavaScript Fundamentals',
+        type: 'pdf',
+        url: '/resources/javascript-fundamentals.pdf',
+        description: 'A comprehensive guide covering all JavaScript basics and advanced concepts.',
+        },
+        {
+        id: '2',
+        title: 'Modern JavaScript Tutorial',
+        type: 'video',
+        url: 'https://youtube.com/watch?v=example1',
+        duration: '45:20',
+        description: 'Step-by-step video tutorial on modern JavaScript features and best practices.',
+        },
+        {
+        id: '3',
+        title: 'JavaScript Design Patterns',
+        type: 'pdf',
+        url: '/resources/design-patterns.pdf',
+        description: 'Learn common design patterns and their implementation in JavaScript.',
+        },
+        {
+        id: '4',
+        title: 'MDN JavaScript Documentation',
+        type: 'link',
+        url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+        description: 'Official Mozilla Developer Network JavaScript documentation.',
+        }
+        ];
+        
+        const youtubeChannels = [
+        {
+        id: '1',
+        name: 'JavaScript Mastery',
+        url: 'https://youtube.com/@javascriptmastery',
+        subscribers: '1.2M',
+        description: 'Advanced JavaScript tutorials and project-based learning.',
+        },
+        {
+        id: '2',
+        name: 'Traversy Media',
+        url: 'https://youtube.com/@TraversyMedia',
+        subscribers: '2.1M',
+        description: 'Comprehensive web development tutorials including JavaScript.',
+        },
+        {
+        id: '3',
+        name: 'Fun Fun Function',
+        url: 'https://youtube.com/@funfunfunction',
+        subscribers: '800K',
+        description: 'Deep dives into JavaScript concepts and functional programming.',
+        }
+        ];
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Render courses
+        function renderCourses() {
+        const courseGrid = document.getElementById('courseGrid');
+        courseGrid.innerHTML = courses.map(course => `
+        <div class="course-card">
+        <div class="course-image">
+            <img src="${course.thumbnail}" alt="${course.title}">
+            <div class="course-price">$${course.price}</div>
+        </div>
+        <div class="course-content">
+            <h3 class="course-title">${course.title}</h3>
+            <p class="course-description">${course.description}</p>
+            <div class="course-meta">
+                <div><i data-lucide="star"></i>${course.rating}</div>
+                <div><i data-lucide="users"></i>${course.students.toLocaleString()}</div>
+                <div><i data-lucide="clock"></i>${course.duration}</div>
+            </div>
+            <div class="course-footer">
+                <div class="instructor">
+                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(course.instructor)}&background=random" alt="${course.instructor}">
+                    <span>${course.instructor}</span>
+                </div>
+                <button class="btn btn-primary" onclick="showCourseDetail('${course.id}')">
+                    Learn More
+                </button>
+            </div>
+        </div>
+        </div>
+        `).join('');
+        lucide.createIcons();
+        }
+        
+        // Show course detail
+        function showCourseDetail(courseId) {
+        const course = courses.find(c => c.id === courseId);
+        if (!course) return;
+        
+        document.getElementById('courseImage').src = course.thumbnail;
+        document.getElementById('courseTitle').textContent = course.title;
+        document.getElementById('courseRating').textContent = `${course.rating} (2.5k reviews)`;
+        document.getElementById('courseStudents').textContent = course.students.toLocaleString();
+        document.getElementById('courseDuration').textContent = course.duration;
+        
+        // Render resources
+        document.getElementById('resourcesList').innerHTML = resources.map(resource => `
+        <div class="resource-item">
+        <i data-lucide="${resource.type === 'pdf' ? 'file-text' : resource.type === 'video' ? 'youtube' : 'link'}"></i>
+        <div class="resource-content">
+            <h3>${resource.title}</h3>
+            <p>${resource.description}</p>
+            ${resource.duration ? `<p>Duration: ${resource.duration}</p>` : ''}
+            <a href="${resource.url}" target="_blank">
+                ${resource.type === 'pdf' ? 'Download PDF' : 'View Resource'}
+                <i data-lucide="external-link"></i>
+            </a>
+        </div>
+        </div>
+        `).join('');
+        
+        // Render YouTube channels
+        document.getElementById('channelsList').innerHTML = youtubeChannels.map(channel => `
+        <div class="channel-item">
+        <h3>${channel.name}</h3>
+        <p>${channel.description}</p>
+        <div class="channel-meta">
+            <span>${channel.subscribers} subscribers</span>
+            <a href="${channel.url}" target="_blank">Visit Channel</a>
+        </div>
+        </div>
+        `).join('');
+        
+        document.getElementById('courseDetail').classList.remove('hidden');
+        document.querySelector('.courses').classList.add('hidden');
+        lucide.createIcons();
+        }
+        
+        // Hide course detail
+        function hideCourseDetail() {
+        document.getElementById('courseDetail').classList.add('hidden');
+        document.querySelector('.courses').classList.remove('hidden');
+        }
+        
+        // Mobile menu toggle
+        document.getElementById('mobileMenu').addEventListener('click', function() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Initialize
+        renderCourses();
+        </script>
+
+</body>
+</html>

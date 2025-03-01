@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/63c50dd3d1.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Aptitude & Logical Reasoning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://img.freepik.com/free-vector/learning-concept-illustration_114360-3896.jpg?semt=ais_hybrid') no-repeat center center/cover;
+            opacity: 0.3; /* Adjust the opacity (0.0 - 1.0) */
+            z-index: -1;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .navbar {
+            background: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .menu {
+            display: flex;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+        .navbar a:hover {
+            background: #575757;
+            border-radius: 5px;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-toggle div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px;
+        }
+        @media (max-width: 768px) {
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #333;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                text-align: center;
+            }
+            .navbar .menu a {
+                padding: 15px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+        }
+        .container {
+            border: 2px solid black;
+            max-width: 600px;
+            margin: 100px auto 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: none;
+        }
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .resources {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+       
+        .resources p{
+         border: 1px solid rgb(0, 0, 0);
+            text-align: center;
+            width: 50%;
+            margin: 10px;
+            margin-left: 30%;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            color: black;
+
+
+        }
+    .resources p a{
+        color: black;
+        text-decoration: none;
+    }
+    li{
+        background-color: red;
+        color: white;
+    }
+    .fa-solid.fa-file-pdf{
+        color: black;
+        font-size: 15px;
+    }
+    .fa-brands.fa-youtube{
+        color: red;
+        font-size: 15px;
+
+    }
+    .fa-solid.fa-link{
+        color: black;
+        font-size: 15px;
+    }
+    </style>
+    <script>
+        function toggleList(id) {
+            var list = document.getElementById(id);
+            if (list.style.display === "none" || list.style.display === "") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+        function toggleMenu() {
+            var menu = document.querySelector('.navbar .menu');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+        }
+        function showResources(id) {
+            var resources = document.getElementById(id);
+            if (resources.style.display === "none" || resources.style.display === "") {
+                resources.style.display = "block";
+            } else {
+                resources.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="menu">
+            <a href="#quantitative">Home</a>
+            <a href="#logical">Back</a>
+            <a href="#verbal">Verbal Ability</a>
+        </div>
+    </div>
+
+    <div class="container" id="quantitative">
+        <h1 onclick="toggleList('quantitative-list')">Quantitative Aptitude</h1>
+        <ul id="quantitative-list">
+            <li onclick="showResources('resources-1')">Number System</li>
+            <div id="resources-1" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/NmzQMri9uXk?si=_T1pkT3M6O1SeeYO">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://www.tutorialspoint.com/quantitative_aptitude/aptitude_number_system.htm">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-2')">problems on LCM & HCF</li>
+            <div id="resources-2" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://www.youtube.com/live/lJcARZaV8Ok?si=k0gIsB38EdpGPpHD">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://byjus.com/maths/hcf-and-lcm/">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-3')">PERCENTAGE</li>
+            <div id="resources-3" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/I9O16sqdK6Q?si=6DQzXYBisq31CGY9">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://pendulumedu.com/quantitative-aptitude/percentage-tricks-calculation-shortcuts-concepts">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-4')">PROFIT & LOSS</li>
+            <div id="resources-4" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/ToeUKWkZmlc?si=dqTUjbki8I0FIVmX">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://byjus.com/maths/profit-and-loss/">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-5')">TIME & WORK</li>
+            <div id="resources-5" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/IisZuO3XBm0?si=QvzhnNf6lwQN3GxV">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org/time-and-work/">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-6')">TIME SPEED DISTANCE</li>
+            <div id="resources-6" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/4q0zrtT9Srw?si=o0_7TW7sUC6lzeJg">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://testbook.com/maths/speed-time-and-distance">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-7')">PIPES AND CISTERNS</li>
+            <div id="resources-7" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/nXoU0dFXByo?si=14PwYcqP2p98P_6n">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org/pipes-and-cistern/">GeeksforGeeks Links</a></p>
+            </div>
+            <li onclick="showResources('resources-8')">AGES</li>
+            <div id="resources-8" class="resources">
+                <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                <p><i class="fa-brands fa-youtube"></i> <a href="https://www.youtube.com/live/WyDXGFfs2ho?si=D9WPapIaNiM75jfr">YouTube Videos</a></p>
+                <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org/ages/">GeeksforGeeks Links</a></p>
+            </div>
+        </ul>
+    </div>
+    
+   
+</body>
+</html>
+
+<!-- 
+<div class="container" id="logical">
+    <h1 onclick="toggleList('logical-list')">Logical Reasoning</h1>
+    <ul id="logical-list">
+        <li onclick="showResources('resources-2')">Coding-Decoding</li>
+        <div id="resources-2" class="resources">
+            <p>📄 <a href="#">Download PDF</a></p>
+            <p>🎥 <a href="#">YouTube Videos</a></p>
+            <p>🔗 <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+        </div>
+    </ul>
+</div>
+
+<div class="container" id="verbal">
+    <h1 onclick="toggleList('verbal-list')">Verbal Ability</h1>
+    <ul id="verbal-list">
+        <li onclick="showResources('resources-3')">Synonyms & Antonyms</li>
+        <div id="resources-3" class="resources">
+            <p>📄 <a href="#">Download PDF</a></p>
+            <p>🎥 <a href="#">YouTube Videos</a></p>
+            <p>🔗 <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+        </div>
+    </ul>
+</div> -->

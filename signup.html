@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        nav a, .nav-btn {
+            margin: 10px;
+            cursor: pointer;
+            color: white;
+            background-color: blue;
+            border: none;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        nav a {
+            background: none;
+            color: blue;
+            text-decoration: underline;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .nav-btn:hover {
+            background-color: darkblue;
+        }
+        /**/
+        .navbar {
+            background: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .menu {
+            display: flex;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+        .navbar a:hover {
+            background: #575757;
+            border-radius: 5px;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-toggle div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px;
+        }
+        @media (max-width: 768px) {
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #333;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                text-align: center;
+            }
+            .navbar .menu a {
+                padding: 15px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+        }
+        .container {
+            border: 2px solid black;
+            max-width: 600px;
+            margin: 100px auto 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: none;
+        }
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .resources {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+       
+        .resources p{
+         border: 1px solid rgb(0, 0, 0);
+            text-align: center;
+            width: 50%;
+            margin: 10px;
+            margin-left: 30%;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            color: black;
+
+
+        }
+    .resources p a{
+        color: black;
+        text-decoration: none;
+    }
+    li{
+        background-color: red;
+        color: white;
+    }
+    .fa-solid.fa-file-pdf{
+        color: black;
+        font-size: 15px;
+    }
+    .fa-brands.fa-youtube{
+        color: red;
+        font-size: 15px;
+
+    }
+    .fa-solid.fa-link{
+        color: black;
+        font-size: 15px;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a onclick="showSection('home')">Home</a> >
+        <a onclick="showSection('quantitative-aptitude')">Quantitative Aptitude</a> >
+        <a onclick="showSection('data-interpretation')">Data Interpretation</a>
+    </nav>
+
+    <!-- Sections -->
+    <div id="home" class="section active">
+        <h1>Home</h1>
+        <p>Welcome to the homepage.</p>
+        <h2>python</h2>
+        <ul>
+            <li>Python HOME</li>
+              <li>Python Intro</li>
+               <li> Python Get Started</li>
+               <li> Python Syntax</li>
+                <li>Python Comments</li>
+              <li>Python Variables</li>
+               <li> Python Data Types</li>
+             <li>Python Numbers</li>
+               <li> Python Casting</li>
+              <li>Python Strings</li>
+            <li>Python Booleans</li>
+                <li>Python Operators</li>
+              <li>  Python Lists</li>
+                <li>Python Tuples</li>
+             <li>   Python Sets</li>
+                <li>Python Dictionaries</li>
+              <li>  Python If...Else</li>
+               <li> Python While Loops</li>
+            <li>Python For Loops</li>
+             <li>   Python Functions</li>
+               <li> Python Lambda</li>
+               <li> Python User Input</li>
+                <li>Python String Formatting</li>
+                </li>
+          
+        </ul>
+        <button class="nav-btn" onclick="showSection('quantitative-aptitude')">Go to Quantitative Aptitude</button>
+    </div>
+
+    <div id="quantitative-aptitude" class="section">
+        <h1>Quantitative Aptitude</h1>
+        <p>This section covers quantitative aptitude topics.</p>
+        <button class="nav-btn" onclick="showSection('home')">Back to Home</button>
+        <button class="nav-btn" onclick="showSection('data-interpretation')">Go to Data Interpretation</button>
+    </div>
+
+    <div id="data-interpretation" class="section">
+        <div class="navbar">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="menu">
+                <a href="#quantitative">Home</a>
+                <a href="#logical">Back</a>
+                <a href="#verbal">Verbal Ability</a>
+            </div>
+        </div>
+    
+        <div class="container" id="quantitative">
+            <h1 onclick="toggleList('quantitative-list')">Quantitative Aptitude</h1>
+            <ul id="quantitative-list">
+                <li onclick="showResources('resources-1')">Number System</li>
+                <div id="resources-1" class="resources">
+                    <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                    <p><i class="fa-brands fa-youtube"></i> <a href="https://youtu.be/exAPyTTZ2uU?si=vCI3GhZY9bTpgo8O">YouTube Videos</a></p>
+                    <p><i class="fa-solid fa-link"></i> <a href="https://www.tutorialspoint.com/quantitative_aptitude/aptitude_number_system.htm">GeeksforGeeks Links</a></p>
+                </div>
+                <li onclick="showResources('resources-2')">problems on  HCF & LCM</li>
+                <div id="resources-2" class="resources">
+                    <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                    <p><i class="fa-brands fa-youtube"></i> <a href="#">YouTube Videos</a></p>
+                    <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+                </div>
+                <li onclick="showResources('resources-3')">problems on  HCF & LCM</li>
+                <div id="resources-3" class="resources">
+                    <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                    <p><i class="fa-brands fa-youtube"></i> <a href="#">YouTube Videos</a></p>
+                    <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+                </div>
+                <li onclick="showResources('resources-4')">problems on  HCF & LCM</li>
+                <div id="resources-4" class="resources">
+                    <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                    <p><i class="fa-brands fa-youtube"></i> <a href="#">YouTube Videos</a></p>
+                    <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+                </div>
+                <li onclick="showResources('resources-5')">problems on  HCF & LCM</li>
+                <div id="resources-5" class="resources">
+                    <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                    <p><i class="fa-brands fa-youtube"></i> <a href="#">YouTube Videos</a></p>
+                    <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+                </div>
+                <li onclick="showResources('resources-6')">problems on  HCF & LCM</li>
+                <div id="resources-6" class="resources">
+                    <p><i class="fa-solid fa-file-pdf"></i> <a href="#">Download PDF</a></p>
+                    <p><i class="fa-brands fa-youtube"></i> <a href="#">YouTube Videos</a></p>
+                    <p><i class="fa-solid fa-link"></i> <a href="https://www.geeksforgeeks.org">GeeksforGeeks Links</a></p>
+                </div>
+            </ul>
+        </div>
+        
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+    <script>
+        function toggleList(id) {
+            var list = document.getElementById(id);
+            if (list.style.display === "none" || list.style.display === "") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+        function toggleMenu() {
+            var menu = document.querySelector('.navbar .menu');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+        }
+        function showResources(id) {
+            var resources = document.getElementById(id);
+            if (resources.style.display === "none" || resources.style.display === "") {
+                resources.style.display = "block";
+            } else {
+                resources.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
