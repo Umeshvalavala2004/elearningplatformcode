@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform</title>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/63c50dd3d1.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* New Navbar Styles */
+        .navbar {
+            background-color: #3498db;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff !important;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f1c40f !important;
+        }
+
+        .dropdown-menu {
+            background-color: #3498db;
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #ffffff !important;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: #2980b9;
+            color: #f1c40f !important;
+        }
+
+        /* Neat Search Bar Styles */
+        .search-bar {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-bar input {
+            border-radius: 25px 0 0 25px;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            width: 60%;
+            max-width: 500px;
+            outline: none;
+            height: 50px; /* Fixed height */
+        }
+
+        .search-bar button {
+            border-radius: 0 25px 25px 0;
+            padding: 12px 20px;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            height: 50px; /* Fixed height to match input */
+        }
+
+        .search-bar button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Scrolling Card Container */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 10px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Card Styles */
+        .cards {
+            flex: 0 0 auto;
+            width: 250px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cards:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .cards img {
+            width: 100%;
+            height:100% ;
+            border-radius: 10%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            padding: 0px !important;        }
+
+        .cards i {
+            font-size: 60px;
+            color: #fff;
+            background-color: #3498db;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .cards h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .cards a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- New Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">E-Learning</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Neat Search Bar -->
+    <div class="container search-bar">
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for courses..." aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn" type="button" onclick="performSearch()">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Computer Fundamentals Section -->
+    <div class="container">
+        <h2>Computer Fundamentals</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="aptitude">
+              <img src="images\Capgemini-Homepage-Icon (1).webp" alt="">
+                <!-- <a href="aptitude/quntitative_aptitude.html"><h3>Aptitude</h3></a> -->
+            </div>
+            <div class="cards" data-name="reasoning">
+                <i class="fa-solid fa-puzzle-piece"></i> <!-- Added icon for Reasoning -->
+                <h3>Reasoning</h3>
+            </div>
+            <div class="cards" data-name="verbal">
+                <i class="fa-solid fa-comments"></i> <!-- Added icon for Verbal Ability -->
+                <h3>Verbal Ability</h3>
+            </div>
+            <div class="cards" data-name="softskills">
+                <i class="fa-solid fa-handshake"></i> <!-- Added icon for Soft Skills -->
+                <h3>Soft Skills</h3>
+            </div>
+            <div class="cards" data-name="computer">
+                <dotlottie-player src="https://lottie.host/5b0b9dd2-5361-4ba1-a25c-3f9c7d7ff3e2/9RQWNkIEdK.lottie" background="transparent" speed="1" style="width: 100px; height: 100px" loop autoplay></dotlottie-player>
+                <h3>Computer</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programming Languages Section -->
+    <div class="container">
+        <h2>Programming Languages</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="python">
+                <a href="programming/python.html"><i class="fa-brands fa-python"></i></a>
+                <a href="programming/python.html"><h3>Python</h3></a>
+            </div>
+            <div class="cards" data-name="java">
+                <i class="fa-brands fa-java"></i>
+                <h3>Java</h3>
+            </div>
+            <div class="cards" data-name="javascript">
+                <i class="fa-brands fa-js"></i>
+                <h3>JavaScript</h3>
+            </div>
+            <div class="cards" data-name="sql">
+                <i class="fa-solid fa-database"></i>
+                <h3>SQL</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Computer Science Fundamentals Section -->
+    <div class="container">
+        <h2>Computer Science Fundamentals</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="os">
+                <i class="fa-brands fa-windows"></i>
+                <h3>Operating Systems</h3>
+            </div>
+            <div class="cards" data-name="cn">
+                <i class="fa-solid fa-globe"></i>
+                <h3>Computer Networks</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <i class="fa-solid fa-server"></i>
+                <h3>DBMS</h3>
+            </div>
+        </div>
+    </div>
+ <!-- Computer Science Fundamentals Section -->
+ <div class="container">
+    <h2>Computer Science Fundamentals</h2>
+    <div class="scroll-container">
+        <div class="cards" data-name="os">
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI7mpLn43uYFAJhi_4Lb6x0LCUHjCOjccaHw&s" alt="">
+            <h3>Operating Systems</h3>
+        </div>
+        <div class="cards" data-name="cn">
+       <img src="data:image/jpeg;base64,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" alt="">
+            <h3>Computer Networks</h3>
+        </div>
+        <div class="cards" data-name="dbms">
+            <i class="fa-solid fa-server"></i>
+            <h3>DBMS</h3>
+        </div>
+    </div>
+</div>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function performSearch() {
+            let query = document.getElementById("searchInput").value.toLowerCase();
+            let cards = document.querySelectorAll(".cards");
+            cards.forEach(card => {
+                let cardName = card.getAttribute("data-name").toLowerCase();
+                card.style.display = cardName.includes(query) ? "flex" : "none";
+            });
+        }
+    </script>
+</body>
+</html>

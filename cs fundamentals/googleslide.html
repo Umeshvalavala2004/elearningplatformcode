@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OS SHORTNOTES</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #192A56;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #74B9FF;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            background-color: #74B9FF;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toggle-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar:not(.collapsed) + .main-content {
+            margin-left: 250px;
+        }
+
+        /* Slides Container */
+        .slides-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .slides-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        /* Full-Screen Button */
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #74B9FF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            z-index: 1002;
+        }
+
+        .fullscreen-btn:hover {
+            background-color: #74B9FF;
+        }
+
+        /* Preloader */
+        .loading {
+            --speed-of-animation: 0.9s;
+            --gap: 6px;
+            --first-color: #4c86f9;
+            --second-color: #49a84c;
+            --third-color: #f6bb02;
+            --fourth-color: #f6bb02;
+            --fifth-color: #2196f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            gap: var(--gap);
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .loading span {
+            width: 4px;
+            height: 50px;
+            background: var(--first-color);
+            animation: scale var(--speed-of-animation) ease-in-out infinite;
+        }
+
+        .loading span:nth-child(2) {
+            background: var(--second-color);
+            animation-delay: -0.8s;
+        }
+
+        .loading span:nth-child(3) {
+            background: var(--third-color);
+            animation-delay: -0.7s;
+        }
+
+        .loading span:nth-child(4) {
+            background: var(--fourth-color);
+            animation-delay: -0.6s;
+        }
+
+        .loading span:nth-child(5) {
+            background: var(--fifth-color);
+            animation-delay: -0.5s;
+        }
+
+        @keyframes scale {
+            0%, 40%, 100% {
+                transform: scaleY(0.05);
+            }
+            20% {
+                transform: scaleY(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.collapsed {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar:not(.collapsed) + .main-content {
+                margin-left: 0;
+            }
+
+            .slides-container {
+                padding-bottom: 75%; /* Adjust aspect ratio for mobile */
+            }
+
+            .toggle-btn {
+                top: 10px;
+                left: 10px;
+            }
+
+            .fullscreen-btn {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar with Topics -->
+    <div class="sidebar" id="sidebar">
+        <h2>Topics</h2>
+        <ul>
+            <li><a href="#" data-slides="https://docs.google.com/presentation/d/e/2PACX-1vTL_9x7A6-4sxdV-Zjs4vD6yfK_z8NCwOsRR39akgqWapguwm7108NrjOE0AGgEkg/embed?start=false&loop=false&delayms=3000&slide=id.g11845aedde4_0_4738">L1-Introduction to Sql</a></li>
+            <li><a href="#" data-slides="https://docs.google.com/presentation/d/e/2PACX-1vQnxH1IV5xHYp4u2NAc9_P8LAz-XgpuE78rkOLf1UOHk9wMwH6W14wn0ITLZwdSPw/embed?start=false&loop=false&delayms=3000&slide=id.p3">L2-Functions of OS</a></li>
+            <li><a href="#" data-slides="https://docs.google.com/presentation/d/e/2PACX-1vTAP4v0_GnpvNh_vsGjwmloTbQu-Q_ygkK_pe36fPkQ_fNAS8NASHg_MXlNF9t8vg/embed?start=false&amp;loop=false&amp;delayms=3000%22%20scale=%221%22%20class=%22sc-kxLnmX%20IframeComponent___StyledIframe-odnya6-0%20gMaVIU&slide=id.g1141da69769_0_2329">L3-computer system works</a></li>
+            <li><a href="#" data-slides="https://docs.google.com/presentation/d/e/2PACX-1vRVTDpJeU_mhBv_ABd9GPYp6ADeunEBGSVajk1DbH8WxNOnTQ20Fo21kHyoX-dlCw/embed?start=false&loop=false&delayms=3000&slide=id.g1184ef68c68_0_2327">L4-Program,Process &Thread</a></li>
+            <li><a href="#" data-slides="https://docs.google.com/presentation/d/e/2PACX-1vSHLrpGSwJW5q-9EzA0-G1tzphoSZXW8ODJya8hdqsw2axpXx24dALTUUdAMWDVQQ/embed?start=false&loop=false&delayms=3000">Advanced Concepts</a></li>
+            <!-- Add more topics as needed -->
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Embedded Slides -->
+        <div class="slides-container">
+            <!-- Uiverse.io Preloader -->
+            <div class="loading" id="preloader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <iframe id="slides" src="https://docs.google.com/presentation/d/e/2PACX-1vTL_9x7A6-4sxdV-Zjs4vD6yfK_z8NCwOsRR39akgqWapguwm7108NrjOE0AGgEkg/embed?start=false&loop=false&delayms=3000&slide=id.g11845aedde4_0_4738" allow="autoplay"></iframe>
+            <button class="fullscreen-btn" id="fullscreen-btn">Full Screen</button>
+        </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button class="toggle-btn" id="toggle-btn">&#9664;</button>
+
+    <script>
+        // JavaScript for Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const mainContent = document.querySelector('.main-content');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '&#9654;' : '&#9664;';
+        });
+
+        // JavaScript for Topic Clicks
+        const topicLinks = document.querySelectorAll('.sidebar ul li a');
+        const slides = document.getElementById('slides');
+        const preloader = document.getElementById('preloader');
+
+        topicLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                const slidesUrl = link.getAttribute('data-slides'); // Get the slides URL
+                preloader.style.display = 'flex'; // Show preloader
+
+                // Force the iframe to reload by setting the src attribute
+                slides.src = slidesUrl;
+
+                // Hide preloader when slides are loaded
+                slides.onload = () => {
+                    preloader.style.display = 'none';
+                };
+
+                // Close the sidebar after clicking a topic
+                sidebar.classList.add('collapsed');
+                toggleBtn.innerHTML = '&#9654;';
+            });
+        });
+
+        // JavaScript for Full-Screen Slides
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                if (slides.requestFullscreen) {
+                    slides.requestFullscreen();
+                } else if (slides.mozRequestFullScreen) { // Firefox
+                    slides.mozRequestFullScreen();
+                } else if (slides.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    slides.webkitRequestFullscreen();
+                } else if (slides.msRequestFullscreen) { // IE/Edge
+                    slides.msRequestFullscreen();
+                }
+                fullscreenBtn.textContent = 'Minimize Screen';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.textContent = 'Full Screen';
+            }
+        });
+
+        // Listen for Fullscreen Change
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.textContent = 'Full Screen';
+            }
+        });
+    </script>
+</body>
+</html>

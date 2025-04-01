@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Discussion Guide for Freshers</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3f51b5;
+            --primary-light: #757de8;
+            --primary-dark: #002984;
+            --accent: #ff4081;
+            --light: #f5f5f5;
+            --dark: #212121;
+            --gray: #757575;
+            --success: #4caf50;
+            --warning: #ff9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.7;
+            padding-top: 70px; /* Added for fixed navbar */
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            color: var(--primary-dark);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+            padding: 8px 15px !important;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-light);
+            color: white !important;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        h3 {
+            color: var(--primary);
+            margin: 20px 0 15px;
+            font-size: 1.3rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+     ul   li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-light);
+        }
+
+        .dos-donts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .dos, .donts {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .dos {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--success);
+        }
+
+        .donts {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+
+        .dos h3 {
+            color: var(--success);
+        }
+
+        .donts h3 {
+            color: #f44336;
+        }
+
+        .example {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .example p {
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .example .moderator {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .example .participant {
+            color: #2e7d32;
+        }
+
+        .topic-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .topic {
+            background: var(--primary-light);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        .topic.tech { background: #2196f3; }
+        .topic.social { background: #e91e63; }
+        .topic.economy { background: #4caf50; }
+        .topic.edu { background: #ff9800; }
+        .topic.env { background: #009688; }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary);
+        }
+
+        .tip-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-card h4 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .dos-donts {
+                flex-direction: column;
+            }
+            
+            .card {
+                padding: 20px 15px;
+            }
+        }
+        ul li{
+            list-style: none;
+        }
+        ol li{
+            list-style: none;
+        }
+        .nav-link{
+            list-style: none !important;
+          
+        }
+        #home{
+            padding-top: 50px !important;
+            margin-top: 50px !important;
+            
+        }
+    </style>
+</head>
+<body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">
+                <i class="fa-solid fa-arrow-left"></i>  <i class="fas fa-users"></i>GD Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ol class="navbar-nav ms-auto">
+                 
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#topics"><i class="fas fa-list"></i> Topics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tips"><i class="fas fa-lightbulb"></i> Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#examples"><i class="fas fa-comments"></i> Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header id="home">
+            <h1>Group Discussion Guide for Freshers</h1>
+            <p class="subtitle">Master the art of group discussions with essential tips, examples, and strategies to ace your next interview</p>
+        </header>
+
+        <div class="card">
+            <h2>What is a Group Discussion?</h2>
+            <p>A Group Discussion (GD) is a structured conversation where 6-10 participants discuss a given topic for 15-20 minutes. It's commonly used in:</p>
+            <ul>
+                <li>Campus placements</li>
+                <li>MBA admissions</li>
+                <li>Government job interviews</li>
+                <li>Leadership program selections</li>
+            </ul>
+            <p>GDs assess your ability to work in a team, communicate effectively, and think critically under pressure.</p>
+        </div>
+
+        <div class="card" id="topics">
+            <h2>Popular GD Topics for Freshers</h2>
+            <div class="topic-list">
+                <span class="topic tech">AI replacing human jobs</span>
+                <span class="topic social">Social media addiction</span>
+                <span class="topic economy">Cashless economy</span>
+                <span class="topic edu">Online vs traditional education</span>
+                <span class="topic env">Climate change responsibility</span>
+                <span class="topic tech">Data privacy concerns</span>
+                <span class="topic social">Work from home culture</span>
+                <span class="topic economy">Universal basic income</span>
+                <span class="topic edu">Skill-based education</span>
+                <span class="topic env">Plastic ban effectiveness</span>
+            </div>
+        </div>
+
+        <div class="card" id="tips">
+            <h2>Do's and Don'ts in Group Discussion</h2>
+            <div class="dos-donts">
+                <div class="dos">
+                    <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                    <ul>
+                        <li>Initiate discussion if you know the topic well</li>
+                        <li>Maintain eye contact with all participants</li>
+                        <li>Use facts, statistics, and examples to support points</li>
+                        <li>Listen actively and acknowledge others' views</li>
+                        <li>Speak clearly and at moderate pace</li>
+                        <li>Summarize discussion if possible</li>
+                        <li>Maintain positive body language</li>
+                    </ul>
+                </div>
+                <div class="donts">
+                    <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                    <ul>
+                        <li>Don't interrupt others while speaking</li>
+                        <li>Avoid being too aggressive or passive</li>
+                        <li>Don't go off-topic or share irrelevant information</li>
+                        <li>Avoid using slang or informal language</li>
+                        <li>Don't dominate the conversation</li>
+                        <li>Avoid negative facial expressions</li>
+                        <li>Don't take extreme positions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>GD Evaluation Criteria</h2>
+            <p>You're typically evaluated on these parameters:</p>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4><i class="fas fa-comment-alt"></i> Communication</h4>
+                    <ul>
+                        <li>Clarity of expression</li>
+                        <li>Fluency in language</li>
+                        <li>Grammar and vocabulary</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-lightbulb"></i> Content</h4>
+                    <ul>
+                        <li>Relevance to topic</li>
+                        <li>Depth of knowledge</li>
+                        <li>Originality of ideas</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-users"></i> Group Behavior</h4>
+                    <ul>
+                        <li>Team participation</li>
+                        <li>Listening skills</li>
+                        <li>Respect for others</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-brain"></i> Critical Thinking</h4>
+                    <ul>
+                        <li>Logical reasoning</li>
+                        <li>Problem-solving approach</li>
+                        <li>Ability to analyze</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="examples">
+            <h2>Complete GD Example</h2>
+            <h3>Topic: "Should college education be made free?"</h3>
+            <div class="example">
+                <p class="moderator">Moderator: "You have 15 minutes to discuss whether college education should be free. Please begin."</p>
+                
+                <p class="participant">Participant 1 (Initiator): "I believe education is a fundamental right. Countries like Germany and Norway offer free higher education successfully. This increases overall literacy and workforce quality."</p>
+                
+                <p class="participant">Participant 2: "But who will bear the cost? Taxpayers' money should be used carefully. According to a 2022 report, free college in the US would cost $800 billion over 10 years."</p>
+                
+                <p class="participant">Participant 3: "We could implement a sliding scale - free for those below poverty line, subsidized for middle class, and full fees for affluent students."</p>
+                
+                <p class="participant">Participant 4: "Instead of making it completely free, we should focus on improving quality first. Many government colleges lack proper infrastructure."</p>
+                
+                <p class="participant">Participant 1 (Summarizer): "To conclude, while free education is ideal, we need balanced solutions considering economic realities - perhaps income-based fees with more scholarships."</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Pro Tips for Freshers</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4><i class="fas fa-bullhorn"></i> Initiation Tips</h4>
+                    <ul>
+                        <li>Start only if you have strong points</li>
+                        <li>Define the topic first if abstract</li>
+                        <li>Use a quote or recent news to begin</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-microphone"></i> Speaking Tips</h4>
+                    <ul>
+                        <li>Limit each turn to 30-45 seconds</li>
+                        <li>Use transition words: "Furthermore", "However"</li>
+                        <li>Back points with data: "A UNESCO study shows..."</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-user-friends"></i> Group Dynamics</h4>
+                    <ul>
+                        <li>Bring quiet participants into discussion</li>
+                        <li>Diffuse conflicts: "Both views have merit..."</li>
+                        <li>Build on others' points: "Adding to what X said..."</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-hourglass-end"></i> Closing Tips</h4>
+                    <ul>
+                        <li>Summarize if discussion is ending</li>
+                        <li>Conclude with balanced view</li>
+                        <li>Thank the group at the end</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Practice with friends, record mock GDs, and focus on continuous improvement</p>
+            <p>© 2024 Interview Preparation Guide | Designed for Freshers</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

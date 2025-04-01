@@ -1,0 +1,116 @@
+{
+  "name": "SkillStack - E-Learning Platform",
+  "short_name": "SkillStack",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#3498db",
+  "description": "Comprehensive e-learning platform for technical skills, aptitude training, and interview preparation",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["education", "learning", "courses"],
+  
+  "icons": [
+    {
+      "src": "images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "images/selfintro.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Homepage of SkillStack"
+    },
+    {
+      "src": "images/screenshots/screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Course categories"
+    }
+  ],
+  
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://yourdomain.com"
+    }
+  ],
+  
+  "prefer_related_applications": false,
+  
+  "shortcuts": [
+    {
+      "name": "Aptitude Tests",
+      "short_name": "Aptitude",
+      "description": "Practice aptitude questions",
+      "url": "/aptitude",
+      "icons": [
+        {
+          "src": "images/icons/aptitude-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Interview Prep",
+      "short_name": "Interviews",
+      "description": "Prepare for technical interviews",
+      "url": "/interview",
+      "icons": [
+        {
+          "src": "images/icons/interview-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

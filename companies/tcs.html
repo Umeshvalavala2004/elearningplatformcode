@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS Exam Pattern & Syllabus - TalentBattle</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #16a085;
+            --danger-color: #e74c3c;
+            --light-bg: #f9f9f9;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding-top: 70px;
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+        
+        /* Navbar customization */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .nav-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: white;
+            background-color: var(--secondary-color);
+        }
+        
+        /* Home Button */
+        .home-btn {
+            position: fixed;
+            text-decoration: none;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+        .home-btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Section Styling */
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary-color);
+        }
+        .section h2 {
+            color: var(--primary-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: var(--accent-color);
+            margin-top: 25px;
+        }
+        
+        /* Table Styling */
+        .table {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+        .table td, .table th {
+            vertical-align: middle;
+        }
+        
+        /* List Styling */
+        .styled-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .styled-list li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .styled-list li:before {
+            content: "\f054";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-size: 12px;
+            top: 10px;
+        }
+        
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0 !important;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .btn-danger {
+            background-color: var(--danger-color);
+            border-color: var(--danger-color);
+        }
+        
+        /* Badges */
+        .badge {
+            padding: 6px 10px;
+            font-weight: 500;
+        }
+        
+        /* Important Note */
+        .important-note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            .section {
+                padding: 20px;
+            }
+        }
+       .fas.fa-arrow-left{
+        margin-right: 20px;
+        padding: 5px;
+       }
+    </style>
+</head>
+<body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">
+                <i class="fas fa-arrow-left"></i>    <i class="fas fa-graduation-cap me-2"></i>TCS Prep Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pattern"><i class="fas fa-list-alt me-1"></i> Exam Pattern</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#syllabus"><i class="fas fa-book me-1"></i> Syllabus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources"><i class="fas fa-file-pdf me-1"></i> Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#youtube"><i class="fab fa-youtube me-1"></i> Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tips"><i class="fas fa-lightbulb me-1"></i> Tips</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Home Button -->
+    <a href="#" class="home-btn">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="section mt-4 text-center">
+            <h1 class="display-5 fw-bold mb-4">TCS NQT Syllabus & Pattern 2025</h1>
+            <p class="lead">Complete guide to crack the TCS National Qualifier Test with detailed syllabus, preparation resources, and expert tips</p>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <a href="#pattern" class="btn btn-primary btn-lg px-4">
+                    <i class="fas fa-chart-bar me-2"></i>Exam Pattern
+                </a>
+                <a href="#resources" class="btn btn-success btn-lg px-4">
+                    <i class="fas fa-download me-2"></i>Resources
+                </a>
+            </div>
+        </div>
+        
+        <!-- Exam Pattern Section -->
+        <div class="section" id="pattern">
+            <h2><i class="fas fa-chart-bar me-2"></i>TCS Exam Pattern</h2>
+            
+            <div class="important-note">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <strong>Important Note:</strong> There is no negative marking in the TCS exam.
+            </div>
+            
+            <h3>TCS Exam Pattern 2025</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Section</th>
+                            <th>No. of Questions</th>
+                            <th>Time Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Foundation Section</td>
+                            <td>Numerical Ability + Verbal Ability + Reasoning Ability (Total 25)</td>
+                            <td>75 mins</td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Section</td>
+                            <td>Advanced Quantitative Ability + Advanced Reasoning Ability + Advanced Coding (Total 20)</td>
+                            <td>105 mins</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Detailed TCS Exam Pattern For 2025 Batch</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Section</th>
+                            <th>Duration (in Minutes)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-primary">
+                            <td><strong>PART-A (Foundation Section)</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Numerical Ability</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td>Verbal Ability</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td>Reasoning Ability</td>
+                            <td>25</td>
+                        </tr>
+                        <tr class="table-primary">
+                            <td><strong>PART-B (Advanced Section)</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Reasoning Ability</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Quantitative & Reasoning Ability</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Coding</td>
+                            <td>90</td>
+                        </tr>
+                        <tr class="table-info">
+                            <td><strong>Total Duration (in minutes)</strong></td>
+                            <td><strong>190</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- <div class="text-center mt-4">
+                <a href="#syllabus" class="btn btn-primary me-2">
+                    <i class="fas fa-book me-1"></i> View Syllabus
+                </a>
+                <a href="#resources" class="btn btn-success">
+                    <i class="fas fa-download me-1"></i> Download Pattern PDF
+                </a>
+            </div> -->
+        </div>
+        
+        <!-- Syllabus Section -->
+        <div class="section" id="syllabus">
+            <h2><i class="fas fa-book me-2"></i>TCS Syllabus</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-calculator me-2"></i>Foundation Section (75 mins)
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Numerical Ability (10 questions)</h5>
+                            <ul class="styled-list">
+                                <li>Number System</li>
+                                <li>LCM & HCF</li>
+                                <li>Divisibility</li>
+                                <li>Decimals & Fractions</li>
+                                <li>Ratio & Proportion</li>
+                                <li>Percentages</li>
+                                <li>Profit & Loss</li>
+                                <li>Simple & Compound Interest</li>
+                                <li>Time, Speed & Distance</li>
+                                <li>Time & Work</li>
+                                <li>Algebra & Geometry</li>
+                                <li>Probability & Statistics</li>
+                            </ul>
+                            
+                            <h5 class="card-title mt-4">Verbal Ability (10 questions)</h5>
+                            <ul class="styled-list">
+                                <li>Error Identification</li>
+                                <li>Sentence Completion</li>
+                                <li>Synonyms & Antonyms</li>
+                                <li>Reading Comprehension</li>
+                                <li>Grammar Rules</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-brain me-2"></i>Advanced Section (105 mins)
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Advanced Quantitative (7 questions)</h5>
+                            <ul class="styled-list">
+                                <li>Advanced Algebra</li>
+                                <li>Geometry & Trigonometry</li>
+                                <li>Permutation & Combination</li>
+                                <li>Probability</li>
+                                <li>Statistics</li>
+                                <li>Data Interpretation</li>
+                            </ul>
+                            
+                            <h5 class="card-title mt-4">Advanced Coding (2 problems)</h5>
+                            <ul class="styled-list">
+                                <li>Data Structures</li>
+                                <li>Algorithms</li>
+                                <li>Problem Solving</li>
+                                <li>Efficiency Analysis</li>
+                            </ul>
+                            
+                            <div class="mt-3">
+                                <span class="badge bg-primary">Difficulty: Medium-Hard</span>
+                                <span class="badge bg-success">Languages: Java, Python, C++</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#resources" class="btn btn-primary">
+                    <i class="fas fa-download me-1"></i> Download Full Syllabus
+                </a>
+            </div>
+        </div>
+        
+        <!-- Resources Section -->
+        <div class="section" id="resources">
+            <h2><i class="fas fa-file-pdf me-2"></i>Preparation Resources</h2>
+            <p class="lead">Download these comprehensive resources to boost your preparation:</p>
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fas fa-file-alt me-2"></i>Quantitative Aptitude
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Complete Math Guide</h5>
+                            <p class="card-text">500+ practice questions with detailed solutions covering all numerical ability topics.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">PDF</span>
+                                <span class="text-muted">3.2 MB</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-primary w-100">
+                                <i class="fas fa-download me-1"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <i class="fas fa-language me-2"></i>Verbal Ability
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Grammar & Vocabulary</h5>
+                            <p class="card-text">Complete English guide with grammar rules, vocabulary lists, and reading comprehension exercises.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">PDF</span>
+                                <span class="text-muted">2.8 MB</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-success w-100">
+                                <i class="fas fa-download me-1"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-danger text-white">
+                            <i class="fas fa-laptop-code me-2"></i>Coding
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Coding Problems Collection</h5>
+                            <p class="card-text">150+ coding problems with solutions in Java, Python, and C++ for TCS advanced coding round.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">PDF</span>
+                                <span class="text-muted">4.1 MB</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-danger w-100">
+                                <i class="fas fa-download me-1"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-warning text-dark">
+                            <i class="fas fa-puzzle-piece me-2"></i>Reasoning
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Logical Reasoning</h5>
+                            <p class="card-text">Complete reasoning guide with 300+ practice questions covering all reasoning ability topics.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">PDF</span>
+                                <span class="text-muted">3.5 MB</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-warning w-100">
+                                <i class="fas fa-download me-1"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-info text-white">
+                            <i class="fas fa-clipboard-list me-2"></i>Mock Tests
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Practice Papers</h5>
+                            <p class="card-text">10 full-length mock tests with solutions based on previous TCS exam patterns.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">PDF</span>
+                                <span class="text-muted">5.7 MB</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-info w-100">
+                                <i class="fas fa-download me-1"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-secondary text-white">
+                            <i class="fas fa-file-archive me-2"></i>Complete Package
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">All-in-One Bundle</h5>
+                            <p class="card-text">Everything you need in one package - quantitative, verbal, reasoning, and coding resources.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">ZIP</span>
+                                <span class="text-muted">15.2 MB</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-secondary w-100">
+                                <i class="fas fa-download me-1"></i> Download All
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- YouTube Channels Section -->
+        <div class="section" id="youtube">
+            <h2><i class="fab fa-youtube me-2"></i>Recommended YouTube Channels</h2>
+            <p class="lead">Learn from these excellent YouTube channels for TCS exam preparation:</p>
+            
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://yt3.googleusercontent.com/ytc/AIdro_mjesUGQ8rv1_pUM-zZyMCChTYqW_CuWMI9MWbtXAquJdI=s160-c-k-c0x00ffffff-no-rj" class="rounded-circle me-3" alt="Channel Logo">
+                                <div>
+                                    <h5 class="card-title mb-0">CareerRide</h5>
+                                    <span class="text-muted small">1.2M subscribers</span>
+                                </div>
+                            </div>
+                            <p class="card-text">Quantitative aptitude and reasoning tutorials with detailed explanations and shortcuts.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger"><i class="fab fa-youtube me-1"></i> YouTube</span>
+                                <a href="https://youtube.com/playlist?list=PLpyc33gOcbVBvdfzlSn97a1TlfysSPwm-&si=NBtiOHfgkmKXf5cw" target="_blank" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-external-link-alt me-1"></i> Visit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://yt3.googleusercontent.com/xiQcPdzQL20ytMyd4iCQUVv_2b3TdZhfgNTkSi58IpblqtpNql88kw_F6tocuReEV71S9B-oxuE=s160-c-k-c0x00ffffff-no-rj" class="rounded-circle me-3" alt="Channel Logo">
+                                <div>
+                                    <h5 class="card-title mb-0">Online Studyforu</h5>
+                                    <span class="text-muted small">850K subscribers</span>
+                                </div>
+                            </div>
+                            <p class="card-text">Programming and data structures tutorials for TCS advanced coding section.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger"><i class="fab fa-youtube me-1"></i> YouTube</span>
+                                <a href="https://youtube.com/playlist?list=PLYA_1SYVpPQyiJedfAydj0WGTKcbv0LYL&si=ugdDrcuPQKkeZkJI" target="_blank" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-external-link-alt me-1"></i> Visit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://yt3.googleusercontent.com/7jsBkoW28PNLseDpl_Smizf4VTe834po1wo2wqjYXqH6xco4aocl8KxNXwRZF68hv2Hs5zRALA=s160-c-k-c0x00ffffff-no-rj" class="rounded-circle me-3" alt="Channel Logo">
+                                <div>
+                                    <h5 class="card-title mb-0">Prepinsta</h5>
+                                    <span class="text-muted small">650K subscribers</span>
+                                </div>
+                            </div>
+                            <p class="card-text">Problem-solving techniques and shortcuts for quantitative aptitude section.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger"><i class="fab fa-youtube me-1"></i> YouTube</span>
+                                <a href="https://youtube.com/playlist?list=PLKtofb3HgEyyfXieT54RIG-XDAyS2Aczx&si=KubaPgoL18AURjDk" target="_blank" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-external-link-alt me-1"></i> Visit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://yt3.googleusercontent.com/ytc/AIdro_mWTIv4H0ALBOw05DiZfCeoV7BniQlsFTIBBZo7Mxwc-yjI=s160-c-k-c0x00ffffff-no-rj" class="rounded-circle me-3" alt="Channel Logo">
+                                <div>
+                                    <h5 class="card-title mb-0">by Hemanth Aptitude</h5>
+                                    <span class="text-muted small">320K subscribers</span>
+                                </div>
+                            </div>
+                            <p class="card-text">Dedicated TCS exam preparation content with mock test analysis.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger"><i class="fab fa-youtube me-1"></i> YouTube</span>
+                                <a href="https://youtube.com/playlist?list=PLkCrdYKeDrauuanKmDV4Wca7ZkMH0P5yP&si=QtZq32lVgQOhxYDF" target="_blank" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-external-link-alt me-1"></i> Visit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-danger">
+                    <i class="fab fa-youtube me-1"></i> More Video Resources
+                </a>
+            </div>
+        </div>
+        
+        <!-- Tips Section -->
+        <div class="section" id="tips">
+            <h2><i class="fas fa-lightbulb me-2"></i>Preparation Tips</h2>
+            <p class="lead">Expert recommendations to help you crack the TCS exam:</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fas fa-clock me-2"></i>Time Management
+                        </div>
+                        <div class="card-body">
+                            <ul class="styled-list">
+                                <li>Practice with timed mock tests to improve speed</li>
+                                <li>Allocate time based on question difficulty</li>
+                                <li>Don't spend too much time on any single question</li>
+                                <li>Learn to quickly identify and skip difficult questions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <i class="fas fa-book me-2"></i>Study Strategy
+                        </div>
+                        <div class="card-body">
+                            <ul class="styled-list">
+                                <li>Focus on your weak areas first</li>
+                                <li>Solve previous year question papers</li>
+                                <li>Make formula sheets for quick revision</li>
+                                <li>Practice daily with small sets of questions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-info text-white">
+                            <i class="fas fa-code me-2"></i>Coding Preparation
+                        </div>
+                        <div class="card-body">
+                            <ul class="styled-list">
+                                <li>Master basic data structures first</li>
+                                <li>Practice coding on paper/whiteboard</li>
+                                <li>Learn to write clean, efficient code</li>
+                                <li>Understand time and space complexity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-warning text-dark">
+                            <i class="fas fa-brain me-2"></i>Exam Day Tips
+                        </div>
+                        <div class="card-body">
+                            <ul class="styled-list">
+                                <li>Stay calm and read questions carefully</li>
+                                <li>Attempt easy questions first</li>
+                                <li>Double-check your answers if time permits</li>
+                                <li>Manage stress with deep breathing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary me-2">
+                    <i class="fas fa-file-pdf me-1"></i> Download Tips PDF
+                </a>
+                <a href="#" class="btn btn-success">
+                    <i class="fas fa-clipboard-list me-1"></i> 30-Day Study Plan
+                </a>
+            </div>
+        </div>
+        
+        <!-- Final CTA -->
+        <div class="section text-center bg-light">
+            <h2>Ready to Start Your Preparation?</h2>
+            <p class="lead mb-4">Download our complete preparation package and get access to all resources!</p>
+            <a href="#" class="btn btn-primary btn-lg px-5 py-3">
+                <i class="fas fa-download me-2"></i>Download Full Package
+            </a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-graduation-cap me-2"></i>TCS Prep Guide</h5>
+                    <p>Comprehensive resources to help you crack the TCS National Qualifier Test.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#pattern" class="text-white">Exam Pattern</a></li>
+                        <li><a href="#syllabus" class="text-white">Syllabus</a></li>
+                        <li><a href="#resources" class="text-white">Resources</a></li>
+                        <li><a href="#youtube" class="text-white">Videos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> support@tcsguide.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (123) 456-7890</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 TCS Prep Guide. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

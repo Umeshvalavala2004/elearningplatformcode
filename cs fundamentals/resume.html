@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Guide for Freshers | SkillStudy</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-bg: #f9fafb;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .navbar {
+            background-color: var(--secondary-color) !important;
+            padding: 0.8rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .guide-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .guide-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .guide-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .example-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .example-box b {
+            color: var(--secondary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-group-resume {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .tool-card h5 {
+            color: var(--primary-color);
+        }
+        
+        .tool-icon {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            .guide-section {
+                padding: 1.5rem;
+            }
+            
+            .btn-group-resume {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html"><i class="fas fa-arrow-left me-2"></i>SkillStudy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Career Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://resume.io/resume-templates?ga_utm_source=bing&utm_medium=ppc&utm_campaign=434120185&utm_adgroup=1244647794383410&utm_custom=Resume.io|IN|PS|NB&utm_content=77790646683950&utm_term=resume%20templates&matchtype=e&device=c&location=116070&msclkid=22e3916e5cfd1243b873f68c7263c98f">Resume Templates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container text-center">
+            <h1 class="display-4"><i class="fas fa-file-alt me-3"></i>Resume Guide for Freshers</h1>
+            <p class="lead">Create a professional resume that gets you noticed by recruiters</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Personal Information -->
+        <section class="guide-section">
+            <h2><i class="fas fa-user me-2"></i>Personal Information</h2>
+            <p>Start with your basic contact details and professional profiles. Use a professional email address and ensure all links are working.</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> John Doe</p>
+                        <p><strong>Phone:</strong> +91 9876543210</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Email:</strong> johndoe@example.com</p>
+                        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></p>
+                        <p><strong>GitHub:</strong> <a href="https://github.com/johndoe" target="_blank">github.com/johndoe</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-lightbulb me-2"></i><strong>Tip:</strong> Create a professional email address (firstname.lastname@domain.com) if you don't have one already.
+            </div>
+        </section>
+
+        <!-- Career Objective -->
+        <section class="guide-section">
+            <h2><i class="fas fa-bullseye me-2"></i>Career Objective</h2>
+            <p>Write a concise 2-3 sentence statement that highlights your career goals and value proposition. Customize it for each job application.</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <p class="fst-italic">"Recent Computer Science graduate with hands-on experience in full-stack development seeking an entry-level software engineer position. Skilled in JavaScript, React, and Node.js with a strong foundation in data structures and algorithms. Passionate about creating efficient solutions and eager to contribute to innovative projects while expanding my technical expertise."</p>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="guide-section">
+            <h2><i class="fas fa-graduation-cap me-2"></i>Educational Qualifications</h2>
+            <p>List your academic background in reverse chronological order. Include relevant coursework if it strengthens your profile.</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <div class="education-item mb-3">
+                    <h5>Bachelor of Technology in Computer Science</h5>
+                    <p class="mb-1">XYZ University, Mumbai | 2021 - 2025 | CGPA: 8.5/10.0</p>
+                    <p class="text-muted small">Relevant Coursework: Data Structures, Algorithms, Database Systems, Web Development</p>
+                </div>
+                <div class="education-item">
+                    <h5>Higher Secondary Certificate (12th Grade)</h5>
+                    <p>ABC College, Delhi | 2019 - 2021 | Percentage: 90%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="guide-section">
+            <h2><i class="fas fa-code me-2"></i>Technical Skills</h2>
+            <p>Organize your skills into relevant categories. Be honest about your proficiency level (Basic, Intermediate, Advanced).</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Programming Languages</h6>
+                        <ul>
+                            <li>Python (Advanced)</li>
+                            <li>JavaScript (Intermediate)</li>
+                            <li>Java (Intermediate)</li>
+                        </ul>
+                        
+                        <h6>Web Development</h6>
+                        <ul>
+                            <li>HTML5, CSS3</li>
+                            <li>React.js, Node.js</li>
+                            <li>Express.js, REST APIs</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Database & Tools</h6>
+                        <ul>
+                            <li>MySQL, MongoDB</li>
+                            <li>Git, GitHub</li>
+                            <li>Docker, Postman</li>
+                        </ul>
+                        
+                        <h6>Soft Skills</h6>
+                        <ul>
+                            <li>Problem-solving</li>
+                            <li>Team Collaboration</li>
+                            <li>Communication</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="guide-section">
+            <h2><i class="fas fa-project-diagram me-2"></i>Projects</h2>
+            <p>Showcase 3-5 significant projects with descriptions of your contributions and technologies used.</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <div class="project-item mb-4">
+                    <h5>E-commerce Website (Full Stack)</h5>
+                    <p class="text-muted">React, Node.js, MongoDB | <a href="#" target="_blank">View Project</a></p>
+                    <ul>
+                        <li>Developed a responsive e-commerce platform with user authentication and product catalog</li>
+                        <li>Implemented cart functionality and payment gateway integration</li>
+                        <li>Reduced page load time by 40% through performance optimization</li>
+                    </ul>
+                </div>
+                <div class="project-item">
+                    <h5>Task Management App</h5>
+                    <p class="text-muted">JavaScript, Firebase | <a href="#" target="_blank">View Project</a></p>
+                    <ul>
+                        <li>Created a real-time task organizer with drag-and-drop interface</li>
+                        <li>Integrated Firebase for data persistence and user authentication</li>
+                        <li>Implemented offline functionality using service workers</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="guide-section">
+            <h2><i class="fas fa-briefcase me-2"></i>Work Experience & Internships</h2>
+            <p>Highlight relevant experiences with bullet points emphasizing achievements and skills gained.</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <div class="experience-item mb-4">
+                    <h5>Software Development Intern</h5>
+                    <p class="text-muted">Tech Solutions Inc. | June 2024 - August 2024</p>
+                    <ul>
+                        <li>Collaborated on frontend development using React.js and Redux</li>
+                        <li>Optimized application performance, reducing load time by 30%</li>
+                        <li>Participated in agile development processes and code reviews</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h5>Campus Ambassador</h5>
+                    <p class="text-muted">Google Developer Student Clubs | 2023-2024</p>
+                    <ul>
+                        <li>Organized coding workshops and hackathons for 100+ students</li>
+                        <li>Promoted tech learning initiatives across campus</li>
+                        <li>Mentored 20+ students in web development projects</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-warning mt-3">
+                <i class="fas fa-exclamation-circle me-2"></i><strong>No experience?</strong> Highlight academic projects, volunteer work, or freelance projects that demonstrate your skills.
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="guide-section">
+            <h2><i class="fas fa-certificate me-2"></i>Certifications & Achievements</h2>
+            <p>Include relevant certifications, awards, or recognitions that validate your skills.</p>
+            <div class="example-box">
+                <h5>Example:</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-transparent">Google Cloud Certified - Associate Cloud Engineer (2024)</li>
+                    <li class="list-group-item bg-transparent">AWS Fundamentals Certification - Coursera (2023)</li>
+                    <li class="list-group-item bg-transparent">1st Prize in CodeFest Hackathon 2023 (Team Leader)</li>
+                    <li class="list-group-item bg-transparent">Microsoft Learn Student Ambassador</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Resume Templates -->
+        <section class="guide-section">
+            <h2><i class="fas fa-file-download me-2"></i>Resume Templates</h2>
+            <p>Download professionally designed resume templates to get started quickly.</p>
+            <div class="btn-group-resume">
+                <a href="https://resume.io/resume-templates?ga_utm_source=bing&utm_medium=ppc&utm_campaign=434120185&utm_adgroup=1244647794383410&utm_custom=Resume.io|IN|PS|NB&utm_content=77790646683950&utm_term=resume%20templates&matchtype=e&device=c&location=116070&msclkid=22e3916e5cfd1243b873f68c7263c98f" class="btn btn-primary"><i class="fas fa-download me-2"></i>Modern Resume</a>
+                <a href="https://resume.io/resume-templates/ats" class="btn btn-primary"><i class="fas fa-download me-2"></i>ATS-Friendly Resume</a>
+                <a href="https://www.jobseeker.com/en/resume?msclkid=8a806c99a72b18453ff60b7b8812fe45&utm_source=bing&utm_medium=cpc&utm_campaign=02+%7C+EN-L+%7C+CV&utm_term=create+a+resume&utm_content=resume+create" class="btn btn-primary"><i class="fas fa-download me-2"></i>Creative Resume</a>
+                <a href="https://resume.io/resume-templates/simple" class="btn btn-primary"><i class="fas fa-download me-2"></i>Minimal Resume</a>
+            </div>
+        </section>
+
+        <!-- ATS Tools -->
+        <section class="guide-section">
+            <h2><i class="fas fa-search me-2"></i>ATS Optimization Tools</h2>
+            <p>Check your resume's ATS compatibility using these recommended tools:</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="tool-card text-center">
+                        <div class="tool-icon"><i class="fas fa-check-circle"></i></div>
+                        <h5>Jobscan</h5>
+                        <p>Optimize your resume for specific job descriptions</p>
+                        <a href="https://www.jobscan.co/" target="_blank" class="btn btn-sm btn-outline-primary">Visit Tool</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tool-card text-center">
+                        <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+                        <h5>Resume Worded</h5>
+                        <p>Get instant feedback on your resume</p>
+                        <a href="https://resumeworded.com/" target="_blank" class="btn btn-sm btn-outline-primary">Visit Tool</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tool-card text-center">
+                        <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                        <h5>Zety</h5>
+                        <p>Resume builder with ATS checks</p>
+                        <a href="https://zety.com/" target="_blank" class="btn btn-sm btn-outline-primary">Visit Tool</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Tips -->
+        <section class="guide-section">
+            <h2><i class="fas fa-lightbulb me-2"></i>Final Tips</h2>
+            <div class="alert alert-success">
+                <h5 class="alert-heading">Do's:</h5>
+                <ul>
+                    <li>Keep your resume to 1 page (for freshers)</li>
+                    <li>Use action verbs (Developed, Implemented, Optimized)</li>
+                    <li>Quantify achievements where possible (e.g., "Improved performance by 30%")</li>
+                    <li>Save as PDF with a professional filename (JohnDoe_Resume.pdf)</li>
+                </ul>
+            </div>
+            <div class="alert alert-danger">
+                <h5 class="alert-heading">Don'ts:</h5>
+                <ul>
+                    <li>Don't include personal details like age or marital status</li>
+                    <li>Avoid using generic objectives or skills</li>
+                    <li>Don't use fancy fonts or graphics (for ATS resumes)</li>
+                    <li>Avoid spelling and grammatical errors</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>SkillStudy</h4>
+                    <p>Helping freshers build successful careers through quality resources.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Career Guides</a></li>
+                        <li><a href="#" class="text-white">Interview Prep</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white"><i class="fab fa-linkedin me-2"></i>LinkedIn</a></li>
+                        <li><a href="#" class="text-white"><i class="fab fa-github me-2"></i>GitHub</a></li>
+                        <li><a href="#" class="text-white"><i class="fas fa-envelope me-2"></i>Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">© 2025 SkillStudy | Created with <i class="fas fa-heart text-danger"></i> by Umesh</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

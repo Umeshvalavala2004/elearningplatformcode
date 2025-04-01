@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3498db">
+    <meta name="description" content="SkillStack - Your E-Learning Platform for technical skills and interview preparation">
+    <title>SkillStack - E-Learning Platform</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/sw.js">
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/63c50dd3d1.js" crossorigin="anonymous"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- ScrollReveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 20px 0;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #3498db;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff !important;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f1c40f !important;
+        }
+
+        .dropdown-menu {
+            background-color: #3498db;
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #ffffff !important;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: #2980b9;
+            color: #f1c40f !important;
+        }
+
+        /* Search Bar Styles */
+        .search-bar {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-bar input {
+            border-radius: 25px 0 0 25px;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            width: 60%;
+            max-width: 500px;
+            outline: none;
+            height: 50px;
+        }
+
+        .search-bar button {
+            border-radius: 0 25px 25px 0;
+            padding: 12px 20px;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            height: 50px;
+        }
+
+        .search-bar button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Scrolling Card Container */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            display: none;
+        }
+
+        /* Card Styles */
+        .cards {
+            flex: 0 0 auto;
+            width: 250px;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cards:hover {
+            cursor: pointer;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .cards img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .cards h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            margin-top: 100px !important;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .cards a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        /* Install Button */
+        #installBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        #installBtn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Back to Top Button */
+        .uparrow {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        .fa-solid.fa-arrow-up-from-bracket {
+            color: white;
+            font-size: 30px;
+            margin: 10px;
+            background-color: #3498db;
+            border: 1px solid wheat;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 999;
+        }
+
+        .fa-solid.fa-arrow-up-from-bracket:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+
+        /* Offline Notification */
+        #offlineNotification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #f39c12;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Install Button -->
+    <button id="installBtn" style="display: none;">Install App</button>
+    
+    <!-- Offline Notification -->
+    <div id="offlineNotification">You are currently offline. Some features may not be available.</div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">SkillStack</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#aptitude">Aptitude</a>
+                            <a class="dropdown-item" href="#programming">Programming</a>
+                            <a class="dropdown-item" href="#cs-fundamentals">CS Fundamentals</a>
+                            <a class="dropdown-item" href="#companies">Companies</a>
+                            <a class="dropdown-item" href="#interview">Interview Prep</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="container search-bar">
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for courses..." aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn" type="button" onclick="performSearch()">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aptitude Section -->
+    <div class="container" id="aptitude">
+        <h2>Aptitude</h2>
+        <div class="scroll-container">
+           <a href="#">
+            <div class="cards" data-name="aptitude">
+                <img src="images/aptitude/quantitative.webp" alt="Aptitude">
+                <div class="name">
+                    <h3>Aptitude</h3>
+                </div>
+            </div>
+           </a>
+          
+            <div class="cards" data-name="reasoning">
+                <img src="images/aptitude/logical_thumbnail-_2x.webp" alt="Reasoning">
+                <h3>Reasoning</h3>
+            </div>
+            <div class="cards" data-name="verbal">
+                <img src="images/aptitude/visualreasoning.webp" alt="Verbal Ability">
+                <h3>Verbal Ability</h3>
+            </div>
+            <a href="cs fundamentals/selfintro.html">
+                <div class="cards" data-name="softskills">
+                    <img src="images/aptitude/Verbal-Homepage-Icon.webp" alt="Soft Skills">
+                    <h3>Soft Skills</h3>
+                </div>
+            </a>
+            <a href="signin/signin.html">
+                <div class="cards" data-name="softskills">
+                    <img src="images/visual_reasoning_thumbnail_2x.webp" alt="Soft Skills">
+                    <h3>main video</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Programming Languages Section -->
+    <div class="container" id="programming">
+        <h2>Programming Languages</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="python">
+                <a href="programming/python.html">
+                    <img src="images/program languages/LearnPythonCarouselImage7.webp" alt="Python">
+                    <h3>Python</h3>
+                </a>
+            </div>
+            <a href="cs fundamentals/document.html">
+                <div class="cards" data-name="java">
+                    <img src="images/program languages/Java-Thumbn.png" alt="Java">
+                    <h3>Java</h3>
+                </div>
+            </a>
+            <div class="cards" data-name="javascript">
+                <img src="images/program languages/javascript.webp" alt="JavaScript">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="cards" data-name="c++">
+                <img src="images/program languages/C.webp" alt="SQL">
+                <h3>C++</h3>
+            </div>
+            <a href="cs fundamentals/mainvideo.html">
+                <div class="cards" data-name="c">
+                    <img src="images/program languages/C-Homepage-Icon-1.webp" alt="SQL">
+                    <h3>C</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Computer Science Fundamentals Section -->
+    <div class="container" id="cs-fundamentals">
+        <h2>CS Fundamentals</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="dbms">
+                <img src="images/cs subjects/dbms.webp" alt="Operating Systems">
+                <h3>DBMS</h3>
+            </div>
+           <a href="cs fundamentals/osshortnotes.html">
+            <div class="cards" data-name="operating system">
+                <img src="images/cs subjects/Operating-SYstem-Home-Page-Icon.webp" alt="DBMS">
+                <h3>OS</h3>
+            </div>
+           </a>
+            <div class="cards" data-name="sql">
+                <img src="images/cs subjects/SQL-Homepage-Icon.webp" alt="Computer Networks">
+                <h3>Computer Networks</h3>
+            </div>
+            <div class="cards" data-name="computer network">
+                <img src="images/cs subjects/conmputer networks.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
+            <div class="cards" data-name="sdlc">
+                <img src="images/cs subjects/SDLC-Home-Page-Icon.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Companies Section -->
+    <div class="container" id="companies">
+        <h2>Companies</h2>
+        <div class="scroll-container">
+            <a target="_blank" href="https://talentbattle.in/accenture/syllabus-pattern">
+                <div class="cards" data-name="accenture">
+                    <img src="images/companies/accentureimg.webp" alt="Accenture">
+                    <h3>Accenture</h3>
+                </div>
+            </a>
+           <a target="_blank" href="/companies/tcs.html">
+            <div class="cards" data-name="tcs">
+                <img src="images/companies/TCS-Home-Thumb.webp" alt="TCS">
+                <h3>TCS</h3>
+            </div>
+           </a>
+            <div class="cards" data-name="wipro">
+                <img src="images/companies/Wipro-Homepage-Icon.webp" alt="Wipro">
+                <h3>Wipro</h3>
+            </div>
+            <div class="cards" data-name="infosys">
+                <img src="images/companies/Infosys-Homepage-Icon.webp" alt="Infosys">
+                <h3>Infosys</h3>
+            </div>
+            <div class="cards" data-name="infytq">
+                <img src="images/companies/InfyTQ-Home-Page.webp" alt="InfyTQ">
+                <h3>InfyTQ</h3>
+            </div>
+            <div class="cards" data-name="mindtree">
+                <img src="images/companies/Mindtree-Homepage-Icon.webp" alt="Mindtree">
+                <h3>Mindtree</h3>
+            </div>
+            <div class="cards" data-name="ibm">
+                <img src="images/companies/IBM-Homepage-Icon.webp" alt="IBM">
+                <h3>IBM</h3>
+            </div>
+            <div class="cards" data-name="hsbc">
+                <img src="images/companies/HSBC-Homepage-Icon.webp" alt="HSBC">
+                <h3>HSBC</h3>
+            </div>
+            <div class="cards" data-name="deloitte">
+                <img src="images/companies/Deloitte-NLA-Thumb.webp" alt="Deloitte">
+                <h3>Deloitte</h3>
+            </div>
+            <div class="cards" data-name="cognizant">
+                <img src="images/companies/Cognizant-GenC-Elevate-Thumb (1).webp" alt="Cognizant">
+                <h3>Cognizant</h3>
+            </div>
+            <div class="cards" data-name="capgemini">
+                <img src="images/companies/Capgemini-Homepage-Icon.webp" alt="Capgemini">
+                <h3>Capgemini</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interview Preparation Section -->
+    <div class="container" id="interview">
+        <h2>Interview Preparation</h2>
+        <div class="scroll-container">
+             <a href="cs fundamentals/resume.html">
+                <div class="cards" data-name="resume">
+                    <img src="images/resume-home-thumb (1).webp" alt="Resume Building">
+                    <h3>Resume</h3>
+                </div>
+            </a>
+            <a href="">
+                <div class="cards" data-name="interview tips">
+                    <img src="images/Your paragraph text.png" alt="Interview Tips">
+                    <h3>Interview Tips</h3>
+                </div>
+            </a>
+            <a href="/cs fundamentals/selfintro.html">
+                <div class="cards" data-name="self introduction">
+                    <img src="images/slfintroimg.png" alt="Self Introduction">
+                    <h3>Self Introduction</h3>
+                </div>
+            </a>
+            <a href="/cs fundamentals/gd.html">
+                <div class="cards" data-name="group discussion">
+                    <img src="images/Group-discussion-home-thumb.webp" alt="Group Discussion">
+                    <h3>Group Discussion</h3>
+                </div>
+            </a>
+            <div class="cards" data-name="sdlc">
+                <img src="images/cs subjects/SDLC-Home-Page-Icon.webp" alt="SDLC">
+                <h3>SDLC</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="uparrow">
+        <a href="#"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Search functionality
+        function performSearch() {
+            let query = document.getElementById("searchInput").value.toLowerCase();
+            let cards = document.querySelectorAll(".cards");
+            cards.forEach(card => {
+                let cardName = card.getAttribute("data-name").toLowerCase();
+                card.style.display = cardName.includes(query) ? "flex" : "none";
+            });
+        }
+
+        // Listen for Enter key in search input
+        document.getElementById("searchInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        });
+
+        // PWA Installation
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installBtn.style.display = 'none';
+            deferredPrompt = null;
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+
+        // Offline detection
+        window.addEventListener('online', () => {
+            document.getElementById('offlineNotification').style.display = 'none';
+        });
+
+        window.addEventListener('offline', () => {
+            document.getElementById('offlineNotification').style.display = 'block';
+        });
+
+        // Check initial connection status
+        if (!navigator.onLine) {
+            document.getElementById('offlineNotification').style.display = 'block';
+        }
+
+        // Initialize ScrollReveal
+        ScrollReveal().reveal('.container', { 
+            delay: 200,
+            distance: '20px',
+            origin: 'bottom',
+            interval: 100
+        });
+    </script>
+    <!-- In your index.html head section -->
+<link rel="manifest" href="/manifest.json">  <!-- Case sensitive path -->
+<meta name="theme-color" content="#3498db"> <!-- Must match manifest -->
+<script>
+    // In your main JavaScript file or script tag
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('SW registered: ', registration);
+          registration.update(); // Force update check
+        })
+        .catch(error => {
+          console.log('SW registration failed: ', error);
+        });
+    });
+  }
+</script>
+</body>
+</html>

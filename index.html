@@ -1,276 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://kit.fontawesome.com/63c50dd3d1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu_book" />
+    <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/service-worker.js">
+  <script src="/service-worker.js">  </script>
+  <script src="/install.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar with Search Bar Below</title>
+    <title>E-Learning Platform</title>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/63c50dd3d1.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #ffffff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
         h2 {
-            text-align: start;
-            margin-left: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 20px 0;
+            color: #ffffff;
         }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
-        .cards {
-            flex: 1 1 calc(33.33% - 20px);
-            max-width: calc(33.33% - 20px);
-            height: 200px;
+
+        /* New Navbar Styles */
+        .navbar {
+            background-color: #3498db;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff !important;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f1c40f !important;
+        }
+
+        .dropdown-menu {
+            background-color: #3498db;
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #ffffff !important;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: #2980b9;
+            color: #f1c40f !important;
+        }
+
+        /* Neat Search Bar Styles */
+        .search-bar {
+            margin: 30px 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            padding: 20px;
-            text-align: center;
-            background: #ffffff;
         }
-        .cards:hover {
-            border: 1px solid black;
+
+        .search-bar input {
+            border-radius: 25px 0 0 25px;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            width: 60%;
+            max-width: 500px;
+            outline: none;
+            height: 50px; /* Fixed height */
+        }
+
+        .search-bar button {
+            border-radius: 0 25px 25px 0;
+            padding: 12px 20px;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            color: #fff;
             cursor: pointer;
-            transform: scale(1.05);
+            transition: background-color 0.3s ease;
+            height: 50px; /* Fixed height to match input */
         }
+
+        .search-bar button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Scrolling Card Container */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            display: none;
+        }
+
+        /* Card Styles */
+        .cards {
+            flex-direction: column !important;
+            flex: 0 0 auto;
+            width: 250px;
+            background: #000; /* Black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0; /* Remove padding to make image full width/height */
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; /* For positioning h3 */
+            overflow: hidden; /* Ensure image fits within card */
+        }
+
+        .cards:hover {
+            cursor: pointer;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
         .cards img {
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure image covers the card */
+            border-radius: 10px;
+        }
+
+        .cards h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff; /* White text for better contrast */
+            margin: 0;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            margin-top: 100px !important;
+            z-index: 2; /* Ensure text is above the image */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .cards a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Watermark Styles */
+        .cards::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 24px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+            z-index: 1; /* Behind the image and text */
+        }
+        .fa-solid.fa-arrow-up-from-bracket {
+            color: white;
+            font-size: 30px;
+            margin: 10px;
+            background-color: #3498db;
+            border: 1px solid wheat;
             border-radius: 50%;
-            object-fit: cover;
-            background-color: #ffa16a;
+            cursor: pointer;
             padding: 10px;
+          
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 20px;  
+            right: 20px;  
+            transition: background-color 0.3s, transform 0.3s;
+          }
+          
+          .fa-solid.fa-arrow-up-from-bracket:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+          }
+          
+        .uparrow{
+            display: flex;
+            align-items: center;
+            justify-content: end;
         }
-        #img2{
-            background-color: #EA6166;
-        }
-        #img3{
-            background-color: #64C0E8;
-        }
-        #img4{
-            background-color: #92C57B;
-        }
-        #img5{
-            background-color: #FFAF82;
-        }
-        
-        @media (max-width: 768px) {
-            .cards {
-                flex: 1 1 calc(50% - 20px);
-                max-width: calc(50% - 20px);
-            }
-        }
-      .fa-brands.fa-python{
-        color: rgb(255, 255, 255);
-        font-size: 60px;
-        background-color: rgb(0, 255, 94);
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-      }
-      .fa-brands.fa-java{
-        color: rgb(255, 255, 255);
-        font-size: 60px;
-        background-color: rgb(42, 33, 33);
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-      }
-      .fa-brands.fa-js{
-        color: rgb(255, 255, 255);
-        font-size: 60px;
-        background-color: #f6ce09;
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-      }
-    .fa-solid.fa-database{
-        color: rgb(255, 255, 255);
-        font-size: 60px;
-        background-color: grey;
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-    }
-    .fa-solid.fa-globe{
-        color: rgb(255, 255, 255);
-        font-size: 60px;
-        background-color: grey;
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-    }
-    .fa-solid.fa-server{
-        color: rgb(255, 255, 255);
-        font-size: 60px;
-        background-color: grey;
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-    }
-    .fa-brands.fa-windows{
-        color: rgb(44, 32, 222);
-        font-size: 60px;
-        background-color: grey;
-        width: 100px;
-        height: 100px;
-        border-radius: 50% ;
-        padding-top: 20px;
-    }
-    .navbar-brand{
-        color: blue !important;
-        font-size: 30px !important;
-    }
     </style>
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#homepage.html">Elearning</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" 
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" 
-                        aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
+    <button id="installBtn" style="display: none;">Install App</button>
+    <!-- New Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">SkillStack </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Search..." aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" onclick="performSearch()">Search</button>
-                    </div>
-                </div>
+    <!-- Neat Search Bar -->
+    <div class="container search-bar">
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for courses..." aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn" type="button" onclick="performSearch()">Search</button>
             </div>
         </div>
     </div>
 
-    <hr>
-    <h2>Computer Fundamentals</h2>
+    <!-- Computer Fundamentals Section -->
+    <div class="container">
+        <h2>Aptitude</h2>
+        <div class="scroll-container">
+           <a href="#">
+            <div class="cards" data-name="aptitude">
+                <img src="images\aptitude\quantitative.webp" alt="Aptitude">
+                <div class="name">
+                    <h3>Aptitude</h3>
+                </div>
+            </div>
+           </a>
+         
+          
+            <div class="cards" data-name="reasoning">
+                <img src="images\aptitude\logical_thumbnail-_2x.webp" alt="Reasoning">
+                <h3>Reasoning</h3>
+            </div>
+            <div class="cards" data-name="verbal">
+                <img src="images\aptitude\visualr easoning.webp" alt="Verbal Ability">
+                <h3>Verbal Ability</h3>
+            </div>
+            <a href="cs fundamentals\selfintro.html">
+                <div class="cards" data-name="softskills">
+                    <img src="images\aptitude\Verbal-Homepage-Icon.webp" alt="Soft Skills">
+                    <h3>Soft Skills</h3>
+                </div>
+            </a>
+            <a href="signin\signin.html">
+                <div class="cards" data-name="softskills">
+                    <img src="images\visual_reasoning_thumbnail_2x.webp" alt="Soft Skills">
+                    <h3>main video</h3>
+                </div>
+            </a>
+            
+        </div>
+    </div>
 
-    <div class="card-container">
-        <div class="cards" data-name="aptitude">
-            <img src="images/aptitude.png" alt="Aptitude">
-          <a href="aptitude\quntitative_aptitude.html">  <h3>Aptitude</h3></a>
+    <!-- Programming Languages Section -->
+    <div class="container">
+        <h2>Programming Languages</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="python">
+                <a href="programming\python.html">
+                    <img src="images\program languages\LearnPythonCarouselImage7.webp" alt="Python">
+                <h3>Python</h3>
+                </a>
+            </div>
+            <a href="cs fundamentals\document.html">
+                <div class="cards" data-name="java">
+                    <img src="images\program languages\Java-Thumbn.png" alt="Java">
+                    <h3>Java</h3>
+                </div>
+            </a>
+            <div class="cards" data-name="javascript">
+                <img src="images\program languages\javascript.webp" alt="JavaScript">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="cards" data-name="c++">
+                <img src="images\program languages\C.webp" alt="SQL">
+                <h3>C++</h3>
+            </div>
+            <a href="cs fundamentals\mainvideo.html">
+                <div class="cards" data-name="c">
+                    <img src="images\program languages\C-Homepage-Icon-1.webp" alt="SQL">
+                    <h3>C</h3>
+                </div>
+            </a>
         </div>
-        <div class="cards" data-name="reasoning">
-            <img id="img2" src="images/settings.png" alt="Reasoning">
-            <h3>Reasoning</h3>
-        </div>
-        <div id="verbal" class="cards" data-name="verbal">
+    </div>
+
+    <!-- Computer Science Fundamentals Section -->
+    <div class="container">
+        <h2>CS Fundamentals</h2>
+        <div class="scroll-container">
+            <div class="cards" data-name="dbms">
+                <img src="images\cs subjects\dbms.webp" alt="Operating Systems">
+                <h3>DBMS</h3>
+            </div>
+           <a href="cs fundamentals\osshortnotes.html">
+            <div class="cards" data-name="operating system">
+                <img src="images\cs subjects\Operating-SYstem-Home-Page-Icon.webp" alt="DBMS">
+                <h3>OS</h3>
+            </div>
+           </a>
+            <div class="cards" data-name="sql">
+                <img src="images\cs subjects\SQL-Homepage-Icon.webp" alt="Computer Networks">
+                <h3>Computer Networks</h3>
+            </div>
+            <div class="cards" data-name="computer network">
+                <img src="images\cs subjects\conmputer networks.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
+            <div class="cards" data-name="sdlc">
+                <img src="images\cs subjects\SDLC-Home-Page-Icon.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
            
-            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-            <dotlottie-player src="https://lottie.host/58571e2e-1767-4832-8c93-af31e6a376f9/7sDvi5mwhr.lottie" background="transparent" speed="1" style="width: 200px; height: 200px" loop autoplay></dotlottie-player>
-            <h6>Verbal Ability</h6>
-        </div>
-        <div class="cards" data-name="softskills">
-            <img id="img4" src="images/gk.png" alt="Soft Skills">
-            <h3>Soft Skills</h3>
-        </div>
-        <div class="cards" data-name="computer">
-
-            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-<dotlottie-player src="https://lottie.host/5b0b9dd2-5361-4ba1-a25c-3f9c7d7ff3e2/9RQWNkIEdK.lottie" background="transparent" speed="1" style="width: 150px; height: 200px" loop autoplay></dotlottie-player>
-            <h5>Computer</h5>
         </div>
     </div>
 
-    <!--  -->
-    <hr>
-    <h2>Programming Languages</h2>
 
-    <div class="card-container">
-        <div class="cards" data-name="python">
-       <a href="/programming/python.html"><i class="fa-brands fa-python"></i></a>
-        <a href="programming\python.html">    <h3>Python</h3></a>
+     <!-- Computer Science Fundamentals Section -->
+     <div class="container">
+        <h2>Companies</h2>
+        <div class="scroll-container">
+            <a target="_blank" href="https://talentbattle.in/accenture/syllabus-pattern">
+                <div class="cards" data-name="dbms">
+                    <img src="images\companies\accentureimg.webp" alt="Operating Systems">
+                    <h3>Accenture</h3>
+                </div>
+            </a>
+           <a target="_blank" href="/companies/tcs.html">
+            <div class="cards" data-name="operating system">
+                <img src="images\companies\TCS-Home-Thumb.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
+           </a>
+            <div class="cards" data-name="sql">
+                <img src="images\companies\Wipro-Homepage-Icon.webp" alt="Computer Networks">
+                <h3>Computer Networks</h3>
+            </div>
+            <div class="cards" data-name="computer network">
+                <img src="images\companies\Infosys-Homepage-Icon.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
+            <div class="cards" data-name="sdlc">
+                <img src="images\companies\InfyTQ-Home-Page.webp" alt="DBMS">
+                <h3>DBMS</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <img src="images\companies\Mindtree-Homepage-Icon.webp" alt="Operating Systems">
+                <h3>Accenture</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <img src="images\companies\IBM-Homepage-Icon.webp" alt="Operating Systems">
+                <h3>Accenture</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <img src="images\companies\HSBC-Homepage-Icon.webp" alt="Operating Systems">
+                <h3>Accenture</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <img src="images\companies\Deloitte-NLA-Thumb.webp" alt="Operating Systems">
+                <h3>Accenture</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <img src="images\companies\Cognizant-GenC-Elevate-Thumb (1).webp" alt="Operating Systems">
+                <h3>Accenture</h3>
+            </div>
+            <div class="cards" data-name="dbms">
+                <img src="images\companies\Capgemini-Homepage-Icon.webp" alt="Operating Systems">
+                <h3>Accenture</h3>
+            </div>
         </div>
-        <div class="cards" data-name="java">
-            <i class="fa-brands fa-java"></i>
-            <h3>Java</h3>
-        </div>
-        <div id="verbal" class="cards" data-name="javascript">
-           
-            <i class="fa-brands fa-js"></i>
-            <h6>JavaScript</h6>
-        </div>
-        <div class="cards" data-name="sql">
-            <i class="fa-solid fa-database"></i>
-            <h3>Sql</h3>
-        </div>
-        <div class="cards" data-name="computer">
+    </div>
 
-            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-<dotlottie-player src="https://lottie.host/5b0b9dd2-5361-4ba1-a25c-3f9c7d7ff3e2/9RQWNkIEdK.lottie" background="transparent" speed="1" style="width: 150px; height: 200px" loop autoplay></dotlottie-player>
-            <h5>Computer</h5>
+        <!-- Interview Preperation Section -->
+        <div class="container">
+            <h2>Interview Preperation</h2>
+            <div class="scroll-container">
+                 <a href="cs fundamentals\resume.html">
+                <div class="cards" data-name="dbms">
+                    <img src="images\resume-home-thumb (1).webp" alt="Operating Systems">
+                    <h3>Resume</h3>
+                </div>
+                        </a>
+                        <a href="">
+                <div class="cards" data-name="resume">
+                    <img src="images\Your paragraph text.png" alt="resume">
+                    <h3>OS</h3>
+                </div>
+               </a>
+                <a href="/cs fundamentals/selfintro.html">
+                    <div class="cards" data-name="self introduction">
+                        <img src="images\slfintroimg.png" alt="self introduction">
+                        <h3>Computer Networks</h3>
+                    </div>
+                </a>
+           <a href="/cs fundamentals/gd.html">
+            <div class="cards" data-name="group disscusion">
+                <img src="images\Group-discussion-home-thumb.webp" alt="group disscusion">
+                <h3>DBMS</h3>
+            </div>
+           </a>
+                <div class="cards" data-name="sdlc">
+                    <img src="images\cs subjects\SDLC-Home-Page-Icon.webp" alt="DBMS">
+                    <h3>DBMS</h3>
+                </div>
+               
+            </div>
         </div>
-    </div>
-<!--  -->
-<hr>
-<h2>Computer Science Fundamentals</h2>
-
-<div class="card-container">
-    <div class="cards" data-name="os">
-   <a href="/aptitude/quntitative_aptitude.html"><i class="fa-brands fa-windows"></i></i></a>
-        <h3>OS</h3>
-    </div>
-    <div class="cards" data-name="cn">
-        <i class="fa-solid fa-globe"></i>
-        <h3>cn</h3>
-    </div>
-    <div id="verbal" class="cards" data-name="dbms">
-       
-        <i class="fa-solid fa-server"></i>
-        <h6>Dbms</h6>
-    </div>
-    <div class="cards" data-name="sql">
-        <i class="fa-solid fa-database"></i>
-        <h3>Sql</h3>
-    </div>
-    <!-- <div class="cards" data-name="computer">
-
-        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-<dotlottie-player src="https://lottie.host/5b0b9dd2-5361-4ba1-a25c-3f9c7d7ff3e2/9RQWNkIEdK.lottie" background="transparent" speed="1" style="width: 150px; height: 200px" loop autoplay></dotlottie-player>
-        <h5>Computer</h5>
-    </div> -->
+    
+<div class="uparrow">
+   <a href="#"> <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
 </div>
-<hr>
+    <!-- Bootstrap JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -283,5 +492,20 @@
             });
         }
     </script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+      
+</script>
+<script src="/install.js"></script>
 </body>
 </html>

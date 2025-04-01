@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Classes</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #192A56;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s ease;
+            position: relative;
+            overflow-y: auto; /* Add scrollbar */
+            height: 100vh; /* Full height */
+        }
+
+        .sidebar.collapsed {
+            width: 5px; /* Smaller width when collapsed */
+
+        }
+
+        .sidebar h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #74B9FF;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            background-color: #74B9FF;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .video-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Full-Screen Button */
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #74B9FF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background-color: #74B9FF ;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #333;
+            display: none; /* Hidden by default */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .video-container iframe {
+                height: 300px;
+            }
+
+            .fullscreen-btn {
+                margin-bottom: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar with Topics -->
+    <div class="sidebar" id="sidebar">
+        <h2>Topics</h2>
+        <ul>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Introduction</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Advanced Concepts</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Case Studies</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1Yfd-vTN98SkgFLmwkEB6jpapmZYMoVMB/preview">Conclusion</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Introduction</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Advanced Concepts</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Case Studies</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1Yfd-vTN98SkgFLmwkEB6jpapmZYMoVMB/preview">Conclusion</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Introduction</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Advanced Concepts</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Case Studies</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1Yfd-vTN98SkgFLmwkEB6jpapmZYMoVMB/preview">Conclusion</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Introduction</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Advanced Concepts</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Case Studies</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1Yfd-vTN98SkgFLmwkEB6jpapmZYMoVMB/preview">Conclusion</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Introduction</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Advanced Concepts</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview">Case Studies</a></li>
+            <li><a href="#" data-video="https://drive.google.com/file/d/1Yfd-vTN98SkgFLmwkEB6jpapmZYMoVMB/preview">Conclusion</a></li>
+            <!-- Add more topics as needed -->
+        </ul>
+        <button class="toggle-btn" id="toggle-btn">&#9664;</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Embedded Video -->
+        <div class="video-container">
+            <div class="preloader" id="preloader">Loading...</div>
+            <iframe id="video" src="https://drive.google.com/file/d/1zKmFEvm63AXZK-MuI3F7T1jmvNcnE5dG/preview" allow="autoplay"></iframe>
+            <button class="fullscreen-btn" id="fullscreen-btn">Full Screen</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '&#9654;' : '&#9664;';
+        });
+
+        // JavaScript for Topic Clicks
+        const topicLinks = document.querySelectorAll('.sidebar ul li a');
+        const video = document.getElementById('video');
+        const preloader = document.getElementById('preloader');
+
+        topicLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                const videoUrl = link.getAttribute('data-video'); // Get the video URL
+                preloader.style.display = 'block'; // Show preloader
+
+                // Force the iframe to reload by setting the src attribute
+                video.src = videoUrl;
+
+                // Hide preloader when video is loaded
+                video.onload = () => {
+                    preloader.style.display = 'none';
+                };
+            });
+        });
+
+        // JavaScript for Full-Screen Video
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.mozRequestFullScreen) { // Firefox
+                    video.mozRequestFullScreen();
+                } else if (video.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { // IE/Edge
+                    video.msRequestFullscreen();
+                }
+                fullscreenBtn.textContent = 'Minimize Screen';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.textContent = 'Full Screen';
+            }
+        });
+
+        // Listen for Fullscreen Change
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.textContent = 'Full Screen';
+            }
+        });
+    </script>
+
+        <!-- Firebase SDK -->
+        <script type="module">
+            // Import the functions you need from the Firebase SDKs
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+            import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDSapc498-GErIIKRcOss5bTJwn0kCPS8g",
+                authDomain: "elearning-92515.firebaseapp.com",
+                projectId: "elearning-92515",
+                storageBucket: "elearning-92515.firebasestorage.app",
+                messagingSenderId: "546172404816",
+                appId: "1:546172404816:web:cd6aa52f94671eb7d47d55",
+                measurementId: "G-0VZPB6BWYQ"
+            };
+    
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+    
+            // Check if the user is authenticated
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+                    // Redirect to the Sign-In Page if the user is not authenticated
+                    window.location.href = "/signin.html";
+                }
+            });
+    
+            // Your existing JavaScript for sidebar, video, etc.
+        </script>
+</body>
+</html>
