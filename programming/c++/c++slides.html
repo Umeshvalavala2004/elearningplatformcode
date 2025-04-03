@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Tutorial | Learn C++ Programming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f9f9f9;
+            --dark-text: #2c3e50;
+            --light-text: #ecf0f1;
+            --sidebar-width: 280px;
+            --header-height: 80px;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .last-updated {
+            font-style: italic;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            background-color: var(--primary-color);
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: var(--transition);
+            z-index: 90;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            color: var(--light-text);
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: var(--light-text);
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu a.active {
+            background-color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .sidebar-menu i {
+            width: 24px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        /* Toggle Button */
+        .sidebar-toggle {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .sidebar-toggle:hover {
+            background-color: #2980b9;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .sidebar.open ~ .main-content {
+            margin-left: var(--sidebar-width);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .section h3 {
+            color: var(--secondary-color);
+            margin: 20px 0 15px;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .section ul, .section ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+        }
+
+        /* Code Examples */
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .code-box {
+            background-color: #282c34;
+            color: #abb2bf;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .output {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            margin: 10px 0 25px;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Slider */
+        .slider-container {
+            position: relative;
+            margin: 30px 0;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        .slider {
+            display: flex;
+            transition: var(--transition);
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 20px;
+        }
+
+        .topic-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+        }
+
+        .topic-card h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .topic-card ul {
+            list-style-type: none;
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .topic-card li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+
+        .topic-card a {
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            padding: 5px 0;
+        }
+
+        .topic-card a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--secondary-color);
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .slider-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .slider-arrow.left {
+            left: 10px;
+        }
+
+        .slider-arrow.right {
+            right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .topic-card ul {
+                columns: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+            }
+            
+            .sidebar.open ~ .main-content {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .last-updated {
+                align-self: flex-end;
+            }
+        }
+        /* Add to your existing CSS */
+.menu-header {
+    color: var(--light-text);
+    padding: 15px 20px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-header i {
+    font-size: 1rem;
+}
+
+.sidebar-menu a {
+    padding-left: 40px; /* Indent nested items */
+}
+
+.sidebar-menu .menu-header + a {
+    padding-left: 20px; /* First item after header not indented */
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1><i class="fas fa-code"></i> C++ Tutorial</h1>
+            </div>
+            <div class="last-updated">Last Updated: June 2023</div>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-book"></i>
+            <span>C++ Concepts</span>
+        </div>
+       <!-- Inside the <div class="sidebar"> section, replace the existing <ul class="sidebar-menu"> with this: -->
+<ul class="sidebar-menu">
+    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+    
+    <!-- C++ Basics Section -->
+    <li class="menu-header"><i class="fas fa-cube"></i> C++ Basics</li>
+    <li><a href="#"><i class="fas fa-info-circle"></i> Overview</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Environment Setup</a></li>
+    <li><a href="#"><i class="fas fa-code"></i> Basic Syntax</a></li>
+    <li><a href="#"><i class="fas fa-comment"></i> Comments</a></li>
+    <li><a href="#"><i class="fas fa-laptop-code"></i> Hello World</a></li>
+    <li><a href="#"><i class="fas fa-tags"></i> Tokens</a></li>
+    <li><a href="#"><i class="fas fa-hashtag"></i> Constants/Literals</a></li>
+    <li><a href="#"><i class="fas fa-key"></i> Keywords</a></li>
+    <li><a href="#"><i class="fas fa-id-card"></i> Identifiers</a></li>
+    
+    <!-- Data Types Section -->
+    <li class="menu-header"><i class="fas fa-database"></i> Data Types</li>
+    <li><a href="#"><i class="fas fa-list-ol"></i> Numeric Types</a></li>
+    <li><a href="#"><i class="fas fa-font"></i> Character Type</a></li>
+    <li><a href="#"><i class="fas fa-toggle-on"></i> Boolean Type</a></li>
+    <li><a href="#"><i class="fas fa-code-branch"></i> Variable Types</a></li>
+    <li><a href="#"><i class="fas fa-expand"></i> Variable Scope</a></li>
+    <li><a href="#"><i class="fas fa-layer-group"></i> Multiple Variables</a></li>
+    <li><a href="#"><i class="fas fa-terminal"></i> Basic I/O</a></li>
+    <li><a href="#"><i class="fas fa-sliders-h"></i> Modifier Types</a></li>
+    <li><a href="#"><i class="fas fa-archive"></i> Storage Classes</a></li>
+    <li><a href="#"><i class="fas fa-sort-numeric-up"></i> Numbers</a></li>
+    <li><a href="#"><i class="fas fa-list-ul"></i> Enumeration</a></li>
+    <li><a href="#"><i class="fas fa-list-alt"></i> Enum Class</a></li>
+    <li><a href="#"><i class="fas fa-link"></i> References</a></li>
+    <li><a href="#"><i class="far fa-clock"></i> Date & Time</a></li>
+    
+    <!-- Operators Section -->
+    <li class="menu-header"><i class="fas fa-calculator"></i> Operators</li>
+    <li><a href="#"><i class="fas fa-plus-circle"></i> Arithmetic</a></li>
+    <li><a href="#"><i class="fas fa-equals"></i> Relational</a></li>
+    <li><a href="#"><i class="fas fa-project-diagram"></i> Logical</a></li>
+    <li><a href="#"><i class="fas fa-memory"></i> Bitwise</a></li>
+    <li><a href="#"><i class="fas fa-arrow-right"></i> Assignment</a></li>
+    <li><a href="#"><i class="fas fa-ruler"></i> sizeof</a></li>
+    <li><a href="#"><i class="fas fa-question-circle"></i> Conditional</a></li>
+    <li><a href="#"><i class="fas fa-comma"></i> Comma</a></li>
+    <li><a href="#"><i class="fas fa-user"></i> Member</a></li>
+    <li><a href="#"><i class="fas fa-exchange-alt"></i> Casting</a></li>
+    <li><a href="#"><i class="fas fa-bullseye"></i> Pointer</a></li>
+    <li><a href="#"><i class="fas fa-sort-amount-down"></i> Precedence</a></li>
+    <li><a href="#"><i class="fas fa-plus"></i> Unary</a></li>
+    
+    <!-- Control Statements Section -->
+    <li class="menu-header"><i class="fas fa-code-branch"></i> Control Statements</li>
+    <li><a href="#"><i class="fas fa-question"></i> Decision Making</a></li>
+    <li><a href="#"><i class="fas fa-check"></i> if Statement</a></li>
+    <li><a href="#"><i class="fas fa-check-double"></i> if-else</a></li>
+    <li><a href="#"><i class="fas fa-sitemap"></i> Nested if</a></li>
+    <li><a href="#"><i class="fas fa-random"></i> switch</a></li>
+    <li><a href="#"><i class="fas fa-random"></i> Nested switch</a></li>
+    <li><a href="#"><i class="fas fa-redo"></i> Loop Types</a></li>
+    <li><a href="#"><i class="fas fa-sync"></i> while Loop</a></li>
+    <li><a href="#"><i class="fas fa-undo"></i> for Loop</a></li>
+    <li><a href="#"><i class="fas fa-retweet"></i> do while</a></li>
+    <li><a href="#"><i class="fas fa-list"></i> Foreach</a></li>
+    <li><a href="#"><i class="fas fa-project-diagram"></i> Nested Loops</a></li>
+    <li><a href="#"><i class="fas fa-stop"></i> break</a></li>
+    <li><a href="#"><i class="fas fa-step-forward"></i> continue</a></li>
+    <li><a href="#"><i class="fas fa-arrow-right"></i> goto</a></li>
+    
+    <!-- Strings Section -->
+    <li class="menu-header"><i class="fas fa-font"></i> Strings</li>
+    <li><a href="#"><i class="fas fa-text-width"></i> Strings</a></li>
+    <li><a href="#"><i class="fas fa-repeat"></i> Loop Through</a></li>
+    <li><a href="#"><i class="fas fa-ruler"></i> Length</a></li>
+    <li><a href="#"><i class="fas fa-link"></i> Concatenation</a></li>
+    <li><a href="#"><i class="fas fa-balance-scale"></i> Comparison</a></li>
+    
+    <!-- Add the remaining sections following the same pattern -->
+    <!-- Functions, Arrays, Pointers, OOP, etc. -->
+    
+    <!-- Advanced Topics Section -->
+    <li class="menu-header"><i class="fas fa-rocket"></i> Advanced</li>
+    <li><a href="#"><i class="fas fa-bug"></i> Exception Handling</a></li>
+    <li><a href="#"><i class="fas fa-memory"></i> Dynamic Memory</a></li>
+    <li><a href="#"><i class="fas fa-object-group"></i> Namespaces</a></li>
+    <li><a href="#"><i class="fas fa-cubes"></i> Templates</a></li>
+    <li><a href="#"><i class="fas fa-microchip"></i> Preprocessor</a></li>
+    <li><a href="#"><i class="fas fa-bolt"></i> Signal Handling</a></li>
+    <li><a href="#"><i class="fas fa-tasks"></i> Multithreading</a></li>
+    <li><a href="#"><i class="fas fa-globe"></i> Web Programming</a></li>
+    <li><a href="#"><i class="fas fa-network-wired"></i> Socket Programming</a></li>
+    <li><a href="#"><i class="fas fa-random"></i> Concurrency</a></li>
+    <li><a href="#"><i class="fas fa-lambda"></i> Lambda Expression</a></li>
+    
+    <!-- Resources Section -->
+    <li class="menu-header"><i class="fas fa-book"></i> Resources</li>
+    <li><a href="#"><i class="fas fa-question-circle"></i> Q&A</a></li>
+    <li><a href="#"><i class="fas fa-lightbulb"></i> Quick Guide</a></li>
+    <li><a href="#"><i class="fas fa-clipboard-list"></i> Cheatsheet</a></li>
+    <li><a href="#"><i class="fas fa-box-open"></i> STL Tutorial</a></li>
+    <li><a href="#"><i class="fas fa-laptop"></i> Online Compiler</a></li>
+    <li><a href="#"><i class="fas fa-book-open"></i> Standard Library</a></li>
+    <li><a href="/programming\c++\c++nxtwavep1.html"><i class="fas fa-comments"></i> nxt wave slides</a></li>
+</ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <!-- Introduction Section -->
+            <section class="section">
+                <h2>What is C++?</h2>
+                <p>
+                    C++ is a middle-level programming language developed by Bjarne Stroustrup starting in 1979 at Bell Labs. 
+                    C++ runs on a variety of platforms, such as Windows, Mac OS, and the various versions of UNIX. 
+                    C++ is an extension of the C programming language with object-oriented programming concepts. 
+                    Or, we can say, "C++ is a superset of C programming with additional implementation of object-oriented concepts".
+                </p>
+            </section>
+
+            <!-- Why Learn C++ Section -->
+            <section class="section">
+                <h2>Why Learn C++?</h2>
+                <p>
+                    C++ is a powerful programming language that is essential for students and professionals who want to become skilled software developers. 
+                    Here are some key reasons why learning C++ is valuable:
+                </p>
+                <ul>
+                    <li><strong>Close to Hardware:</strong> C++ allows direct interaction with hardware, providing better control over memory management and performance optimization.</li>
+                    <li><strong>Strong Object-Oriented Programming (OOP) Concepts:</strong> Helps in understanding OOP fundamentals like polymorphism, inheritance, and encapsulation.</li>
+                    <li><strong>High Demand & Job Security:</strong> C++ is a widely used language, and skilled developers are highly paid.</li>
+                    <li><strong>Used in System & Application Development:</strong> Essential for game development, operating systems, and high-performance applications.</li>
+                    <li><strong>Deep Understanding of Core Programming Concepts:</strong> Covers compilers, linkers, loaders, data types, and storage classes.</li>
+                </ul>
+            </section>
+
+            <!-- Hello World Program Section -->
+            <section class="section">
+                <h2>Hello, World! Program</h2>
+                <p>
+                    To introduce you to C++ programming, here's a simple "Hello, World!" program. 
+                    You can try it by clicking "Edit & Run".
+                </p>
+                
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode()">
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                    <pre class="code-box" id="code">#include &lt;iostream&gt;
+using namespace std;
+
+// main() is where program execution begins.
+int main() {
+    cout << "Hello, World!"; // prints Hello, World!
+    return 0;
+}</pre>
+                </div>
+                
+                <div class="output">
+                    <strong>Output:</strong> Hello, World!
+                </div>
+            </section>
+
+            <!-- Compilers Section -->
+            <section class="section">
+                <h2>C++ Compilers</h2>
+                <p>
+                    There are many C++ compilers available that you can use to compile and run the above-mentioned program:
+                </p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Compiler</th>
+                            <th>Platform</th>
+                        </tr>
+                        <tr>
+                            <td>Apple C++ (Xcode)</td>
+                            <td>macOS</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft Visual C++</td>
+                            <td>Windows</td>
+                        </tr>
+                        <tr>
+                            <td>GNU GCC/G++</td>
+                            <td>Linux/Unix</td>
+                        </tr>
+                        <tr>
+                            <td>Clang</td>
+                            <td>Cross-platform</td>
+                        </tr>
+                        <tr>
+                            <td>Intel C++ Compiler</td>
+                            <td>Windows/Linux/macOS</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Topics Slider -->
+            <section class="section">
+                <h2>C++ Tutorial Topics</h2>
+                <div class="slider-container">
+                    <button class="slider-arrow left" id="prev-slide">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="slider" id="slider">
+                        <!-- Slide 1 -->
+                        <div class="slide">
+                            <div class="topic-card">
+                                <h3>C++ Basics</h3>
+                                <ul>
+                                    <li><a href="#">Hello World Program</a></li>
+                                    <li><a href="#">Comments</a></li>
+                                    <li><a href="#">Tokens</a></li>
+                                    <li><a href="#">Identifiers</a></li>
+                                    <li><a href="#">Keywords</a></li>
+                                    <li><a href="#">Variables</a></li>
+                                    <li><a href="#">Data Types</a></li>
+                                    <li><a href="#">Literals</a></li>
+                                    <li><a href="#">Constants</a></li>
+                                    <li><a href="#">Operators</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="slide">
+                            <div class="topic-card">
+                                <h3>C++ Control Flow</h3>
+                                <ul>
+                                    <li><a href="#">if Statement</a></li>
+                                    <li><a href="#">if-else Statement</a></li>
+                                    <li><a href="#">if-else-if Ladder</a></li>
+                                    <li><a href="#">Nested if-else Statement</a></li>
+                                    <li><a href="#">Switch Statement</a></li>
+                                    <li><a href="#">Jump Statements</a></li>
+                                    <li><a href="#">for Loop</a></li>
+                                    <li><a href="#">while Loop</a></li>
+                                    <li><a href="#">do...while Loop</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="slide">
+                            <div class="topic-card">
+                                <h3>C++ OOP Concepts</h3>
+                                <ul>
+                                    <li><a href="#">Classes and Objects</a></li>
+                                    <li><a href="#">Access Modifiers</a></li>
+                                    <li><a href="#">Friend Class and Function</a></li>
+                                    <li><a href="#">Constructors</a></li>
+                                    <li><a href="#">Destructors</a></li>
+                                    <li><a href="#">Shallow Copy and Deep Copy</a></li>
+                                    <li><a href="#">this pointer</a></li>
+                                    <li><a href="#">Encapsulation</a></li>
+                                    <li><a href="#">Abstraction</a></li>
+                                    <li><a href="#">Polymorphism</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="slider-arrow right" id="next-slide">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <div class="slider-nav" id="slider-nav">
+                        <div class="slider-dot active"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- C vs C++ Comparison -->
+            <section class="section">
+                <h2>C vs C++ Comparison</h2>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>C</th>
+                            <th>C++</th>
+                        </tr>
+                        <tr>
+                            <td>Programming Paradigm</td>
+                            <td>Procedural</td>
+                            <td>Multi-paradigm (Procedural, OOP, Generic)</td>
+                        </tr>
+                        <tr>
+                            <td>Memory Management</td>
+                            <td>Manual (malloc/free)</td>
+                            <td>Manual and automatic (new/delete)</td>
+                        </tr>
+                        <tr>
+                            <td>OOP Support</td>
+                            <td>No</td>
+                            <td>Yes (classes, inheritance, polymorphism)</td>
+                        </tr>
+                        <tr>
+                            <td>Standard Library</td>
+                            <td>Limited</td>
+                            <td>Extensive (STL)</td>
+                        </tr>
+                        <tr>
+                            <td>Exception Handling</td>
+                            <td>No</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Function Overloading</td>
+                            <td>No</td>
+                            <td>Yes</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2023 C++ Tutorial. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Sidebar toggle functionality
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.getElementById('mainContent');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            const icon = sidebarToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close sidebar when clicking on a link (for mobile)
+        const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    const icon = sidebarToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Slider functionality
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.getElementById('prev-slide');
+        const nextBtn = document.getElementById('next-slide');
+        
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlider();
+        }
+        
+        // Button events
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+        
+        // Keyboard navigation for slider
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Copy code functionality
+        function copyCode() {
+            const codeText = document.getElementById('code').textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const copyBtn = document.querySelector('.copy-btn');
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Highlight active menu item based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id') || 'home';
+                }
+            });
+            
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}` || 
+                    (currentSection === 'home' && link.getAttribute('href') === '#')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

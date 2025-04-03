@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Google Docs Guide</title>
+    <style>
+        :root {
+            --primary-color: #192A56;
+            --secondary-color: #74B9FF;
+            --accent-color: #45a049;
+            --light-bg: #f4f4f9;
+            --dark-text: #333;
+        }
+
+        /* General Styles */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-text) !important;
+            padding: 8px 15px !important;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--secondary-color);
+            color: white !important;
+        }
+
+        /* Main Layout */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: calc(100vh - 70px); /* Account for navbar */
+            background-color: var(--primary-color);
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 70px;
+            left: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            position: fixed;
+            top: 80px;
+            left: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        .sidebar.open + .toggle-btn {
+            left: 260px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            overflow: auto;
+        }
+
+        .sidebar.open ~ .main-content {
+            margin-left: 250px;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Full-Screen Button */
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            z-index: 1002;
+        }
+
+        .fullscreen-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Preloader */
+        .loading {
+            --speed-of-animation: 0.9s;
+            --gap: 6px;
+            --first-color: #4c86f9;
+            --second-color: #49a84c;
+            --third-color: #f6bb02;
+            --fourth-color: #f6bb02;
+            --fifth-color: #2196f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            gap: var(--gap);
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .loading span {
+            width: 4px;
+            height: 50px;
+            background: var(--first-color);
+            animation: scale var(--speed-of-animation) ease-in-out infinite;
+        }
+
+        .loading span:nth-child(2) {
+            background: var(--second-color);
+            animation-delay: -0.8s;
+        }
+
+        .loading span:nth-child(3) {
+            background: var(--third-color);
+            animation-delay: -0.7s;
+        }
+
+        .loading span:nth-child(4) {
+            background: var(--fourth-color);
+            animation-delay: -0.6s;
+        }
+
+        .loading span:nth-child(5) {
+            background: var(--fifth-color);
+            animation-delay: -0.5s;
+        }
+
+        @keyframes scale {
+            0%, 40%, 100% {
+                transform: scaleY(0.05);
+            }
+            20% {
+                transform: scaleY(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 220px;
+            }
+            
+            .sidebar.open ~ .main-content {
+                margin-left: 220px;
+            }
+            
+            .sidebar.open + .toggle-btn {
+                left: 230px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                padding-top: 60px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                top: 60px;
+                z-index: 999;
+            }
+            
+            .sidebar.open ~ .main-content {
+                margin-left: 0;
+            }
+            
+            .toggle-btn {
+                top: 70px;
+            }
+            
+            .sidebar.open + .toggle-btn {
+                left: auto;
+                right: 20px;
+            }
+            
+            .fullscreen-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            
+            .nav-link {
+                padding: 6px 10px !important;
+                font-size: 0.9rem;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-file-alt"></i>
+                <span>c++ slides nxtwave</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#topics"><i class="fas fa-list"></i> Topics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tips"><i class="fas fa-lightbulb"></i> Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#examples"><i class="fas fa-comments"></i> Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <h2>Topics</h2>
+            <ul>
+                <li><a href="#" data-video="https://docs.google.com/presentation/d/e/2PACX-1vTIpiI6xAOfH_zUl1d8a8_ZN2cT9M2LSvMjp93Y_Vx2RISrus6semaasqTO_WuMx13XuWHW4jb-naFn/embed?start=false&loop=false&delayms=3000">Introduction to c++</a></li>
+                <li><a href="#" data-video="https://docs.google.com/presentation/d/e/2PACX-1vSj5pRrlN_nW_200cM1NyQ-foEKm1eIXIjWKErw-cvlzfucp1UfxxIWmiuHHLgHjgzISGgXbF4LfqFx/embed?start=false&loop=false&delayms=3000">Basic of c++</a></li>
+                <li><a href="#" data-video="https://docs.google.com/presentation/d/e/2PACX-1vTIpiI6xAOfH_zUl1d8a8_ZN2cT9M2LSvMjp93Y_Vx2RISrus6semaasqTO_WuMx13XuWHW4jb-naFn/embed?start=false&loop=false&delayms=3000&slide=id.g31f0d2a29a2_1_814">Collaboration Features</a></li>
+                <li><a href="#" data-video="https://docs.google.com/presentation/d/e/2PACX-1vTIpiI6xAOfH_zUl1d8a8_ZN2cT9M2LSvMjp93Y_Vx2RISrus6semaasqTO_WuMx13XuWHW4jb-naFn/embed?start=false&loop=false&delayms=3000&slide=id.g31f0d2a29a2_1_814">Advanced Features</a></li>
+                <li><a href="#" data-video="https://docs.google.com/presentation/d/e/2PACX-1vTIpiI6xAOfH_zUl1d8a8_ZN2cT9M2LSvMjp93Y_Vx2RISrus6semaasqTO_WuMx13XuWHW4jb-naFn/embed?start=false&loop=false&delayms=3000&slide=id.g31f0d2a29a2_1_814">Templates & Add-ons</a></li>
+                <li><a href="#" data-video="https://docs.google.com/presentation/d/e/2PACX-1vTIpiI6xAOfH_zUl1d8a8_ZN2cT9M2LSvMjp93Y_Vx2RISrus6semaasqTO_WuMx13XuWHW4jb-naFn/embed?start=false&loop=false&delayms=3000&slide=id.g31f0d2a29a2_1_814">Keyboard Shortcuts</a></li>
+            </ul>
+        </div>
+
+        <!-- Toggle Button -->
+        <button class="toggle-btn" id="toggle-btn">&#9776;</button>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="video-container">
+                <div class="loading" id="preloader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <iframe id="video" src="https://docs.google.com/presentation/d/e/2PACX-1vTIpiI6xAOfH_zUl1d8a8_ZN2cT9M2LSvMjp93Y_Vx2RISrus6semaasqTO_WuMx13XuWHW4jb-naFn/embed?start=false&loop=false&delayms=3000&slide=id.g31f0d2a29a2_1_814" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                <button class="fullscreen-btn" id="fullscreen-btn">Full Screen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // JavaScript for Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const mainContent = document.querySelector('.main-content');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            toggleBtn.innerHTML = sidebar.classList.contains('open') ? '&times;' : '&#9776;';
+        });
+
+        // JavaScript for Topic Clicks
+        const topicLinks = document.querySelectorAll('.sidebar ul li a');
+        const video = document.getElementById('video');
+        const preloader = document.getElementById('preloader');
+
+        topicLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const videoUrl = link.getAttribute('data-video');
+                preloader.style.display = 'flex';
+
+                video.src = videoUrl;
+
+                video.addEventListener('load', () => {
+                    preloader.style.display = 'none';
+                }, { once: true });
+
+                sidebar.classList.remove('open');
+                toggleBtn.innerHTML = '&#9776;';
+            });
+        });
+
+        // JavaScript for Full-Screen Video
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const videoContainer = document.querySelector('.video-container');
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.mozRequestFullScreen) {
+                    videoContainer.mozRequestFullScreen();
+                } else if (videoContainer.webkitRequestFullscreen) {
+                    videoContainer.webkitRequestFullscreen();
+                } else if (videoContainer.msRequestFullscreen) {
+                    videoContainer.msRequestFullscreen();
+                }
+                fullscreenBtn.textContent = 'Exit Fullscreen';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.textContent = 'Full Screen';
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.textContent = 'Full Screen';
+            }
+        });
+    </script>
+</body>
+</html>
