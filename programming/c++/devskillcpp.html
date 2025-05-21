@@ -1,0 +1,3075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Tutorial | Learn C++ Programming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f9f9f9;
+            --dark-text: #2c3e50;
+            --light-text: #ecf0f1;
+            --sidebar-width: 280px;
+            --header-height: 80px;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .last-updated {
+            font-style: italic;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            background-color: var(--primary-color);
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: var(--transition);
+            z-index: 90;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            color: var(--light-text);
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: var(--light-text);
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu a.active {
+            background-color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .sidebar-menu i {
+            width: 24px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        /* Toggle Button */
+        .sidebar-toggle {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .sidebar-toggle:hover {
+            background-color: #2980b9;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .sidebar.open ~ .main-content {
+            margin-left: var(--sidebar-width);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .section h3 {
+            color: var(--secondary-color);
+            margin: 20px 0 15px;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .section ul, .section ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+        }
+
+        /* Code Examples */
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .code-box {
+            background-color: #282c34;
+            color: #abb2bf;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .output {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            margin: 10px 0 25px;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .nav-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .topic-card ul {
+                columns: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+            }
+            
+            .sidebar.open ~ .main-content {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .last-updated {
+                align-self: flex-end;
+            }
+        }
+/* Table Styles */
+.table-container {
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+    table {
+        display: block;
+    }
+    
+    th, td {
+        padding: 8px 10px;
+    }
+}
+
+/* Code block inside table cells */
+td code {
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+        /* Menu Header Styles */
+        .menu-header {
+            color: var(--light-text);
+            padding: 15px 20px;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.2);
+            cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-header i {
+            font-size: 1rem;
+        }
+
+        .sidebar-menu a {
+            padding-left: 40px;
+        }
+
+        .sidebar-menu .menu-header + a {
+            padding-left: 20px;
+        }
+        /* home section*/
+        .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.feature-card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.cta-box {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    border-radius: var(--border-radius);
+}
+
+.start-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #d62c1a;
+    transform: scale(1.05);
+} .img-container {
+    width: 70%;
+    margin: 1rem auto; /* Changed to auto for horizontal centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .img-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .img-container {
+        width: 90%;
+        margin: 0.75rem auto; /* Slightly reduced margin */
+    }
+}
+
+@media (max-width: 480px) {
+    .img-container {
+        width: 100%;
+        margin: 0.5rem 0;
+        border-radius: 4px; /* Smaller radius on small screens */
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1><i class="fas fa-code"></i> C++ Tutorial</h1>
+            </div>
+            <div class="last-updated">Last Updated: June 2023</div>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-book"></i>
+            <span>C++ Concepts</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" data-topic="home" class="active"><i class="fas fa-home"></i> Home</a></li>
+            
+            <!-- C++ Basics Section -->
+            <li class="menu-header"><i class="fas fa-cube"></i> C++ Basics</li>
+            <li><a href="#" data-topic="overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+            <li><a href="#" data-topic="environment-setup"><i class="fas fa-cog"></i> Environment Setup</a></li>
+            <li><a href="#" data-topic="basic-syntax"><i class="fas fa-code"></i> Basic Syntax</a></li>
+            <li><a href="#" data-topic="comments"><i class="fas fa-comment"></i> Comments</a></li>
+            <li><a href="#" data-topic="hello-world"><i class="fas fa-laptop-code"></i> Hello World</a></li>
+            <li><a href="#" data-topic="tokens"><i class="fas fa-tags"></i> Tokens</a></li>
+            <li><a href="#" data-topic="constants"><i class="fas fa-hashtag"></i> Constants/Literals</a></li>
+            <li><a href="#" data-topic="keywords"><i class="fas fa-key"></i> Keywords</a></li>
+            <li><a href="#" data-topic="identifiers"><i class="fas fa-id-card"></i> Identifiers</a></li>
+            
+            <!-- Data Types Section -->
+            <li class="menu-header"><i class="fas fa-database"></i> Data Types</li>
+            <li><a href="#" data-topic="numeric-types"><i class="fas fa-list-ol"></i> Numeric Types</a></li>
+            <li><a href="#" data-topic="char-type"><i class="fas fa-font"></i> Character Type</a></li>
+            <li><a href="#" data-topic="bool-type"><i class="fas fa-toggle-on"></i> Boolean Type</a></li>
+            <li><a href="#" data-topic="variable-types"><i class="fas fa-code-branch"></i> Variable Types</a></li>
+            <li><a href="#" data-topic="variable-scope"><i class="fas fa-expand"></i> Variable Scope</a></li>
+            <li><a href="#" data-topic="multiple-variables"><i class="fas fa-layer-group"></i> Multiple Variables</a></li>
+            <li><a href="#" data-topic="basic-io"><i class="fas fa-terminal"></i> Basic I/O</a></li>
+            <li><a href="#" data-topic="modifier-types"><i class="fas fa-sliders-h"></i> Modifier Types</a></li>
+            <li><a href="#" data-topic="storage-classes"><i class="fas fa-archive"></i> Storage Classes</a></li>
+            <li><a href="#" data-topic="numbers"><i class="fas fa-sort-numeric-up"></i> Numbers</a></li>
+            <li><a href="#" data-topic="enumeration"><i class="fas fa-list-ul"></i> Enumeration</a></li>
+            <li><a href="#" data-topic="enum-class"><i class="fas fa-list-alt"></i> Enum Class</a></li>
+            <li><a href="#" data-topic="references"><i class="fas fa-link"></i> References</a></li>
+            <li><a href="#" data-topic="date-time"><i class="far fa-clock"></i> Date & Time</a></li>
+            
+            <!-- Operators Section -->
+            <li class="menu-header"><i class="fas fa-calculator"></i> Operators</li>
+            <li><a href="#" data-topic="arithmetic"><i class="fas fa-plus-circle"></i> Arithmetic</a></li>
+            <li><a href="#" data-topic="relational"><i class="fas fa-equals"></i> Relational</a></li>
+            <li><a href="#" data-topic="logical"><i class="fas fa-project-diagram"></i> Logical</a></li>
+            <li><a href="#" data-topic="bitwise"><i class="fas fa-memory"></i> Bitwise</a></li>
+            <li><a href="#" data-topic="assignment"><i class="fas fa-arrow-right"></i> Assignment</a></li>
+            <li><a href="#" data-topic="sizeof"><i class="fas fa-ruler"></i> sizeof</a></li>
+            <li><a href="#" data-topic="conditional"><i class="fas fa-question-circle"></i> Conditional</a></li>
+            <li><a href="#" data-topic="comma"><i class="fas fa-com
+
+ma"></i> Comma</a></li>
+            <li><a href="#" data-topic="member"><i class="fas fa-user"></i> Member</a></li>
+            <li><a href="#" data-topic="casting"><i class="fas fa-exchange-alt"></i> Casting</a></li>
+            <li><a href="#" data-topic="pointer"><i class="fas fa-bullseye"></i> Pointer</a></li>
+            <li><a href="#" data-topic="precedence"><i class="fas fa-sort-amount-down"></i> Precedence</a></li>
+            <li><a href="#" data-topic="unary"><i class="fas fa-plus"></i> Unary</a></li>
+            
+            <!-- Control Statements Section -->
+            <li class="menu-header"><i class="fas fa-code-branch"></i> Control Statements</li>
+            <li><a href="#" data-topic="decision-making"><i class="fas fa-question"></i> Decision Making</a></li>
+            <li><a href="#" data-topic="if-statement"><i class="fas fa-check"></i> if Statement</a></li>
+            <li><a href="#" data-topic="if-else"><i class="fas fa-check-double"></i> if-else</a></li>
+            <li><a href="#" data-topic="nested-if"><i class="fas fa-sitemap"></i> Nested if</a></li>
+            <li><a href="#" data-topic="switch"><i class="fas fa-random"></i> switch</a></li>
+            <li><a href="#" data-topic="nested-switch"><i class="fas fa-random"></i> Nested switch</a></li>
+            <li><a href="#" data-topic="loop-types"><i class="fas fa-redo"></i> Loop Types</a></li>
+            <li><a href="#" data-topic="while-loop"><i class="fas fa-sync"></i> while Loop</a></li>
+            <li><a href="#" data-topic="for-loop"><i class="fas fa-undo"></i> for Loop</a></li>
+            <li><a href="#" data-topic="do-while"><i class="fas fa-retweet"></i> do while</a></li>
+            <li><a href="#" data-topic="foreach"><i class="fas fa-list"></i> Foreach</a></li>
+            <li><a href="#" data-topic="nested-loops"><i class="fas fa-project-diagram"></i> Nested Loops</a></li>
+            <li><a href="#" data-topic="break"><i class="fas fa-stop"></i> break</a></li>
+            <li><a href="#" data-topic="continue"><i class="fas fa-step-forward"></i> continue</a></li>
+            <li><a href="#" data-topic="goto"><i class="fas fa-arrow-right"></i> goto</a></li>
+            
+            <!-- Strings Section -->
+            <li class="menu-header"><i class="fas fa-font"></i> Strings</li>
+              <li><a href="#" data-topic="arrays"><i class="fas fa-text-width"></i> arrays</a></li>
+            <li><a href="#" data-topic="strings"><i class="fas fa-text-width"></i> Strings</a></li>
+            <li><a href="#" data-topic="loop-through-strings"><i class="fas fa-repeat"></i> Loop Through</a></li>
+            <li><a href="#" data-topic="string-length"><i class="fas fa-ruler"></i> Length</a></li>
+            <li><a href="#" data-topic="concatenation"><i class="fas fa-link"></i> Concatenation</a></li>
+            <li><a href="#" data-topic="string-comparison"><i class="fas fa-balance-scale"></i> Comparison</a></li>
+            
+            <!-- Advanced Topics Section -->
+            <li class="menu-header"><i class="fas fa-rocket"></i> Advanced</li>
+            <li><a href="#" data-topic="exception-handling"><i class="fas fa-bug"></i> Exception Handling</a></li>
+            <li><a href="#" data-topic="dynamic-memory"><i class="fas fa-memory"></i> Dynamic Memory</a></li>
+            <li><a href="#" data-topic="namespaces"><i class="fas fa-object-group"></i> Namespaces</a></li>
+            <li><a href="#" data-topic="templates"><i class="fas fa-cubes"></i> Templates</a></li>
+            <li><a href="#" data-topic="preprocessor"><i class="fas fa-microchip"></i> Preprocessor</a></li>
+            <li><a href="#" data-topic="signal-handling"><i class="fas fa-bolt"></i> Signal Handling</a></li>
+            <li><a href="#" data-topic="multithreading"><i class="fas fa-tasks"></i> Multithreading</a></li>
+            <li><a href="#" data-topic="web-programming"><i class="fas fa-globe"></i> Web Programming</a></li>
+            <li><a href="#" data-topic="socket-programming"><i class="fas fa-network-wired"></i> Socket Programming</a></li>
+            <li><a href="#" data-topic="concurrency"><i class="fas fa-random"></i> Concurrency</a></li>
+            <li><a href="#" data-topic="lambda-expression"><i class="fas fa-lambda"></i> Lambda Expression</a></li>
+            
+            <!-- Resources Section -->
+            <li class="menu-header"><i class="fas fa-book"></i> Resources</li>
+            <li><a href="#" data-topic="qa"><i class="fas fa-question-circle"></i> Q&A</a></li>
+            <li><a href="#" data-topic="quick-guide"><i class="fas fa-lightbulb"></i> Quick Guide</a></li>
+            <li><a href="#" data-topic="cheatsheet"><i class="fas fa-clipboard-list"></i> Cheatsheet</a></li>
+            <li><a href="#" data-topic="stl-tutorial"><i class="fas fa-box-open"></i> STL Tutorial</a></li>
+            <li><a href="#" data-topic="online-compiler"><i class="fas fa-laptop"></i> Online Compiler</a></li>
+            <li><a href="#" data-topic="standard-library"><i class="fas fa-book-open"></i> Standard Library</a></li>
+            <li><a href="/elerning/signin/nxtwavesignin.html"><i class="fas fa-comments"></i> nxt wave slides</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container" id="contentContainer">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+        <footer>
+            <div class="container">
+                <p>© 2025 C++ Tutorial. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Content map for topics
+        const contentMap = {
+            'home': {
+    title: 'Welcome to C++ Tutorial',
+    content: `
+        <section class="section">
+            <h2>What is C++?</h2>
+            <p>
+                C++ is a powerful, general-purpose programming language developed by 
+                Bjarne Stroustrup at Bell Labs beginning in 1979. As an extension of 
+                the C language, it combines low-level memory manipulation with 
+                high-level object-oriented features.
+            </p>
+           <div class="img-container">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250310111928362305/array-initialization.webp" alt="C++ array initialization example">
+            </div>
+            <p>
+                C++ runs on virtually all platforms including Windows, macOS, Linux, 
+                and various UNIX systems. It's particularly valued for its combination 
+                of performance and abstraction capabilities.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Why Learn C++?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Hardware Control</h3>
+                    <p>
+                        Offers direct memory access and hardware interaction while 
+                        maintaining high-level programming conveniences.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-cube"></i>
+                    <h3>Object-Oriented</h3>
+                    <p>
+                        Implements robust OOP principles including inheritance, 
+                        polymorphism, and encapsulation for organized code.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>High Performance</h3>
+                    <p>
+                        Delivers exceptional speed and efficiency, making it ideal for 
+                        system software, games, and real-time applications.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-industry"></i>
+                    <h3>Industry Standard</h3>
+                    <p>
+                        Widely used in game engines (Unreal), operating systems, 
+                        browsers, and high-frequency trading systems.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Getting Started</h2>
+            <div class="cta-box">
+                <p>Ready to begin your C++ journey?</p>
+                <button class="start-btn" onclick="loadContent('environment-setup')">
+                    <i class="fas fa-rocket"></i> Setup Your Environment
+                </button>
+            </div>
+        </section>
+    `
+},
+            'overview': {
+                title: 'C++ Overview',
+                content: `
+                    <section class="section">
+                        <h2>C++ Overview</h2>
+                        <p>C++ is a general-purpose programming language that supports procedural, object-oriented, and generic programming. It was designed with performance, efficiency, and flexibility in mind.</p>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>Object-Oriented Programming</li>
+                            <li>Rich Standard Library (STL)</li>
+                            <li>Low-level memory manipulation</li>
+                            <li>Support for templates and generics</li>
+                        </ul>
+                    </section>
+                `
+            },
+            'hello-world': {
+                title: 'Hello World Program',
+                content: `
+                    <section class="section">
+                        <h2>Hello, World! Program</h2>
+                        <p>This is a simple C++ program that prints "Hello, World!" to the console.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong> Hello, World!
+                        </div>
+                    </section>
+                `
+            },
+            'basic-syntax': {
+                title: 'Basic Syntax',
+                content: `
+                    <section class="section">
+                        <h2>Basic Syntax</h2>
+                        <p>C++ programs consist of functions, variables, and statements. The basic structure includes the main() function, which is the entry point of the program.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10;
+    cout << "Value of x: " << x << endl;
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong> Value of x: 10
+                        </div>
+                    </section>
+                `
+            },'environment-setup': {
+    title: 'Environment Setup',
+    content: `
+        <section class="section">
+            <h2>C++ Environment Setup</h2>
+            <p>Setting up a proper development environment is the first step to start programming in C++. This section will guide you through the process of installing and configuring the necessary tools.</p>
+            
+            <h3>Components Needed</h3>
+            <ul>
+                <li><strong>Text Editor/IDE:</strong> For writing your code</li>
+                <li><strong>C++ Compiler:</strong> To compile your source code</li>
+                <li><strong>Debugger:</strong> For troubleshooting your programs</li>
+                <li><strong>Build System:</strong> To manage the compilation process</li>
+            </ul>
+            
+            <h3>1. Choosing a Text Editor or IDE</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                        <th>Platform</th>
+                    </tr>
+                    <tr>
+                        <td>Visual Studio Code</td>
+                        <td>Lightweight editor with C++ extensions</td>
+                        <td>Windows, Mac, Linux</td>
+                    </tr>
+                    <tr>
+                        <td>Code::Blocks</td>
+                        <td>Free C++ IDE with built-in compiler</td>
+                        <td>Windows, Mac, Linux</td>
+                    </tr>
+                    <tr>
+                        <td>CLion</td>
+                        <td>Powerful commercial IDE from JetBrains</td>
+                        <td>Windows, Mac, Linux</td>
+                    </tr>
+                    <tr>
+                        <td>Xcode</td>
+                        <td>Apple's official IDE</td>
+                        <td>Mac only</td>
+                    </tr>
+                    <tr>
+                        <td>Eclipse CDT</td>
+                        <td>Eclipse with C++ plugins</td>
+                        <td>Windows, Mac, Linux</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>2. Installing a C++ Compiler</h3>
+            <h4>Windows</h4>
+            <ul>
+                <li><strong>MinGW:</strong> Minimalist GNU for Windows
+                    <div class="code-container">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre class="code-box"># Download from https://sourceforge.net/projects/mingw/
+# Install g++ package
+# Add to PATH: C:\MinGW\bin</pre>
+                    </div>
+                </li>
+                <li><strong>Microsoft Visual C++:</strong> Part of Visual Studio</li>
+            </ul>
+            
+            <h4>MacOS</h4>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box"># Install Xcode Command Line Tools
+xcode-select --install
+
+# Verify installation
+g++ --version
+clang --version</pre>
+            </div>
+            
+            <h4>Linux</h4>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box"># For Debian/Ubuntu
+sudo apt update
+sudo apt install build-essential g++
+
+# For Fedora
+sudo dnf install gcc-c++
+
+# Verify installation
+g++ --version</pre>
+            </div>
+            
+            <h3>3. Configuring VS Code for C++</h3>
+            <ol>
+                <li>Install VS Code from <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a></li>
+                <li>Install these extensions:
+                    <ul>
+                        <li>C/C++ (Microsoft)</li>
+                        <li>Code Runner</li>
+                        <li>CMake Tools (for advanced projects)</li>
+                    </ul>
+                </li>
+                <li>Create a tasks.json file for build configuration</li>
+            </ol>
+            
+            <h3>4. Creating Your First Program</h3>
+            <p>Create a file named <code>hello.cpp</code>:</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout << "Hello, World!";
+    return 0;
+}</pre>
+            </div>
+            
+            <h3>5. Compiling and Running</h3>
+            <h4>Command Line Method</h4>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box"># Compile
+g++ hello.cpp -o hello
+
+# Run (Linux/Mac)
+./hello
+
+# Run (Windows)
+hello.exe</pre>
+            </div>
+            
+            <h4>VS Code Method</h4>
+            <ol>
+                <li>Press Ctrl+Shift+B to build</li>
+                <li>Use the Code Runner extension (Ctrl+Alt+N)</li>
+            </ol>
+            
+            <h3>Troubleshooting Common Issues</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Issue</th>
+                        <th>Solution</th>
+                    </tr>
+                    <tr>
+                        <td>'g++' not recognized</td>
+                        <td>Add compiler to system PATH</td>
+                    </tr>
+                    <tr>
+                        <td>Permission denied</td>
+                        <td>Run <code>chmod +x hello</code> (Linux/Mac)</td>
+                    </tr>
+                    <tr>
+                        <td>Missing iostream</td>
+                        <td>Install build-essential (Linux) or Xcode (Mac)</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>Online Compilers (Quick Alternatives)</h3>
+            <ul>
+                <li><a href="https://www.onlinegdb.com/online_c++_compiler" target="_blank">OnlineGDB</a></li>
+                <li><a href="https://replit.com/languages/cpp" target="_blank">Replit</a></li>
+                <li><a href="https://godbolt.org/" target="_blank">Compiler Explorer</a> (for assembly output)</li>
+            </ul>
+            
+          
+        </section>
+    `
+},
+            'comments': {
+                title: 'Comments',
+                content: `
+                    <section class="section">
+                        <h2>Comments</h2>
+                        <p>Comments are used to explain code and are ignored by the compiler. C++ supports single-line (//) and multi-line (/* */) comments.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+using namespace std;
+
+// This is a single-line comment
+/* This is a
+   multi-line comment */
+int main() {
+    cout << "Comments example" << endl;
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong> Comments example
+                        </div>
+                    </section>
+                `
+            },
+            'arithmetic': {
+                title: 'Arithmetic Operators',
+                content: `
+                    <section class="section">
+                        <h2>Arithmetic Operators</h2>
+                        <p>C++ supports arithmetic operators like +, -, *, /, and % for mathematical operations.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10, b = 3;
+    cout << "Addition: " << a + b << endl;
+    cout << "Subtraction: " << a - b << endl;
+    cout << "Multiplication: " << a * b << endl;
+    cout << "Division: " << a / b << endl;
+    cout << "Modulus: " << a % b << endl;
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong><br>
+                            Addition: 13<br>
+                            Subtraction: 7<br>
+                            Multiplication: 30<br>
+                            Division: 3<br>
+                            Modulus: 1
+                        </div>
+                    </section>
+                `
+            },
+            'if-statement': {
+                title: 'if Statement',
+                content: `
+                    <section class="section">
+                        <h2>if Statement</h2>
+                        <p>The if statement is used to execute a block of code if a condition is true.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 20;
+    if (x > 10) {
+        cout << "x is greater than 10" << endl;
+    }
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong> x is greater than 10
+                        </div>
+                    </section>
+                `
+            },
+            'strings': {
+                title: 'Strings',
+                content: `
+                    <section class="section">
+                        <h2>Strings</h2>
+                        <p>In C++, strings are handled using the std::string class from the string library.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string greeting = "Hello, C++!";
+    cout << greeting << endl;
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong> Hello, C++!
+                        </div>
+                    </section>
+                `
+            },
+            'exception-handling': {
+                title: 'Exception Handling',
+                content: `
+                    <section class="section">
+                        <h2>Exception Handling</h2>
+                        <p>C++ provides try, catch, and throw keywords to handle exceptions.</p>
+                        <div class="code-container">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre class="code-box">#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        int age = 15;
+        if (age >= 18) {
+            cout << "Access granted" << endl;
+        } else {
+            throw (age);
+        }
+    } catch (int myNum) {
+        cout << "Access denied - You are " << myNum << endl;
+    }
+    return 0;
+}</pre>
+                        </div>
+                        <div class="output">
+                            <strong>Output:</strong> Access denied - You are 15
+                        </div>
+                    </section>
+                `
+            }, 'numeric-types': {
+    title: 'Exception Handling',
+    content: `
+        <section class="section">
+            <h2>Exception Handling in C++</h2>
+            <p>Exception handling in C++ provides a way to transfer control from one part of a program to another when exceptional circumstances arise. It allows you to separate error-handling code from normal program logic.</p>
+            
+            <h3>Why Use Exception Handling?</h3>
+            <ul>
+                <li>Separates error handling code from normal code</li>
+                <li>Makes code more readable and maintainable</li>
+                <li>Allows propagation of errors up the call stack</li>
+                <li>Provides a standard mechanism for error reporting</li>
+                <li>Enables grouping and differentiation of error types</li>
+            </ul>
+            
+            <h3>Exception Handling Keywords</h3>
+            <p>C++ provides three keywords for exception handling:</p>
+            <ul>
+                <li><strong>try:</strong> Identifies a block of code where exceptions may occur</li>
+                <li><strong>catch:</strong> Catches and handles exceptions thrown from try block</li>
+                <li><strong>throw:</strong> Throws an exception when a problem is detected</li>
+            </ul>
+            
+            <h3>Basic Exception Handling Example</h3>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    try {
+        int age = 15;
+        if (age >= 18) {
+            cout << "Access granted" << endl;
+        } else {
+            throw (age);
+        }
+    } catch (int myNum) {
+        cout << "Access denied - You are " << myNum << endl;
+    }
+    return 0;
+}</pre>
+            </div>
+            <div class="output">
+                <strong>Output:</strong> Access denied - You are 15
+            </div>
+            
+            <h3>Catching Multiple Exceptions</h3>
+            <p>You can have multiple catch blocks to handle different types of exceptions:</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    try {
+        int numerator = 10;
+        int denominator = 0;
+        
+        if (denominator == 0) {
+            throw "Division by zero condition!";
+        }
+        
+        int result = numerator / denominator;
+        cout << "Result = " << result << endl;
+    }
+    catch (const char* msg) {
+        cerr << "Error: " << msg << endl;
+    }
+    catch (int errorCode) {
+        cerr << "Error code: " << errorCode << endl;
+    }
+    catch (...) {
+        cerr << "Default exception caught" << endl;
+    }
+    
+    return 0;
+}</pre>
+            </div>
+            <div class="output">
+                <strong>Output:</strong> Error: Division by zero condition!
+            </div>
+            
+            <h3>Standard Exceptions</h3>
+            <p>C++ provides a list of standard exceptions defined in &lt;exception&gt;:</p>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Exception</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>std::exception</td>
+                        <td>Parent class of all standard exceptions</td>
+                    </tr>
+                    <tr>
+                        <td>std::bad_alloc</td>
+                        <td>Thrown by new on allocation failure</td>
+                    </tr>
+                    <tr>
+                        <td>std::bad_cast</td>
+                        <td>Thrown by dynamic_cast</td>
+                    </tr>
+                    <tr>
+                        <td>std::bad_typeid</td>
+                        <td>Thrown by typeid</td>
+                    </tr>
+                    <tr>
+                        <td>std::logic_error</td>
+                        <td>Errors detectable before runtime</td>
+                    </tr>
+                    <tr>
+                        <td>std::runtime_error</td>
+                        <td>Errors detectable during runtime</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>Custom Exceptions</h3>
+            <p>You can define your own exception classes by inheriting from std::exception:</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre class="code-box">#include &lt;iostream&gt;
+#include &lt;exception&gt;
+using namespace std;
+
+class MyException : public exception {
+public:
+    const char* what() const throw() {
+        return "Custom exception occurred";
+    }
+};
+
+int main() {
+    try {
+        throw MyException();
+    } catch (MyException& e) {
+        cout << e.what() << endl;
+    }
+    return 0;
+}</pre>
+            </div>
+            <div class="output">
+                <strong>Output:</strong> Custom exception occurred
+            </div>
+            
+            <h3>Best Practices</h3>
+            <ul>
+                <li>Use exceptions for exceptional conditions, not for normal program flow</li>
+                <li>Catch exceptions by reference (catch (const std::exception& e))</li>
+                <li>Derive custom exceptions from std::exception</li>
+                <li>Document what exceptions your functions can throw</li>
+                <li>Don't throw exceptions from destructors</li>
+                <li>Be careful with exception safety in constructors</li>
+                <li>Use RAII (Resource Acquisition Is Initialization) for resource management</li>
+            </ul>
+            
+           
+        </section>
+    `
+},'arrays': {
+    title: 'C++ Arrays - Complete Guide',
+    content: `
+       
+<section class="section">
+    <h2>C++ Arrays: A Complete Guide</h2>
+    <p>
+        An array in C++ is a collection of elements of the same data type stored in contiguous memory locations. Each element is accessed using an index, starting from 0. Arrays are perfect for managing lists of data, like scores, prices, or names, under a single variable name.
+    </p>
+    
+    <div class="analogy-box">
+        <i class="fas fa-utensils"></i>
+        <p><strong>Telugu-Style Analogy:</strong> Think of an array as a row of *tiffin boxes* at a Telugu hostel mess. Each box (index) holds one item, like idli, dosa, or chutney. The whole row is the array, and you pick an item by its box number!</p>
+    </div>
+    
+    <div class="img-container">
+        <img src="https://www.programiz.com/sites/tutorial2program/files/cpp-array-declaration_0.png" alt="C++ array memory layout">
+
+    </div>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+            <li><strong>Same Type:</strong> All elements must be of the same data type (e.g., all <code>int</code> or all <code>float</code>).</li>
+            <li><strong>Fixed Size:</strong> The size is set when the array is created and cannot change.</li>
+            <li><strong>Zero-Based Indexing:</strong> The first element is at index 0, the second at index 1, and so on.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Declaring and Initializing Arrays</h2>
+    
+    <h3 class="subheading">Syntax</h3>
+    <p>To declare an array, specify the data type, array name, and size in square brackets <code>[]</code>. You can initialize it with values or leave it uninitialized.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">dataType arrayName[arraySize];
+</code></pre>
+    </div>
+    
+    <h3 class="subheading">Examples</h3>
+    <p>Here are different ways to create arrays:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    // Declare an array of 5 integers
+    int numbers[5];
+    
+    // Initialize with zeroes
+    int zeros[5] = {};
+    
+    // Initialize with values
+    float prices[4] = {10.5, 20.75, 15.0, 30.25};
+    
+    // Initialize without specifying size (size inferred)
+    string names[] = {"Anil", "Bhavani", "Chandu"};
+    
+    // Print first name
+    cout << "First name: " << names[0] << endl;
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Initialization Tips:</strong></p>
+        <ul>
+            <li>Uninitialized arrays (e.g., <code>int arr[5];</code>) may contain garbage values.</li>
+            <li>Use <code>{}</code> to set all elements to 0 (e.g., <code>int arr[5] = {};</code>).</li>
+            <li>If you provide fewer values than the size, the rest are set to 0 (e.g., <code>int arr[5] = {1, 2};</code> sets last three to 0).</li>
+        </ul>
+    </div>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Always specify the size or initialize with values to avoid compilation errors. For example, <code>int arr[];</code> without values is invalid.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Accessing and Modifying Array Elements</h2>
+    
+    <h3 class="subheading">Accessing Elements</h3>
+    <p>Use the array name followed by the index in square brackets to access an element.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int marks[5] = {85, 90, 78, 92, 88};
+    cout << "Third mark: " << marks[2] << endl; // Outputs 78
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <h3 class="subheading">Modifying Elements</h3>
+    <p>Assign a new value to an index to update the element.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">marks[2] = 80; // Updates third mark to 80
+cout << "Updated third mark: " << marks[2] << endl; // Outputs 80
+</code></pre>
+    </div>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Accessing an index outside the array’s bounds (e.g., <code>marks[5]</code> for a 5-element array) causes <strong>undefined behavior</strong>, leading to crashes or incorrect results.</p>
+    </div>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Why It’s Useful:</strong> Arrays allow quick access and updates, like changing a student’s mark or a shop’s price in a program.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Array Operations</h2>
+    
+    <div class="operation-card">
+        <h3><i class="fas fa-ruler"></i> Finding Array Size</h3>
+        <p>Use <code>sizeof</code> to calculate the number of elements.</p>
+        <div class="code-container">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[6] = {1, 2, 3, 4, 5, 6};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << "Array size: " << size << endl; // Outputs 6
+    return 0;
+}
+</code></pre>
+        </div>
+        <p><strong>Why:</strong> Knowing the size helps in loops and prevents out-of-bounds errors.</p>
+    </div>
+    
+    <div class="operation-card">
+        <h3><i class="fas fa-sync-alt"></i> Looping Through Arrays</h3>
+        <p>Use <code>for</code> loops or range-based loops to process all elements.</p>
+        <div class="code-container">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int prices[5] = {50, 30, 20, 40, 25};
+    
+    // Standard for loop
+    cout << "Prices (standard loop): ";
+    for (int i = 0; i < 5; i++) {
+        cout << prices[i] << " ";
+    }
+    cout << endl;
+    
+    // Range-based for loop (C++11)
+    cout << "Prices (range-based loop): ";
+    for (int price : prices) {
+        cout << price << " ";
+    }
+    cout << endl;
+    return 0;
+}
+</code></pre>
+        </div>
+        <p><strong>Why:</strong> Loops are essential for tasks like printing, summing, or analyzing all elements.</p>
+    </div>
+    
+    <div class="operation-card">
+        <h3><i class="fas fa-calculator"></i> Calculating Sum and Average</h3>
+        <p>Loop through the array to compute sums or averages.</p>
+        <div class="code-container">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    float scores[5] = {85.5, 90.0, 78.5, 92.0, 88.5};
+    float sum = 0;
+    for (float score : scores) {
+        sum += score;
+    }
+    float average = sum / 5;
+    cout << "Sum: " << sum << ", Average: " << average << endl;
+    return 0;
+}
+</code></pre>
+        </div>
+        <p><strong>Why:</strong> Useful for real-world tasks like calculating total sales or average grades.</p>
+    </div>
+    
+    <div class="operation-card">
+        <h3><i class="fas fa-copy"></i> Copying Arrays</h3>
+        <p>Arrays can’t be copied directly; copy each element manually.</p>
+        <div class="code-container">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-cpp">int source[4] = {10, 20, 30, 40};
+int destination[4];
+for (int i = 0; i < 4; i++) {
+    destination[i] = source[i];
+}
+</code></pre>
+        </div>
+        <p><strong>Why:</strong> Copying creates a separate array for independent modifications.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Multi-Dimensional Arrays</h2>
+    <p>Arrays can have multiple dimensions. A 2D array is like a table with rows and columns, while 3D arrays are like cubes. 2D arrays are most common.</p>
+    
+    <h3 class="subheading">Declaring a 2D Array</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    // 2D array: 3 rows x 4 columns
+    int matrix[3][4] = {
+        {1, 2, 3, 4},  // Row 0
+        {5, 6, 7, 8},  // Row 1
+        {9, 10, 11, 12} // Row 2
+    };
+    
+    // Access element
+    cout << "Element at row 1, column 2: " << matrix[1][2] << endl; // Outputs 7
+    
+    // Print all elements
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <div class="analogy-box">
+        <i class="fas fa-table"></i>
+        <p><strong>Telugu-Style Analogy:</strong> A 2D array is like a *jathara* seating plan with rows of benches and seats. Each seat has a number, like <code>plan[1][3]</code> for the fourth seat in the second row!</p>
+    </div>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Key Points:</strong></p>
+        <ul>
+            <li>Access elements with two indexes: <code>array[row][column]</code>.</li>
+            <li>Used for grids, matrices, or game boards (e.g., chess).</li>
+            <li>3D arrays and beyond are possible but rare.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Practical Example: Bus Ticket Booking System</h2>
+    <p>Let’s create a program to manage bus ticket prices for different routes and seat types using a 2D array, inspired by a real-world scenario.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    // 2D array: 3 routes x 3 seat types (in rupees)
+    float ticketPrices[3][3] = {
+        {500, 300, 200}, // Route 1: Hyderabad to Vijayawada
+        {600, 400, 250}, // Route 2: Hyderabad to Bangalore
+        {450, 280, 180}  // Route 3: Hyderabad to Chennai
+    };
+    
+    // Array of route names for display
+    string routes[3] = {"Hyderabad-Vijayawada", "Hyderabad-Bangalore", "Hyderabad-Chennai"};
+    string seatTypes[3] = {"AC Sleeper", "AC Seater", "Non-AC"};
+    
+    // Print all prices
+    cout << "Bus Ticket Prices:\n";
+    for (int i = 0; i < 3; i++) {
+        cout << routes[i] << ":\n";
+        for (int j = 0; j < 3; j++) {
+            cout << "  " << seatTypes[j] << ": Rs. " << ticketPrices[i][j] << endl;
+        }
+        cout << endl;
+    }
+    
+    // Find cheapest ticket
+    float minPrice = ticketPrices[0][0];
+    int minRoute = 0, minSeat = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (ticketPrices[i][j] < minPrice) {
+                minPrice = ticketPrices[i][j];
+                minRoute = i;
+                minSeat = j;
+            }
+        }
+    }
+    cout << "Cheapest ticket: Rs. " << minPrice 
+         << " (" << routes[minRoute] << ", " << seatTypes[minSeat] << ")\n";
+    
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Bus Ticket Prices:
+Hyderabad-Vijayawada:
+  AC Sleeper: Rs. 500
+  AC Seater: Rs. 300
+  Non-AC: Rs. 200
+
+Hyderabad-Bangalore:
+  AC Sleeper: Rs. 600
+  AC Seater: Rs. 400
+  Non-AC: Rs. 250
+
+Hyderabad-Chennai:
+  AC Sleeper: Rs. 450
+  AC Seater: Rs. 280
+  Non-AC: Rs. 180
+
+Cheapest ticket: Rs. 180 (Hyderabad-Chennai, Non-AC)
+    </pre>
+    
+    <p><strong>Why This Helps:</strong> This program shows how 2D arrays can organize complex data (ticket prices) and perform tasks like finding the cheapest option, useful for real-world applications.</p>
+</section>
+
+<section class="section">
+    <h2>Advantages and Disadvantages of Arrays</h2>
+    
+    <div class="pros-cons">
+        <div class="pros">
+            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+            <ul>
+                <li><strong>Fast Access:</strong> Access any element in constant time using its index.</li>
+                <li><strong>Memory Efficient:</strong> Stores data contiguously, minimizing overhead.</li>
+                <li><strong>Simple:</strong> Ideal for fixed-size collections, like days of the week or exam scores.</li>
+                <li><strong>Multi-Dimensional:</strong> Supports 2D/3D arrays for complex data like matrices.</li>
+            </ul>
+        </div>
+        
+        <div class="cons">
+            <h3><i class="fas fa-times-circle"></i> Disadvantages</h3>
+            <ul>
+                <li><strong>Fixed Size:</strong> Cannot resize after declaration.</li>
+                <li><strong>No Bounds Checking:</strong> Accessing invalid indexes can cause crashes.</li>
+                <li><strong>Manual Operations:</strong> Requires custom code for sorting, searching, or copying.</li>
+                <li><strong>Limited Flexibility:</strong> For dynamic sizes, use <code>std::vector</code>.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Tip:</strong> Use arrays for fixed, known-size data. For resizable lists, explore <code>std::vector</code> in the C++ Standard Library.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Common Mistakes and Best Practices</h2>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Common Mistakes:</strong></p>
+        <ul>
+            <li><strong>Out-of-Bounds Access:</strong> Avoid accessing <code>arr[5]</code> in a 5-element array (valid indexes are 0 to 4).</li>
+            <li><strong>Uninitialized Arrays:</strong> Declaring <code>int arr[5];</code> without initialization may lead to garbage values.</li>
+            <li><strong>Incorrect Size:</strong> Declaring too small or too large an array wastes memory or causes errors.</li>
+            <li><strong>Direct Assignment:</strong> You can’t do <code>arr1 = arr2;</code> to copy arrays.</li>
+        </ul>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Best Practices:</strong></p>
+        <ul>
+            <li>Initialize arrays to avoid garbage values (e.g., <code>int arr[5] = {};</code>).</li>
+            <li>Use constants for sizes (e.g., <code>const int SIZE = 5; int arr[SIZE];</code>).</li>
+            <li>Validate indexes in loops to prevent out-of-bounds errors.</li>
+            <li>Consider <code>std::array</code> (C++11) for fixed-size arrays with safer features.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Frequently Asked Questions (FAQs)</h2>
+    
+    <div class="faq-item">
+        <h3>Q: What’s the difference between an array and a vector?</h3>
+        <p>A: Arrays have a fixed size and no built-in bounds checking, while <code>std::vector</code> is dynamic (can grow/shrink) and safer. Arrays are faster for fixed data, but vectors are more flexible.</p>
+    </div>
+    
+    <div class="faq-item">
+        <h3>Q: Can I change an array’s size after declaration?</h3>
+        <p>A: No, arrays have a fixed size. Use <code>std::vector</code> for resizable collections.</p>
+    </div>
+    
+    <div class="faq-item">
+        <h3>Q: Why do arrays start at index 0?</h3>
+        <p>A: In C++, arrays are based on memory offsets. Index 0 is the starting address, and each index increments by the element size, making memory access efficient.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Next Steps</h2>
+    <p>You’re now equipped to use arrays in C++! Here’s what to do next:</p>
+    <ul>
+        <li><strong>Practice:</strong> Write a program to reverse an array or find the maximum element.</li>
+        <li><strong>Explore Vectors:</strong> Learn <code>std::vector</code> for dynamic arrays.</li>
+        <li><strong>Algorithms:</strong> Study array-based algorithms like bubble sort or linear search.</li>
+        <li><strong>Projects:</strong> Build a small app, like a grocery price tracker or a tic-tac-toe game with a 2D array.</li>
+    </ul>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Fun Fact:</strong> Arrays are the backbone of many data structures, from simple lists to complex graphs, used in apps, games, and AI!</p>
+    </div>
+   
+</section>
+
+<style>
+    .section {
+        margin-bottom: 2rem;
+    }
+    
+    .img-container {
+        width: 80%;
+        max-width: 600px;
+        margin: 1rem auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+    }
+    
+    .img-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .img-container .caption {
+        font-style: italic;
+        color: #555;
+        margin-top: 0.5rem;
+    }
+    
+    .code-container {
+        position: relative;
+        background: #f8f9fa;
+        border-left: 4px solid #6c757d;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        overflow-x: auto;
+    }
+    
+    .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    
+    .copy-btn:hover {
+        background: #218838;
+    }
+    
+    .subheading {
+        color: #2c3e50;
+        margin-top: 1.5rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3rem;
+    }
+    
+    .note-box {
+        background: #e7f5ff;
+        border-left: 4px solid #4dabf7;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .note-box.tip {
+        background: #e6ffed;
+        border-left-color: #28a745;
+    }
+    
+    .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffca2c;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .operation-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .pros-cons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .pros, .cons {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+    
+    .pros {
+        background: #e6ffed;
+    }
+    
+    .cons {
+        background: #fff3cd;
+    }
+    
+    .analogy-box {
+        background: #f3e8ff;
+        border-left: 4px solid #8b5cf6;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .faq-item {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    pre code {
+        background: none;
+        padding: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .pros-cons {
+            grid-template-columns: 1fr;
+        }
+        
+        .img-container {
+            width: 100%;
+        }
+    }
+</style>
+
+
+
+    `
+},'loop-through-strings': {
+    title: 'loop-through-strings',
+    content: `
+  <section class="section">
+    <h2>C++ Pointers: A Complete Guide</h2>
+    <p>
+        A pointer in C++ is a variable that stores the memory address of another variable. Pointers are powerful tools that allow direct memory manipulation, enabling dynamic memory allocation, efficient function arguments, and complex data structures. However, they require careful handling to avoid issues like dangling pointers or memory leaks.
+    </p>
+    
+    <div class="analogy-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Telugu-Style Analogy:</strong> Anna, pointer ante okka torchlight laga! Mana computer memory lo chala variables unnayi, prati okkati okka inti address laga. Pointer ee address ni point chestundi, so manam torchlight tho aa address lo value chusi, change cheyochu. Kaani address wrong ayyindi ante, torchlight empty place ni chupistundi — danger, anna!</p>
+    </div>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Key Features of Pointers:</strong></p>
+        <ul>
+            <li><strong>Store Addresses:</strong> Hold the memory address of variables or objects.</li>
+            <li><strong>Dereferencing:</strong> Access or modify the value at the stored address using <code>*</code>.</li>
+            <li><strong>Dynamic Memory:</strong> Enable allocation and deallocation with <code>new</code> and <code>delete</code>.</li>
+            <li><strong>Flexibility:</strong> Used in functions, data structures, and low-level programming.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Declaring and Initializing Pointers</h2>
+    <p>
+        To declare a pointer, specify the data type it points to, followed by an asterisk (<code>*</code>) and the pointer name. Always initialize pointers to avoid undefined behavior.
+    </p>
+    
+    <h3 class="subheading">Syntax</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">dataType* pointerName; // Declaration
+pointerName = &variable; // Initialization with address
+// or
+dataType* pointerName = nullptr; // Initialize to null
+</code></pre>
+    </div>
+    
+    <h3 class="subheading">Example</h3>
+    <p>Here’s how to declare and use a pointer:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10;
+    int* ptr = &x; // Pointer to x
+    cout << "Value of x: " << x << endl; // 10
+    cout << "Address of x: " << &x << endl; // Address
+    cout << "Pointer holds: " << ptr << endl; // Same address
+    cout << "Value via pointer: " << *ptr << endl; // 10
+    *ptr = 20; // Modify via pointer
+    cout << "New value of x: " << x << endl; // 20
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Key Operators:</strong></p>
+        <ul>
+            <li><strong>&</strong>: Address-of operator, gets variable’s memory address.</li>
+            <li><strong>*</strong>: Dereference operator, accesses value at the pointer’s address.</li>
+        </ul>
+    </div>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Uninitialized pointers (e.g., <code>int* ptr;</code>) may point to random memory, causing crashes. Always initialize with <code>nullptr</code> or a valid address.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Types of Pointers</h2>
+    <p>
+        C++ supports various pointer types, each with specific uses. Here’s a breakdown, anna!
+    </p>
+    
+    <h3 class="subheading">1. Null Pointer</h3>
+    <p>A pointer set to <code>nullptr</code>, indicating it points to no valid memory.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">int* ptr = nullptr;
+if (ptr == nullptr) {
+    cout << "Pointer is null, safe!" << endl;
+}
+</code></pre>
+    </div>
+    <p><strong>Use:</strong> Prevents accidental access to invalid memory, ensures safety checks.</p>
+    
+    <h3 class="subheading">2. Void Pointer (Generic Pointer)</h3>
+    <p>A pointer that can point to any data type’s address but cannot be dereferenced directly.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 5;
+    float y = 3.14;
+    void* ptr;
+    ptr = &x; // Points to int
+    cout << "Int value: " << *(int*)ptr << endl; // 5
+    ptr = &y; // Points to float
+    cout << "Float value: " << *(float*)ptr << endl; // 3.14
+    return 0;
+}
+</code></pre>
+    </div>
+    <p><strong>Use:</strong> Generic programming, passing pointers to functions handling multiple types.</p>
+    
+    <h3 class="subheading">3. Pointer to Pointer (Double Pointer)</h3>
+    <p>A pointer that stores the address of another pointer.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10;
+    int* ptr = &x;
+    int** pptr = &ptr;
+    cout << "Value via double pointer: " << **pptr << endl; // 10
+    **pptr = 15; // Modify x
+    cout << "New value of x: " << x << endl; // 15
+    return 0;
+}
+</code></pre>
+    </div>
+    <p><strong>Use:</strong> Dynamic 2D memory allocation, modifying pointer addresses in functions.</p>
+    
+    <h3 class="subheading">4. Function Pointer</h3>
+    <p>A pointer that points to a function’s address, allowing dynamic function calls.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+void sayHello() {
+    cout << "Hello, Anna!" << endl;
+}
+
+int main() {
+    void (*funcPtr)() = sayHello;
+    funcPtr(); // Calls sayHello
+    return 0;
+}
+</code></pre>
+    </div>
+    <p><strong>Use:</strong> Callbacks, event handlers, and dynamic function dispatching.</p>
+    
+    <h3 class="subheading">5. Const Pointers</h3>
+    <p>Pointers with restrictions on modification, ensuring data or pointer safety.</p>
+    <ul>
+        <li><strong>Pointer to Const:</strong> Can’t modify the data, but can point to another address.</li>
+        <li><strong>Const Pointer:</strong> Can’t point to another address, but can modify the data.</li>
+    </ul>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10, y = 20;
+    // Pointer to const
+    const int* ptr1 = &x;
+    // *ptr1 = 15; // Error: Can't modify data
+    ptr1 = &y; // OK: Can change address
+    cout << "Value: " << *ptr1 << endl; // 20
+    
+    // Const pointer
+    int* const ptr2 = &x;
+    *ptr2 = 25; // OK: Can modify data
+    // ptr2 = &y; // Error: Can't change address
+    cout << "New x: " << x << endl; // 25
+    return 0;
+}
+</code></pre>
+    </div>
+    <p><strong>Use:</strong> Protects data or pointer from unintended changes.</p>
+    
+    <h3 class="subheading">6. Smart Pointers (C++11)</h3>
+    <p>Modern C++ pointers that automatically manage memory, reducing leaks and dangling pointers.</p>
+    <ul>
+        <li><strong>unique_ptr:</strong> Exclusive ownership, auto-deletes when out of scope.</li>
+        <li><strong>shared_ptr:</strong> Shared ownership, deletes when last reference is gone.</li>
+        <li><strong>weak_ptr:</strong> Non-owning reference to <code>shared_ptr</code>, avoids circular references.</li>
+    </ul>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+using namespace std;
+
+int main() {
+    unique_ptr<int> ptr = make_unique<int>(30);
+    cout << "Value: " << *ptr << endl; // 30
+    // No delete needed, unique_ptr handles it
+    return 0;
+}
+</code></pre>
+    </div>
+    <p><strong>Use:</strong> Safe memory management, modern C++ best practice.</p>
+</section>
+
+
+
+
+
+<section class="section">
+    <h2>Pointer Arithmetic</h2>
+
+    <p>Pointer arithmetic refers to the operations that C++ allows on the pointers. They include:
+</p>
+    <ul>
+        <li><strong>Incrementing and Decrementing</strong> </li>
+        <li><strong>Addition of Integer</strong> </li>
+        <li><strong>Subtraction of Integer</strong></li>
+        <li><strong>Subtraction of Two Pointers of the Same Type</strong> </li>
+         <li><strong>Comparison of Pointers and NULL</strong></li>
+    </ul>
+    
+    <p>
+        Pointers support arithmetic operations like increment (<code>++</code>), decrement (<code>--</code>), or addition/subtraction, moving the pointer based on the data type’s size (e.g., <code>int</code> is 4 bytes).
+    </p>
+    
+    <h3 class="subheading">Example</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10, y = 20;
+    int* ptr = &x;
+    cout << "Value: " << *ptr << endl; // 10
+    ptr++; // Moves to next int (undefined here, just for demo)
+    cout << "Address after increment: " << ptr << endl;
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Pointer arithmetic outside valid memory (e.g., incrementing beyond allocated space) causes undefined behavior. Use with caution!</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Dangling Pointers</h2>
+    <p>
+        A dangling pointer points to memory that has been freed or is out of scope, leading to undefined behavior if accessed.
+    </p>
+    
+    <h3 class="subheading">Example</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr = new int(10);
+    cout << "Value: " << *ptr << endl; // 10
+    delete ptr; // Memory freed
+    // ptr is now dangling
+    // cout << *ptr << endl; // Undefined behavior
+    ptr = nullptr; // Safe practice
+    cout << "Pointer set to null" << endl;
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <h3 class="subheading">Avoiding Dangling Pointers</h3>
+    <ul>
+        <li>Set pointers to <code>nullptr</code> after <code>delete</code>.</li>
+        <li>Use smart pointers like <code>unique_ptr</code> or <code>shared_ptr</code>.</li>
+        <li>Avoid returning pointers to local variables.</li>
+    </ul>
+    
+    <div class="analogy-box">
+        <i class="fas fa-exclamation"></i>
+        <p><strong>Telugu-Style Analogy:</strong> Anna, dangling pointer ante mana torchlight inti address ni point chestundi, kaani aa inti demolish ayyindi! Ippudu torchlight tho chuste, crash avvochu. So, light off chesi (<code>nullptr</code>) safe ga undu!</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Pointers in Functions</h2>
+    <p>
+        Pointers enable pass-by-reference, allowing functions to modify original variables.
+    </p>
+    
+    <h3 class="subheading">Example: Swap Values</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x = 10, y = 20;
+    cout << "Before swap: x = " << x << ", y = " << y << endl;
+    swap(&x, &y);
+    cout << "After swap: x = " << x << ", y = " << y << endl;
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Before swap: x = 10, y = 20
+After swap: x = 20, y = 10
+    </pre>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Why Use Pointers?</strong> Unlike pass-by-value, pointers allow direct modification of variables, saving memory and enabling complex operations.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Dynamic Memory Allocation</h2>
+    <p>
+        Pointers are used with <code>new</code> and <code>delete</code> to allocate and free memory dynamically at runtime.
+    </p>
+    
+    <h3 class="subheading">Example</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr = new int; // Allocate memory
+    *ptr = 50;
+    cout << "Value: " << *ptr << endl; // 50
+    delete ptr; // Free memory
+    ptr = nullptr; // Prevent dangling pointer
+    cout << "Memory freed" << endl;
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Forgetting <code>delete</code> causes memory leaks. Always pair <code>new</code> with <code>delete</code> and use smart pointers when possible.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Advantages and Disadvantages of Pointers</h2>
+    
+    <div class="pros-cons">
+        <div class="pros">
+            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+            <ul>
+                <li><strong>Direct Memory Access:</strong> Enables low-level manipulation.</li>
+                <li><strong>Dynamic Memory:</strong> Allocates memory at runtime.</li>
+                <li><strong>Efficient Functions:</strong> Pass-by-reference saves memory.</li>
+                <li><strong>Data Structures:</strong> Essential for linked lists, trees, and graphs.</li>
+            </ul>
+        </div>
+        
+        <div class="cons">
+            <h3><i class="fas fa-times-circle"></i> Disadvantages</h3>
+            <ul>
+                <li><strong>Complex:</strong> Prone to errors like dangling pointers or leaks.</li>
+                <li><strong>Unsafe:</strong> No bounds checking, risks undefined behavior.</li>
+                <li><strong>Manual Management:</strong> Requires careful <code>delete</code> usage.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Tip:</strong> Use <code>std::unique_ptr</code> or <code>std::shared_ptr</code> in modern C++ to simplify memory management and avoid common pointer issues.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Common Mistakes and Best Practices</h2>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Common Mistakes:</strong></p>
+        <ul>
+            <li>Using uninitialized pointers, causing random memory access.</li>
+            <li>Forgetting to free memory, leading to leaks.</li>
+            <li>Accessing dangling pointers after <code>delete</code>.</li>
+            <li>Returning pointers to local variables, which become invalid.</li>
+        </ul>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Best Practices:</strong></p>
+        <ul>
+            <li>Initialize pointers to <code>nullptr</code> or valid addresses.</li>
+            <li>Use <code>delete</code> after <code>new</code> and set to <code>nullptr</code>.</li>
+            <li>Prefer smart pointers for automatic memory management.</li>
+            <li>Avoid unnecessary pointer arithmetic.</li>
+            <li>Check for <code>nullptr</code> before dereferencing.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Frequently Asked Questions (FAQs)</h2>
+    
+    <div class="faq-item">
+        <h3>Q: What’s the difference between <code>&</code> and <code>*</code>?</h3>
+        <p>A: <code>&</code> gets a variable’s address, while <code>*</code> accesses the value at a pointer’s address.</p>
+    </div>
+    
+    <div class="faq-item">
+        <h3>Q: Why use smart pointers?</h3>
+        <p>A: Smart pointers like <code>unique_ptr</code> and <code>shared_ptr</code> automatically manage memory, preventing leaks and dangling pointers.</p>
+    </div>
+    
+    <div class="faq-item">
+        <h3>Q: Can a pointer point to another pointer?</h3>
+        <p>A: Yes, a pointer to a pointer (e.g., <code>int**</code>) stores the address of another pointer, useful for dynamic memory or function arguments.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Next Steps</h2>
+    <p>You’re now ready to master pointers in C++! Try these, anna:</p>
+    <ul>
+        <li><strong>Practice:</strong> Write a program to swap two numbers using pointers.</li>
+        <li><strong>Explore:</strong> Learn <code>std::unique_ptr</code> and <code>std::shared_ptr</code>.</li>
+        <li><strong>Data Structures:</strong> Implement a linked list using pointers.</li>
+        <li><strong>Projects:</strong> Build a memory manager that allocates and frees memory dynamically.</li>
+    </ul>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Fun Fact:</strong> Pointers are the backbone of C++ data structures and system programming, powering everything from operating systems to games!</p>
+    </div>
+</section>
+
+<style>
+    .section {
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .code-container {
+        position: relative;
+        background: #f8f9fa;
+        border-left: 4px solid #6c757d;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        overflow-x: auto;
+    }
+    
+    .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+    }
+    
+    .copy-btn:hover {
+        background: #218838;
+    }
+    
+    .subheading {
+        color: #2c3e50;
+        margin-top: 1.5rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3rem;
+    }
+    
+    .note-box {
+        background: #e7f5ff;
+        border-left: 4px solid #4dabf7;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .note-box.tip {
+        background: #e6ffed;
+        border-left-color: #28a745;
+    }
+    
+    .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffca2c;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .analogy-box {
+        background: #f3e8ff;
+        border-left: 4px solid #8b5cf6;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .pros-cons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .pros, .cons {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+    
+    .pros {
+        background: #e6ffed;
+    }
+    
+    .cons {
+        background: #fff3cd;
+    }
+    
+    .faq-item {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    pre code {
+        background: none;
+        padding: 0;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .pros-cons {
+            grid-template-columns: 1fr;
+        }
+        
+        .code-container {
+            padding: 0.5rem;
+        }
+        
+        .copy-btn {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+        
+        h2, .subheading {
+            font-size: 1.2rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .section {
+            padding: 0 0.5rem;
+        }
+        
+        .note-box, .warning-box, .analogy-box {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        pre code {
+            font-size: 0.8rem;
+        }
+    }
+</style>
+`},'string-length': {
+    title: 'string-lengths',
+    content: `l
+ <section class="section">
+    <h2>C++ Smart Pointers: A Complete Guide</h2>
+    <p>
+        Smart pointers in C++ are special pointers introduced in C++11 to manage memory automatically, preventing common issues like memory leaks and dangling pointers. Unlike raw pointers, smart pointers handle the deallocation of memory for you, making your code safer and easier to maintain. They’re part of the <code>&lt;memory&gt;</code> header and are a cornerstone of modern C++ programming.
+    </p>
+    
+    <div class="analogy-box">
+        <i class="fas fa-robot"></i>
+        <p><strong>Telugu-Style Analogy:</strong> Anna, smart pointer ante okka robot cleaner laga! Mana room (memory) lo garbage (allocated memory) unte, raw pointer use cheste maname clean cheyali (<code>delete</code>), lekapote room dirty ayipotundi (memory leak). Kaani smart pointer robot laga automatic ga clean chesestundi, manaki tension ledu! Just set cheste, adi work complete ayyaka cleanup chesestundi!</p>
+    </div>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Why Use Smart Pointers?</strong></p>
+        <ul>
+            <li><strong>Automatic Memory Management:</strong> No need for manual <code>delete</code>.</li>
+            <li><strong>Prevents Leaks:</strong> Ensures memory is freed when no longer needed.</li>
+            <li><strong>Avoids Dangling Pointers:</strong> Manages pointer lifecycle properly.</li>
+            <li><strong>Exception Safety:</strong> Handles memory even if exceptions occur.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Types of Smart Pointers</h2>
+    <p>
+        C++ provides three main smart pointers in the <code>&lt;memory&gt;</code> header, each with a specific purpose. Let’s break them down, anna!
+    </p>
+    
+    <h3 class="subheading">1. unique_ptr</h3>
+    <p>
+        A <code>unique_ptr</code> owns a single object exclusively. It cannot be copied, only moved, ensuring one pointer manages the memory at a time. When the <code>unique_ptr</code> goes out of scope or is reset, the memory is automatically freed.
+    </p>
+    
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+using namespace std;
+
+class Item {
+public:
+    Item() { cout << "Item created" << endl; }
+    ~Item() { cout << "Item destroyed" << endl; }
+    void use() { cout << "Using item" << endl; }
+};
+
+int main() {
+    // Create unique_ptr
+    unique_ptr<Item> ptr = make_unique<Item>();
+    ptr->use(); // Access object
+    
+    // No delete needed, ptr auto-destroys when scope ends
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Item created
+Using item
+Item destroyed
+    </pre>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+            <li>Exclusive ownership: Only one <code>unique_ptr</code> can own the object.</li>
+            <li>Use <code>make_unique</code> (C++14) for safe creation.</li>
+            <li>Moveable with <code>std::move</code>, but not copyable.</li>
+        </ul>
+    </div>
+    
+    <h3 class="subheading">Moving unique_ptr</h3>
+    <p>You can transfer ownership using <code>std::move</code>.</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+using namespace std;
+
+int main() {
+    unique_ptr<int> ptr1 = make_unique<int>(10);
+    cout << "ptr1 value: " << *ptr1 << endl; // 10
+    
+    // Move ownership to ptr2
+    unique_ptr<int> ptr2 = move(ptr1);
+    cout << "ptr2 value: " << *ptr2 << endl; // 10
+    
+    // ptr1 is now null
+    if (ptr1 == nullptr) {
+        cout << "ptr1 is null" << endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+ptr1 value: 10
+ptr2 value: 10
+ptr1 is null
+    </pre>
+    
+    <h3 class="subheading">2. shared_ptr</h3>
+    <p>
+        A <code>shared_ptr</code> allows multiple pointers to share ownership of an object. It uses a reference count to track how many <code>shared_ptr</code>s point to the object. The memory is freed when the last <code>shared_ptr</code> is destroyed or reset.
+    </p>
+    
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+using namespace std;
+
+class Item {
+public:
+    Item() { cout << "Item created" << endl; }
+    ~Item() { cout << "Item destroyed" << endl; }
+    void use() { cout << "Using item" << endl; }
+};
+
+int main() {
+    // Create shared_ptr
+    shared_ptr<Item> ptr1 = make_shared<Item>();
+    ptr1->use();
+    
+    // Share ownership
+    shared_ptr<Item> ptr2 = ptr1;
+    cout << "Reference count: " << ptr1.use_count() << endl; // 2
+    
+    // Both ptr1 and ptr2 go out of scope, object is destroyed
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Item created
+Using item
+Reference count: 2
+Item destroyed
+    </pre>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+            <li>Shared ownership: Multiple <code>shared_ptr</code>s can own the object.</li>
+            <li>Use <code>make_shared</code> for efficient creation.</li>
+            <li><code>use_count()</code> returns the number of shared pointers.</li>
+        </ul>
+    </div>
+    
+    <h3 class="subheading">3. weak_ptr</h3>
+    <p>
+        A <code>weak_ptr</code> is a non-owning reference to an object managed by a <code>shared_ptr</code>. It doesn’t increment the reference count and is used to break circular references or check if the object still exists.
+    </p>
+    
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+using namespace std;
+
+int main() {
+    shared_ptr<int> sptr = make_shared<int>(25);
+    weak_ptr<int> wptr = sptr; // Weak reference
+    
+    cout << "Shared ptr value: " << *sptr << endl; // 25
+    cout << "Weak ptr use count: " << wptr.use_count() << endl; // 1
+    
+    // Check if object exists
+    if (auto temp = wptr.lock()) { // Create temporary shared_ptr
+        cout << "Weak ptr value: " << *temp << endl; // 25
+    } else {
+        cout << "Object is gone" << endl;
+    }
+    
+    sptr.reset(); // Destroy shared_ptr
+    if (wptr.expired()) {
+        cout << "Weak ptr is expired" << endl;
+    }
+    
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Shared ptr value: 25
+Weak ptr use count: 1
+Weak ptr value: 25
+Weak ptr is expired
+    </pre>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+            <li>Non-owning: Doesn’t affect reference count.</li>
+            <li>Use <code>lock()</code> to safely access the object.</li>
+            <li><code>expired()</code> checks if the object is deleted.</li>
+        </ul>
+    </div>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Always use <code>wptr.lock()</code> to access a <code>weak_ptr</code>’s object, as it may be invalid if all <code>shared_ptr</code>s are gone.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Why Smart Pointers Over Raw Pointers?</h2>
+    <p>
+        Raw pointers require manual memory management, which can lead to errors. Smart pointers automate this, making code safer and cleaner.
+    </p>
+    
+    <h3 class="subheading">Example: Raw vs. Smart Pointer</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+using namespace std;
+
+class Item {
+public:
+    Item() { cout << "Item created" << endl; }
+    ~Item() { cout << "Item destroyed" << endl; }
+};
+
+void rawPointer() {
+    Item* ptr = new Item();
+    // Forgot delete, memory leak!
+}
+
+void smartPointer() {
+    unique_ptr<Item> ptr = make_unique<Item>();
+    // Auto-deleted, no leak
+}
+
+int main() {
+    cout << "Raw pointer:" << endl;
+    rawPointer();
+    cout << "Smart pointer:" << endl;
+    smartPointer();
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Raw pointer:
+Item created
+Smart pointer:
+Item created
+Item destroyed
+    </pre>
+    
+    <div class="analogy-box">
+        <i class="fas fa-broom"></i>
+        <p><strong>Telugu-Style Analogy:</strong> Anna, raw pointer ante manam room clean cheyali, kaani marchipothe garbage collect avtundi (memory leak). Smart pointer ante automatic vacuum cleaner laga, manam set cheste adi cleanup chesestundi, no worries!</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Common Pitfalls and Best Practices</h2>
+    
+    <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Common Pitfalls:</strong></p>
+        <ul>
+            <li>Using raw pointers with <code>shared_ptr</code> (e.g., <code>shared_ptr<int>(new int)</code>) can cause double deletion; use <code>make_shared</code>.</li>
+            <li>Creating circular references with <code>shared_ptr</code>, causing memory leaks; use <code>weak_ptr</code>.</li>
+            <li>Accessing <code>weak_ptr</code> without <code>lock()</code>, risking invalid memory access.</li>
+            <li>Copying <code>unique_ptr</code>, which is not allowed.</li>
+        </ul>
+    </div>
+    
+    <div class="note-box tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Best Practices:</strong></p>
+        <ul>
+            <li>Use <code>make_unique</code> and <code>make_shared</code> for safe creation.</li>
+            <li>Prefer <code>unique_ptr</code> for single ownership, <code>shared_ptr</code> for shared ownership.</li>
+            <li>Use <code>weak_ptr</code> to avoid circular references.</li>
+            <li>Avoid mixing raw and smart pointers.</li>
+            <li>Check <code>weak_ptr</code> with <code>lock()</code> or <code>expired()</code>.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Practical Example: Resource Manager</h2>
+    <p>
+        Let’s create a program to manage resources (like files or devices) using smart pointers, showing their real-world use.
+    </p>
+    
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-cpp">#include <iostream>
+#include <memory>
+#include <string>
+using namespace std;
+
+class Resource {
+    string name;
+public:
+    Resource(const string& n) : name(n) { cout << name << " acquired" << endl; }
+    ~Resource() { cout << name << " released" << endl; }
+    void use() { cout << "Using " << name << endl; }
+};
+
+void shareResource() {
+    shared_ptr<Resource> res1 = make_shared<Resource>("File");
+    res1->use();
+    
+    // Share with another pointer
+    shared_ptr<Resource> res2 = res1;
+    res2->use();
+    cout << "Reference count: " << res1.use_count() << endl; // 2
+}
+
+void weakReference() {
+    shared_ptr<Resource> res = make_shared<Resource>("Database");
+    weak_ptr<Resource> weakRes = res;
+    
+    if (auto temp = weakRes.lock()) {
+        temp->use();
+    }
+    
+    res.reset(); // Destroy shared_ptr
+    if (weakRes.expired()) {
+        cout << "Resource is gone" << endl;
+    }
+}
+
+int main() {
+    cout << "Shared Resource Demo:" << endl;
+    shareResource();
+    cout << "\nWeak Reference Demo:" << endl;
+    weakReference();
+    return 0;
+}
+</code></pre>
+    </div>
+    
+    <p><strong>Output:</strong></p>
+    <pre>
+Shared Resource Demo:
+File acquired
+Using File
+Using File
+Reference count: 2
+File released
+
+Weak Reference Demo:
+Database acquired
+Using Database
+Resource is gone
+Database released
+    </pre>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Why This Helps:</strong> Smart pointers ensure resources are released automatically, even in complex scenarios like shared ownership or temporary references.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Frequently Asked Questions (FAQs)</h2>
+    
+    <div class="faq-item">
+        <h3>Q: When should I use <code>unique_ptr</code> vs. <code>shared_ptr</code>?</h3>
+        <p>A: Use <code>unique_ptr</code> for single ownership (e.g., a single object). Use <code>shared_ptr</code> when multiple pointers need to share the object (e.g., in a graph).</p>
+    </div>
+    
+    <div class="faq-item">
+        <h3>Q: Why use <code>make_unique</code> or <code>make_shared</code>?</h3>
+        <p>A: They’re safer and more efficient, handling memory allocation and object construction in one step, reducing the risk of leaks.</p>
+    </div>
+    
+    <div class="faq-item">
+        <h3>Q: What’s the role of <code>weak_ptr</code>?</h3>
+        <p>A: <code>weak_ptr</code> prevents circular references in <code>shared_ptr</code> setups and allows checking if an object still exists without owning it.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Next Steps</h2>
+    <p>You’re now ready to use smart pointers like a pro, anna! Try these:</p>
+    <ul>
+        <li><strong>Practice:</strong> Write a program to manage a list of objects using <code>shared_ptr</code>.</li>
+        <li><strong>Explore:</strong> Learn about custom deleters with <code>unique_ptr</code>.</li>
+        <li><strong>Projects:</strong> Build a resource manager for a game or app using smart pointers.</li>
+        <li><strong>Advanced:</strong> Study how smart pointers work in STL containers.</li>
+    </ul>
+    
+    <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Fun Fact:</strong> Smart pointers are used in modern C++ libraries like STL and Boost, making apps and games safer and more efficient!</p>
+    </div>
+</section>
+
+<style>
+    .section {
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .code-container {
+        position: relative;
+        background: #f8f9fa;
+        border-left: 4px solid #6c757d;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        overflow-x: auto;
+    }
+    
+    .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+    }
+    
+    .copy-btn:hover {
+        background: #218838;
+    }
+    
+    .subheading {
+        color: #2c3e50;
+        margin-top: 1.5rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.3rem;
+    }
+    
+    .note-box {
+        background: #e7f5ff;
+        border-left: 4px solid #4dabf7;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .note-box.tip {
+        background: #e6ffed;
+        border-left-color: #28a745;
+    }
+    
+    .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffca2c;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .analogy-box {
+        background: #f3e8ff;
+        border-left: 4px solid #8b5cf6;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .faq-item {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    pre code {
+        background: none;
+        padding: 0;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .code-container {
+            padding: 0.5rem;
+        }
+        
+        .copy-btn {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+        
+        h2, .subheading {
+            font-size: 1.2rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .section {
+            padding: 0 0.5rem;
+        }
+        
+        .note-box, .warning-box, .analogy-box {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        pre code {
+            font-size: 0.8rem;
+        }
+    }
+</style>
+`}
+
+
+            // Add more topics as needed
+        };
+
+        // List of topics in order for navigation
+        const topicOrder = [
+            'home', 'overview', 'environment-setup', 'basic-syntax', 'comments', 'hello-world',
+            'tokens', 'constants', 'keywords', 'identifiers', 'numeric-types', 'char-type',
+            'bool-type', 'variable-types', 'variable-scope', 'multiple-variables', 'basic-io',
+            'modifier-types', 'storage-classes', 'numbers', 'enumeration', 'enum-class',
+            'references', 'date-time', 'arithmetic', 'relational', 'logical', 'bitwise',
+            'assignment', 'sizeof', 'conditional', 'comma', 'member', 'casting', 'pointer',
+            'precedence', 'unary', 'decision-making', 'if-statement', 'if-else', 'nested-if',
+            'switch', 'nested-switch', 'loop-types', 'while-loop', 'for-loop', 'do-while',
+            'foreach', 'nested-loops', 'break', 'continue', 'goto', 'arrays','strings',
+            'loop-through-strings', 'string-length', 'concatenation', 'string-comparison',
+            'exception-handling', 'dynamic-memory', 'namespaces', 'templates', 'preprocessor',
+            'signal-handling', 'multithreading', 'web-programming', 'socket-programming',
+            'concurrency', 'lambda-expression', 'qa', 'quick-guide', 'cheatsheet',
+            'stl-tutorial', 'online-compiler', 'standard-library'
+        ];
+
+        // Sidebar toggle functionality
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.getElementById('mainContent');
+        const contentContainer = document.getElementById('contentContainer');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            const icon = sidebarToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Function to load content
+        function loadContent(topic) {
+            const content = contentMap[topic] || {
+                title: 'Content Not Available',
+                content: `<section class="section"><h2>Content Not Available</h2><p>Content for this topic is under development.</p></section>`
+            };
+            
+            const currentIndex = topicOrder.indexOf(topic);
+            const prevTopic = currentIndex > 0 ? topicOrder[currentIndex - 1] : null;
+            const nextTopic = currentIndex < topicOrder.length - 1 ? topicOrder[currentIndex + 1] : null;
+
+            contentContainer.innerHTML = `
+                ${content.content}
+                <div class="nav-buttons">
+                    <button class="nav-btn" ${!prevTopic ? 'disabled' : ''} onclick="loadContent('${prevTopic}')">Previous Topic</button>
+                    <button class="nav-btn" ${!nextTopic ? 'disabled' : ''} onclick="loadContent('${nextTopic}')">Next Topic</button>
+                </div>
+            `;
+
+            // Update active link
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-topic') === topic) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Update document title
+            document.title = `${content.title} | C++ Tutorial`;
+        }
+
+        // Sidebar link click handler
+        document.querySelectorAll('.sidebar-menu a[data-topic]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const topic = link.getAttribute('data-topic');
+                loadContent(topic);
+                
+                // Close sidebar on mobile
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    const icon = sidebarToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeText = button.parentElement.querySelector('.code-box').textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="far fa-copy"></i> Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Load initial content
+        loadContent('home');
+    </script>
+    <script>
+       
+function copyCode(button) {
+    const code = button.nextElementSibling.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        button.textContent = 'Copied!';
+        setTimeout(() => {
+            button.textContent = 'Copy';
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+
+    </script>
+</body>
+</html>
